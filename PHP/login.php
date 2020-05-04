@@ -59,7 +59,7 @@ if(!empty($action))
 	// LOGIN
 	else if($action === 'login' && !empty($username) && !empty($password))
 		{
-		$userdata = $database->query('SELECT password FROM Users WHERE username=:0;', array($username));
+		//$userdata = $database->query('SELECT password FROM Users WHERE username=:0;', array($username));
 
 		if(count($userdata) > 0 && password_verify($password, $userdata[0]['password']))
 			{

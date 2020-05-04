@@ -2,14 +2,18 @@
 include('ErrorHandler.php');
 
 class Database
-	{	
+	{
+	private $host = "sql";
+	private $db_name = "Savagery";
+	private $db_user = "Savagery";
+	private $password = "password";
 	private $dblink;
 	
 	function __construct()
 		{
 		try
 			{
-			$this->dblink = new PDO('mysql:host=' . constant('DB_ADDRESS') . ';dbname=' . constant('GAME_TITLE'), constant('DB_USER'), constant('DB_PASSWORD'),
+			$this->dblink = new PDO('mysql:host=' . $this->host . ';dbname=' . $this->db_name, $this->db_user, $this->password,
 				array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 			}
 		catch (PDOException $exc)

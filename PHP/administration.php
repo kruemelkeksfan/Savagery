@@ -24,7 +24,7 @@ if(!empty($_GET['action']))
 	if($_GET['action'] === 'killeverything')
 		{
 
-
+//ToDo: API calls
 
 		    /*
 		// Delete Database
