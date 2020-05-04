@@ -85,7 +85,7 @@ if(!empty($_GET['action']))
 			level INT,
 			town VARCHAR(32),
 			buildingtype VARCHAR(16),
-			PRIMARY KEY (building_id),
+			PRIMARY KEY (building_id, town),
 			FOREIGN KEY (town) REFERENCES Towns(townname),
 			FOREIGN KEY (buildingtype) REFERENCES Buildingtypes(buildingtypename)
 			);');
