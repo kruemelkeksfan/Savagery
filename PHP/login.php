@@ -37,10 +37,9 @@ if(!empty($action))
                     echo "Test curl post: ";
                     var_dump($test);
                     //call API using the HttpHelper
-				$postdata = json_encode(array('username'=>$username, 'password'=>$password));
+				$postdata = array('username'=>$username, 'password'=>$password);
 				var_dump($postdata);
 				$created = $http->post('User/post_new_user.php', $postdata);
-				$created = json_decode($created);
 				var_dump($created);
 				if($created['success'])
 					{
@@ -68,9 +67,8 @@ if(!empty($action))
 	else if($action === 'login' && !empty($username) && !empty($password))
 		{
             //call API using the HttpHelper
-		    $postdata = json_encode(array('username'=>$username, 'password'=>$password));
+		    $postdata = array('username'=>$username, 'password'=>$password);
             $found = $http->post('User/post_find_user_pwd.php', $postdata);
-            $found = json_decode($found);
             var_dump($found);
 
 		if($found['success'])

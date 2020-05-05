@@ -14,7 +14,7 @@ $database = new Database();
 
 //$student = new Student($db);
 
-$data = json_decode(file_get_contents("php://input"));
+$data = json_decode(file_get_contents("php://input"), JSON_OBJECT_AS_ARRAY);
 
 if($data->username != ""){
     /*$student->_firstName = $data->first_name;
