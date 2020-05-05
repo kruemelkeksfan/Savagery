@@ -23,18 +23,17 @@ if($data->username != ""){
 
     $username = $data->username;
     $password = $data->password;
-    $town = $data->town;
 
 
     //ToDo: create town for player
-    if($database->query('INSERT INTO Users (username, password, last_active, town) VALUES (:0, :1, :2, :3);',
-        array($username, password_hash($password, PASSWORD_DEFAULT), time(), $town))) {
+    if($database->query('INSERT INTO Users (username, password, last_active) VALUES (:0, :1, :2);',
+        array($username, password_hash($password, PASSWORD_DEFAULT), time()))) {
         echo json_encode(
-            array('message' => 'User Created')
+            array('message' => 'User Created', 'success'=>true)
         );
     } else {
         echo json_encode(
-            array('message' => 'User Not Created')
+            array('message' => 'User Not Created', 'success'=>false)
         );
     }
 }

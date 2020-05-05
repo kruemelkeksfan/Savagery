@@ -21,11 +21,11 @@ if($data->username != "") {
 
     if(count($userdata) > 0 && password_verify($password, $userdata[0]['password'])){
         echo json_encode(
-            array('message' => 'User Verified')
+            array('message' => 'User Verified', 'success'=>true)
         );
     } else {
         echo json_encode(
-            array('message' => 'User Not Found')
+            array('message' => 'User Not Found', 'success'=>false)
         );
     }
 }

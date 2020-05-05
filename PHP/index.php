@@ -8,7 +8,7 @@ $page = new Page(new SavageryInfo(), 'Overview', true);
 $page->print_header();
 
 // Setup Database Connection
-$database = $page->get_database();
+//$database = $page->get_database();
 
 
 

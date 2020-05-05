@@ -3,12 +3,11 @@
 include_once('MOGUL/AutoLoader.php');
 new AutoLoader();
 
+$http = new HttpHelper();
+
 // PAGE HEADER
 $page = new Page(new SavageryInfo());
 $page->print_header();
-
-// DATABASE CONNECTION
-$database = new Database();
 
 // Get previous Page
 $previouspage = InputHelper::get_get_string('page', '');
@@ -33,8 +32,12 @@ if(!empty($action))
 			{
 			if($password === $repeatpassword)
 				{
-				if($database->query('INSERT INTO Users (username, password, last_active) VALUES (:0, :1, :2);',
-					array($username, password_hash($password, PASSWORD_DEFAULT), time())))
+                    //call API using the HttpHelper
+				$postdata = json_encode(array('username'=>$username, 'password'=>$password));
+				$created = $http->post('User/post_new_user.php', $postdata);
+				$created = json_decode($created);
+				var_dump($created);
+				if($created['success'])
 					{
 					$_SESSION['username'] = $username;
 
@@ -59,9 +62,13 @@ if(!empty($action))
 	// LOGIN
 	else if($action === 'login' && !empty($username) && !empty($password))
 		{
-		//$userdata = $database->query('SELECT password FROM Users WHERE username=:0;', array($username));
+            //call API using the HttpHelper
+		    $postdata = json_encode(array('username'=>$username, 'password'=>$password));
+            $found = $http->post('User/post_find_user_pwd.php', $postdata);
+            $found = json_decode($found);
+            var_dump($found);
 
-		if(count($userdata) > 0 && password_verify($password, $userdata[0]['password']))
+		if($found['success'])
 			{
 			$_SESSION['username'] = $username;
 
