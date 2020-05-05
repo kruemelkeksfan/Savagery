@@ -34,7 +34,8 @@ if(!empty($action))
 				{
 				    //Todo: delete this
                     $test = $http->get("api_test.php");
-                    echo "Test curl get: ". $test;
+                    echo "Test curl get: ";
+                    var_dump($test);
                     //call API using the HttpHelper
 				$postdata = json_encode(array('username'=>$username, 'password'=>$password));
 				var_dump($postdata);
