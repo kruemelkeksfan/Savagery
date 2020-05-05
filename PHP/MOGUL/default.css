@@ -99,18 +99,51 @@ a					{
 					padding: 0px;
 					}
 					
-.formcolumn			{
+.formfield			{
+					display: block;
+					vertical-align: top;
+					margin: 5px;
+					margin-top: 0px;
+					}
+					
+.formcolumnsingle	{
+					width: 100%;
 					display: inline-block;
 					vertical-align: top;
 					padding: 0px;
 					margin: 0px;
 					}
 					
-.formfield			{
-					display: block;
+.formcolumnauto		{
+					width: auto;
+					display: inline-block;
 					vertical-align: top;
-					margin: 5px;
-					margin-top: 0px;
+					padding: 0px;
+					margin: 0px;
+					}
+					
+.formcolumnnarrow	{
+					width: 50px;
+					display: inline-block;
+					vertical-align: top;
+					padding: 0px;
+					margin: 0px;
+					}
+					
+.formcolumnmedium	{
+					width: 200px;
+					display: inline-block;
+					vertical-align: top;
+					padding: 0px;
+					margin: 0px;
+					}
+					
+.formcolumnwide		{
+					width: 400px;
+					display: inline-block;
+					vertical-align: top;
+					padding: 0px;
+					margin: 0px;
 					}
 					
 .table				{

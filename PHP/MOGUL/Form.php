@@ -6,22 +6,21 @@ class Form
 	private $page;
 	private $title;
 	private $fields;
-	private $columnwidths;
 	private $pattern;
 	private $formclass;
-	private $columnclass;
 	private $fieldclass;
+	private $columnclasses;
 
 	function __construct(string $action, string $method = 'get', Page $page = null, string $title = null,
-		string $formclass = 'form', string $columnclass = 'formcolumn', string $fieldclass = 'formfield')
+		string $formclass = 'form', string $fieldclass = 'formfield', string $columnclasses = array('formcolumnsingle'))
 		{
 		$this->action = $action;
 		$this->method = $method;
 		$this->page = $page;
 		$this->title = $title;
 		$this->formclass = $formclass;
-		$this->columnclass = $columnclass;
 		$this->fieldclass = $fieldclass;
+		$this->columnclasses = $columnclasses;
 		
 		$this->fields = array();
 		$this->fields[] = array();
@@ -63,10 +62,9 @@ class Form
 		$this->set_pattern(1, 2048);
 		}
 		
-	function add_column_break(string $width)
+	function add_column_break()
 		{
 		$this->fields[] = array();
-		$this->columnwidths[] = $width;
 		}
 	
 	function add_spacer(string $class = 'spacer')
@@ -187,9 +185,7 @@ class Form
 		
 		foreach($this->fields as $columnindex => $column)
 			{
-			echo('<div class="' . $this->columnclass . '" style="width: '
-				. (count($this->columnwidths) > 0 ? ($columnindex < count($this->columnwidths) ? $this->columnwidths[$columnindex] : 'auto') : '100%')
-				. ';">' . "\n");
+			echo('<div class="' . $this->columnclasses[$columnindex % count($this->columnclasses)] . '">' . "\n");
 			foreach($column as $field)
 				{
 				echo('<div class="' . $this->fieldclass . '">' . "\n");

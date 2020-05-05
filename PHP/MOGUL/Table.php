@@ -77,7 +77,7 @@ class Table
 			for($i = 0; $i < count($columnrow); ++$i)
 				{
 				echo('<th class="' . $this->borderclass . '">');
-				echo('<div class="' . $this->cellclass . ' ' . $this->columnclasses[$i % count($this->columnwidths)] . '">');
+				echo('<div class="' . $this->cellclass . ' ' . $this->columnclasses[$i % count($this->columnclasses)] . '">');
 				echo($columnrow[$i]);
 				echo('</div>');
 				echo('</th>');
@@ -92,7 +92,7 @@ class Table
 			for($i = 0; $i < count($datarow); ++$i)
 				{
 				echo('<td class="' . $this->borderclass . '">');
-				echo('<div class="' . $this->cellclass . ' ' . $this->columnclasses[$i % count($this->columnwidths)] . '">');
+				echo('<div class="' . $this->cellclass . ' ' . $this->columnclasses[$i % count($this->columnclasses)] . '">');
 				if(is_string($datarow[$i]) || is_numeric($datarow[$i]) || is_bool($datarow[$i]))
 					{
 					echo($datarow[$i]);
