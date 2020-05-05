@@ -21,8 +21,8 @@ if($data['username'] != ""){
     $student->_lastName = $data->last_name;
     $student->_grade = $data->grade;*/
 
-    $username = $data->username;
-    $password = $data->password;
+    $username = $data['username'];
+    $password = $data['password'];
 
 
     //ToDo: create town for player

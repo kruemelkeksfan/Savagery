@@ -12,10 +12,10 @@ $database = new Database();
 
 $data = json_decode(file_get_contents("php://input"));
 
-if($data->username != "") {
+if($data['username'] != "") {
 
-    $username = $data->username;
-    $last_active = $data->last_active;
+    $username = $data['username'];
+    $last_active = $data['last_active'];
 
 
 

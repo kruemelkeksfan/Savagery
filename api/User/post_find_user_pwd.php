@@ -12,10 +12,10 @@ $database = new Database();
 
 $data = json_decode(file_get_contents("php://input"));
 
-if($data->username != "") {
+if($data['username'] != "") {
 
-    $username = $data->username;
-    $password = $data->password;
+    $username = $data['username'];
+    $password = $data['password'];
 
     $userdata = $database->query('SELECT password FROM Users WHERE username=:0;', array($username));
 
