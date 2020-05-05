@@ -12,6 +12,18 @@ a					{
 					margin: 0px;
 					}
 					
+.width100per		{
+					width: 100%;
+					}
+					
+.widthauto			{
+					width: auto;
+					}
+
+.width20px			{
+					width: 20px;
+					}
+					
 .width50px			{
 					width: 50px;
 					}
@@ -30,6 +42,14 @@ a					{
 					
 .width400px			{
 					width: 400px;
+					}
+					
+.width600px			{
+					width: 600px;
+					}
+					
+.width800px			{
+					width: 800px;
 					}
 		
 .spacer				{
@@ -85,7 +105,6 @@ a					{
 					}
 					
 .form				{
-					width: 300px;
 					display: inline-block;
 					vertical-align: top;
 					margin: 10px;
@@ -94,22 +113,6 @@ a					{
 					
 .formsingleline		{
 					margin-left: 5px;
-					}
-					
-.formfieldnarrow	{
-					width: 50px;
-					}
-					
-.formfieldmedium	{
-					width: 100px;
-					}
-					
-.formfieldwide		{
-					width: 200px;
-					}
-					
-.formfieldhuge		{
-					width: 800px;
 					}
 					
 .formlabelcontainer	{
@@ -126,40 +129,7 @@ a					{
 					margin-top: 0px;
 					}
 					
-.formcolumnsingle	{
-					width: 100%;
-					display: inline-block;
-					vertical-align: top;
-					padding: 0px;
-					margin: 0px;
-					}
-					
-.formcolumnauto		{
-					width: auto;
-					display: inline-block;
-					vertical-align: top;
-					padding: 0px;
-					margin: 0px;
-					}
-					
-.formcolumnnarrow	{
-					width: 50px;
-					display: inline-block;
-					vertical-align: top;
-					padding: 0px;
-					margin: 0px;
-					}
-					
-.formcolumnmedium	{
-					width: 200px;
-					display: inline-block;
-					vertical-align: top;
-					padding: 0px;
-					margin: 0px;
-					}
-					
-.formcolumnwide		{
-					width: 400px;
+.formcolumn			{
 					display: inline-block;
 					vertical-align: top;
 					padding: 0px;
@@ -190,26 +160,6 @@ a					{
 .tablecellcenter	{
 					height: 20px;
 					text-align: center;
-					}
-
-.tablecolumntiny	{
-					width: 20px;
-					}
-					
-.tablecolumnnarrow	{
-					width: 50px;
-					}
-
-.tablecolumnmedium	{
-					width: 100px;
-					}
-
-.tablecolumnwide	{
-					width: 200px;
-					}
-					
-.tablecolumnhuge	{
-					width: 400px;
 					}
 					
 .mapcell			{

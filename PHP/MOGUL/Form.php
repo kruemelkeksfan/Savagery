@@ -12,7 +12,7 @@ class Form
 	private $fieldclass;
 
 	function __construct(string $action, string $method = 'get', Page $page = null, string $title = null,
-		array $columnclasses = array('formcolumnsingle'), string $formclass = 'form', string $fieldclass = 'formfield')
+		array $columnclasses = array('formcolumn width300px'), string $formclass = 'form width300px', string $fieldclass = 'formfield')
 		{
 		$this->action = $action;
 		$this->method = $method;

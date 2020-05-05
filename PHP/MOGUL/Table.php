@@ -11,7 +11,7 @@ class Table
 	private $data;
 		
 	function __construct(Page $page = null, string $title = null,
-			array $columnclasses = array('tablecolumnmedium'),
+			array $columnclasses = array('tablecolumn width200px'),
 			string $tableclass = 'table', string $cellclass = 'tablecell', string $borderclass = 'tableborder')
 		{
 		$this->page = $page;
