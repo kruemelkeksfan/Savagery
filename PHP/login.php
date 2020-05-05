@@ -33,9 +33,16 @@ if(!empty($action))
 			{
 			if($password === $repeatpassword)
 				{
-				if($database->query('INSERT INTO Users (username, password, last_active) VALUES (:0, :1, :2);',
-					array($username, password_hash($password, PASSWORD_DEFAULT), time())))
+				$gold = $database->query('SELECT value FROM BalanceSettings WHERE settingname=:0;', array('Start_Gold'))[0]['value'];
+				if($database->query('INSERT INTO Users (username, password, last_active, gold) VALUES (:0, :1, :2, :3);',
+					array($username, password_hash($password, PASSWORD_DEFAULT), time(), $gold)))
 					{
+					$mapsize = $database->query('SELECT value FROM BalanceSettings WHERE settingname=:0;', array('Map_Size'))[0]['value'];
+					$tax = $database->query('SELECT value FROM BalanceSettings WHERE settingname=:0;', array('Start_Tax'))[0]['value'];
+					$population = $database->query('SELECT value FROM BalanceSettings WHERE settingname=:0;', array('Start_Population'))[0]['value'];
+					$database->query('INSERT INTO Towns (townname, position, tax, population, owner) VALUES (:0, :1, :2, :3, :4);',
+						array($username . 's Town', mt_rand(0, $mapsize - 1), $tax, $population, $username));
+						
 					$_SESSION['username'] = $username;
 
 					header('Location: ' . (empty($previouspage) ? constant('OVERVIEW_PAGE') : $previouspage));

@@ -40,7 +40,7 @@ if(!empty($_GET['action']))
 		// Define Timestamps
 		$timestamps = array(array('User_Reset', time()), array('Game_Start', time()));
 		// Define Balance Settings
-		$settings = array(array('Example_Setting', '1'));
+		$settings = array(array('Map_Size', '100'), array('Start_Gold', '100'), array('Start_Tax', '5'), array('Start_Population', '5'));
 
 		// Create Tables
 		// Administration Tables
@@ -54,7 +54,6 @@ if(!empty($_GET['action']))
 			password VARCHAR(256),
 			last_active INT,
 			gold INT,
-			town VARCHAR(16),
 			PRIMARY KEY (username)
 			);'); // Use at least VARCHAR(60) for Passwords to prevent cutting Hashes
 		// Setting Tables
