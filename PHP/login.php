@@ -33,8 +33,8 @@ if(!empty($action))
 			if($password === $repeatpassword)
 				{
 				    //Todo: delete this
-                    $test = $http->get("api_test.php");
-                    echo "Test curl get: ";
+                    $test = $http->post("api_test.php", json_encode(array("alte"=>"Eingabe")));
+                    echo "Test curl post: ";
                     var_dump($test);
                     //call API using the HttpHelper
 				$postdata = json_encode(array('username'=>$username, 'password'=>$password));
