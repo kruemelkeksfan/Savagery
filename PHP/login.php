@@ -116,6 +116,7 @@ $loginform->print();
 //DB-Fill Button
 $dbButton = new Form('login.php?action=init_DB' . (!empty($previouspage) ? ('&page=' . $previouspage) : ''), 'post', $page);
 $dbButton->add_submit('Initialize DB');
+$dbButton->print();
 
 // Cookie Notice
 $page->print_heading('A Word about Cookies');
