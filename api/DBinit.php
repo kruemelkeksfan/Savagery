@@ -8,22 +8,20 @@ $database = new Database();
 // Define Timestamps
 $timestamps = array(array('User_Reset', time()), array('Game_Start', time()));
 // Define Balance Settings
-$settings = array(array('Example_Setting', '1'));
+$settings = array(array('Map_Size', '100'), array('Start_Gold', '100'), array('Start_Tax', '5'), array('Start_Population', '5'));
 
 // Create Tables
 // Administration Tables
-$success = $database->query('CREATE TABLE IF NOT EXISTS Timetable (
+$database->query('CREATE TABLE IF NOT EXISTS Timetable (
 			timename VARCHAR(16),
 			record INT,
 			PRIMARY KEY (timename)
 			);');
-//ToDo: town = foreign key?
-$database->query('CREATE TABLE IF NOT EXISTS Users (
+$success = $database->query('CREATE TABLE IF NOT EXISTS Users (
 			username VARCHAR(16),
 			password VARCHAR(256),
 			last_active INT,
-			gold INT DEFAULT 100,
-			town VARCHAR(16),
+			gold INT,
 			PRIMARY KEY (username)
 			);'); // Use at least VARCHAR(60) for Passwords to prevent cutting Hashes
 // Setting Tables
@@ -36,6 +34,7 @@ $database->query('CREATE TABLE IF NOT EXISTS Buildingtypes (
 			buildingtypename VARCHAR(16),
 			effect VARCHAR(64),
 			cost INT,
+			maxworkers INT,
 			PRIMARY KEY (buildingtypename)
 			);');
 // Game Tables
@@ -71,6 +70,7 @@ $database->query('CREATE TABLE IF NOT EXISTS Armies (
 $database->query('INSERT INTO Timetable (timename, record) VALUES (:0, :1);', $timestamps);
 // Save Balance Settings
 $database->query('INSERT INTO BalanceSettings (settingname, value) VALUES (:0, :1);', $settings);
+
 
 if($success){
     echo json_encode(

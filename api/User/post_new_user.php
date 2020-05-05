@@ -24,13 +24,23 @@ if($data['username'] != ""){
     $username = $data['username'];
     $password = $data['password'];
 
+    $gold = $database->query('SELECT value FROM BalanceSettings WHERE settingname=:0;', array('Start_Gold'))[0]['value'];
 
-    //ToDo: create town for player
-    if($database->query('INSERT INTO Users (username, password, last_active) VALUES (:0, :1, :2);',
-        array($username, password_hash($password, PASSWORD_DEFAULT), time()))) {
-        echo json_encode(
-            array('message' => 'User Created', 'success'=>true)
-        );
+
+
+    if($database->query('INSERT INTO Users (username, password, last_active, gold) VALUES (:0, :1, :2, :3);',
+        array($username, password_hash($password, PASSWORD_DEFAULT), time(), $gold))) {
+
+        $mapsize = $database->query('SELECT value FROM BalanceSettings WHERE settingname=:0;', array('Map_Size'))[0]['value'];
+        $tax = $database->query('SELECT value FROM BalanceSettings WHERE settingname=:0;', array('Start_Tax'))[0]['value'];
+        $population = $database->query('SELECT value FROM BalanceSettings WHERE settingname=:0;', array('Start_Population'))[0]['value'];
+        if ($database->query('INSERT INTO Towns (townname, position, tax, population, owner) VALUES (:0, :1, :2, :3, :4);',
+            array($username . 's Town', mt_rand(0, $mapsize - 1), $tax, $population, $username))) {
+
+            echo json_encode(
+                array('message' => 'User and Town Created', 'success' => true)
+            );
+        }
     } else {
         echo json_encode(
             array('message' => 'User Not Created', 'success'=>false)
