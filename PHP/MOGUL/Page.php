@@ -4,7 +4,7 @@ class Page
 	private $title;
 	private $restricted;
 	private $errors;
-	private $database;
+	private $httpHelper;
 		
 	function __construct(GameInfo $info, string $title = '', bool $restricted = false)
 		{
@@ -13,7 +13,7 @@ class Page
 		
 		$this->errors = array();
 		
-		$this->database = new Database();
+		$this->httpHelper = new HttpHelper();
 		}
 		
 	// TODO: Use in Map for Cells and other Locations where $_SERVER['PHP_SELF'] was used before
@@ -78,8 +78,9 @@ class Page
 			if(!empty($_SESSION['username']))
 				{
 				// Check if User was last_active before the User Table was wiped and act accordingly
-				$userreset = $this->database->query('SELECT record FROM Timetable WHERE timename=:0;', array('User_Reset'));
-				if($_SESSION['last_active'] <= $userreset[0]['record'])
+				$userreset = $this->httpHelper->get('Timetable/get_record_reset.php');
+				var_dump($userreset);
+				if($_SESSION['last_active'] <= $userreset['record'])
 					{
 					// Force-logout the User
 					$_SESSION = array();
@@ -88,7 +89,9 @@ class Page
 					{
 					// Update last_active
 					$_SESSION['last_active'] = time();
-					$this->database->query('UPDATE Users SET last_active=:0 WHERE username=:1;', array($_SESSION['last_active'], $_SESSION['username']));
+					$postdata =  json_encode(array($_SESSION['last_active'], $_SESSION['username']));
+					$result = $this->httpHelper->post('User/post_last_active.php', $postdata);
+					var_dump($result);
 					}
 				}
 			

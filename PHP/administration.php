@@ -23,6 +23,10 @@ if(!empty($_GET['action']))
 	// Database Management
 	if($_GET['action'] === 'killeverything')
 		{
+
+//ToDo: API calls
+
+		    /*
 		// Delete Database
 		$database->query('DROP DATABASE ' . constant('GAME_TITLE') . ';');
 		
@@ -33,7 +37,8 @@ if(!empty($_GET['action']))
 		$query->execute();
 		$query = $dblink->prepare('USE ' . constant('GAME_TITLE') . ';');
 		$query->execute();
-	
+
+
 		// Database Connection
 		$database = new Database();
 		
@@ -101,7 +106,7 @@ if(!empty($_GET['action']))
 		// Save Timestamps
 		$database->query('INSERT INTO Timetable (timename, record) VALUES (:0, :1);', $timestamps);
 		// Save Balance Settings
-		$database->query('INSERT INTO BalanceSettings (settingname, value) VALUES (:0, :1);', $settings);
+		$database->query('INSERT INTO BalanceSettings (settingname, value) VALUES (:0, :1);', $settings);*/
 		}
 	}
 

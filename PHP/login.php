@@ -3,12 +3,11 @@
 include_once('MOGUL/AutoLoader.php');
 new AutoLoader();
 
+$http = new HttpHelper();
+
 // PAGE HEADER
 $page = new Page(new SavageryInfo());
 $page->print_header();
-
-// DATABASE CONNECTION
-$database = new Database();
 
 // Get previous Page
 $previouspage = InputHelper::get_get_string('page', '');
@@ -33,15 +32,20 @@ if(!empty($action))
 			{
 			if($password === $repeatpassword)
 				{
-				$gold = $database->query('SELECT value FROM BalanceSettings WHERE settingname=:0;', array('Start_Gold'))[0]['value'];
-				if($database->query('INSERT INTO Users (username, password, last_active, gold) VALUES (:0, :1, :2, :3);',
-					array($username, password_hash($password, PASSWORD_DEFAULT), time(), $gold)))
+				// Merge Start
+				// $gold = $database->query('SELECT value FROM BalanceSettings WHERE settingname=:0;', array('Start_Gold'))[0]['value'];
+
+                //call API using the HttpHelper
+				$postdata = array('username'=>$username, 'password'=>$password);
+				$created = $http->post('User/post_new_user.php', $postdata);
+				if($created['success'])
+				// Merge End
 					{
-					$mapsize = $database->query('SELECT value FROM BalanceSettings WHERE settingname=:0;', array('Map_Size'))[0]['value'];
-					$tax = $database->query('SELECT value FROM BalanceSettings WHERE settingname=:0;', array('Start_Tax'))[0]['value'];
-					$population = $database->query('SELECT value FROM BalanceSettings WHERE settingname=:0;', array('Start_Population'))[0]['value'];
-					$database->query('INSERT INTO Towns (townname, position, tax, population, owner) VALUES (:0, :1, :2, :3, :4);',
-						array($username . 's Town', mt_rand(0, $mapsize - 1), $tax, $population, $username));
+					// $mapsize = $database->query('SELECT value FROM BalanceSettings WHERE settingname=:0;', array('Map_Size'))[0]['value'];
+					// $tax = $database->query('SELECT value FROM BalanceSettings WHERE settingname=:0;', array('Start_Tax'))[0]['value'];
+					// $population = $database->query('SELECT value FROM BalanceSettings WHERE settingname=:0;', array('Start_Population'))[0]['value'];
+					// $database->query('INSERT INTO Towns (townname, position, tax, population, owner) VALUES (:0, :1, :2, :3, :4);',
+					//	array($username . 's Town', mt_rand(0, $mapsize - 1), $tax, $population, $username));
 						
 					$_SESSION['username'] = $username;
 
@@ -66,9 +70,12 @@ if(!empty($action))
 	// LOGIN
 	else if($action === 'login' && !empty($username) && !empty($password))
 		{
-		$userdata = $database->query('SELECT password FROM Users WHERE username=:0;', array($username));
+            //call API using the HttpHelper
+		    $postdata = array('username'=>$username, 'password'=>$password);
+            $found = $http->post('User/post_find_user_pwd.php', $postdata);
+            var_dump($found);
 
-		if(count($userdata) > 0 && password_verify($password, $userdata[0]['password']))
+		if($found['success'])
 			{
 			$_SESSION['username'] = $username;
 
@@ -85,6 +92,11 @@ if(!empty($action))
 		{
 		$page->add_error('The data leech is not satisfied by your sacrifice, feed him more to gain his approval!');
 		}
+	else if($action === 'init_DB'){
+	    echo "pressed DB init";
+        $result = $http->get("DBinit.php");
+        var_dump($result);
+    }
 	}
 
 // ERROR PANEL
@@ -109,6 +121,11 @@ $loginform->add_field('Username', true, 'text', '', true);
 $loginform->add_field('Password', true, 'password', '', true);
 $loginform->add_submit('Login');
 $loginform->print();
+
+//DB-Fill Button
+$dbButton = new Form('login.php?action=init_DB' . (!empty($previouspage) ? ('&page=' . $previouspage) : ''), 'post', $page);
+$dbButton->add_submit('Initialize DB');
+$dbButton->print();
 
 // Cookie Notice
 $page->print_heading('A Word about Cookies');
