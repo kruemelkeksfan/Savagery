@@ -12,7 +12,7 @@ $settings = array(array('Example_Setting', '1'));
 
 // Create Tables
 // Administration Tables
-$database->query('CREATE TABLE IF NOT EXISTS Timetable (
+$success = $database->query('CREATE TABLE IF NOT EXISTS Timetable (
 			timename VARCHAR(16),
 			record INT,
 			PRIMARY KEY (timename)
@@ -72,6 +72,12 @@ $database->query('INSERT INTO Timetable (timename, record) VALUES (:0, :1);', $t
 // Save Balance Settings
 $database->query('INSERT INTO BalanceSettings (settingname, value) VALUES (:0, :1);', $settings);
 
-echo json_encode(
-    array('message' => 'Tables Created Successfully')
-);
+if($success){
+    echo json_encode(
+        array('message' => 'Tables Created Successfully')
+    );
+} else {
+    echo json_encode(
+        array('message' => 'Tables Not Created Successfully')
+    );
+}

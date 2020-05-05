@@ -86,7 +86,8 @@ if(!empty($action))
 		}
 	else if($action === 'init_DB'){
 	    echo "pressed DB init";
-        $http->get("DBinit");
+        $result = $http->get("DBinit");
+        var_dump($result);
     }
 	}
 
