@@ -21,6 +21,7 @@ function post($path, $data){
 
     $json_response = curl_exec($curl);
 
+    echo "Curl Errorno: ".curl_errno($curl);
     if (curl_errno($curl)) {
         print curl_error($curl);
     }
