@@ -32,10 +32,6 @@ if(!empty($action))
 			{
 			if($password === $repeatpassword)
 				{
-				    //Todo: delete this
-                    $test = $http->post("api_test_post.php", array("alte"=>"Eingabe"));
-                    echo "Test curl post: ";
-                    var_dump($test);
                     //call API using the HttpHelper
 				$postdata = array('username'=>$username, 'password'=>$password);
 				var_dump($postdata);
@@ -88,6 +84,10 @@ if(!empty($action))
 		{
 		$page->add_error('The data leech is not satisfied by your sacrifice, feed him more to gain his approval!');
 		}
+	else if($action === 'init_DB'){
+	    echo "pressed DB init";
+        $http->get("DBinit");
+    }
 	}
 
 // ERROR PANEL
@@ -112,6 +112,10 @@ $loginform->add_field('Username', true, 'text', '', true);
 $loginform->add_field('Password', true, 'password', '', true);
 $loginform->add_submit('Login');
 $loginform->print();
+
+//DB-Fill Button
+$dbButton = new Form('login.php?action=init_DB' . (!empty($previouspage) ? ('&page=' . $previouspage) : ''), 'post', $page);
+$dbButton->add_submit('Initialize DB');
 
 // Cookie Notice
 $page->print_heading('A Word about Cookies');

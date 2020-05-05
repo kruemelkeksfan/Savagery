@@ -1,5 +1,5 @@
 <?php
-include('ErrorHandler.php');
+include('ErrorHandlerAPI.php');
 
 class Database
 	{

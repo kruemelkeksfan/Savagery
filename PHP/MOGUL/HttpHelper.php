@@ -28,7 +28,7 @@ function post($path, $data){
 
     curl_close($curl);
 
-    return json_decode($json_response, JSON_OBJECT_AS_ARRAY);
+    return json_decode($json_response, true);
 }
 
 function get($path) {
@@ -40,6 +40,6 @@ function get($path) {
 
     curl_close($curl);
 
-    return json_decode($json_response);
+    return json_decode($json_response, true);
 }
 }
