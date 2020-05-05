@@ -34,6 +34,7 @@ if(!empty($action))
 				{
                     //call API using the HttpHelper
 				$postdata = json_encode(array('username'=>$username, 'password'=>$password));
+				var_dump($postdata);
 				$created = $http->post('User/post_new_user.php', $postdata);
 				$created = json_decode($created);
 				var_dump($created);
