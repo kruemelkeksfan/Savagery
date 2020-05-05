@@ -10,7 +10,7 @@ $page->print_header();
 // Setup Database Connection
 $database = $page->get_database();
 
-$buildingtable = new Table($page, 'Upgrades', array('tablecolumnwide'));
+$buildingtable = new Table($page, 'Upgrades', array('tablecolumn width200px'));
 $buildingtable->add_columns('ID', 'Building', 'Level', 'Workers', 'Upgrade', 'Set Workers');
 
 $upgradeform = new Form('town.php'/*?tag=' . $towntag . '&action=upgrade&building=' . $buildingindex*/,
@@ -18,7 +18,7 @@ $upgradeform = new Form('town.php'/*?tag=' . $towntag . '&action=upgrade&buildin
 $upgradeform->add_submit('Upgrade');
 
 $workerform = new Form('town.php'/*?tag=' . $towntag . '&action=setworkers&building=' . $buildingindex*/,
-	'post', null, null, array('formcolumnnarrow', 'formcolumnnarrow'));
+	'post', null, null, array('formcolumn width100px', 'formcolumn width100px'));
 $workerform->add_field('', true, 'number', 4/*maxworkers*/, true, 1, 'width50px',
 	0, 4/*maxworkers*/);
 $workerform->add_column_break();
@@ -27,11 +27,11 @@ $workerform->add_submit('Set Workers');
 $buildingtable->add_data(array(array('1', 'Blacksmith', '2', '4', $upgradeform, $workerform)));
 $buildingtable->print();
 
-$constructiontable = new Table($page, 'Construction', array('tablecolumnwide'));
+$constructiontable = new Table($page, 'Construction', array('tablecolumn width200px'));
 $constructiontable->add_columns('Building', 'Effect', 'Cost', 'Build');
 
 $constructionform = new Form('town.php'/*?tag=' . $towntag . '&action=construct&building=' . $buildingindex*/,
-	'post', null, null, array('formcolumnsingle'));
+	'post', null, null, array('formcolumn width100per'));
 $constructionform->add_submit('Build');
 
 $constructiontable->add_data(array(array('Blacksmith', 'Increases the Attack Strength of all Armies of this Town.', '20', $constructionform)));
