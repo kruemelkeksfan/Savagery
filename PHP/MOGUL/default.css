@@ -11,6 +11,26 @@ h4					{
 a					{
 					margin: 0px;
 					}
+					
+.width50px			{
+					width: 50px;
+					}
+					
+.width100px			{
+					width: 100px;
+					}
+					
+.width150px			{
+					width: 150px;
+					}
+										
+.width200px			{
+					width: 200px;
+					}
+					
+.width400px			{
+					width: 400px;
+					}
 		
 .spacer				{
 					width: 0px;
@@ -65,7 +85,7 @@ a					{
 					}
 					
 .form				{
-					width: 200px;
+					width: 300px;
 					display: inline-block;
 					vertical-align: top;
 					margin: 10px;

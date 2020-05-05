@@ -7,20 +7,27 @@ class Form
 	private $title;
 	private $fields;
 	private $pattern;
+	private $columnclasses;
 	private $formclass;
 	private $fieldclass;
-	private $columnclasses;
 
 	function __construct(string $action, string $method = 'get', Page $page = null, string $title = null,
-		string $formclass = 'form', string $fieldclass = 'formfield', string $columnclasses = array('formcolumnsingle'))
+		array $columnclasses = array('formcolumnsingle'), string $formclass = 'form', string $fieldclass = 'formfield')
 		{
 		$this->action = $action;
 		$this->method = $method;
 		$this->page = $page;
 		$this->title = $title;
+		if(count($columnclasses) > 0)
+			{
+			$this->columnclasses = $columnclasses;
+			}
+		else
+			{
+			ErrorHandler::handle_error('No Column Widths supplied for new Form ' . $title . '!');
+			}
 		$this->formclass = $formclass;
 		$this->fieldclass = $fieldclass;
-		$this->columnclasses = $columnclasses;
 		
 		$this->fields = array();
 		$this->fields[] = array();

@@ -66,6 +66,7 @@ if(!empty($_GET['action']))
 			buildingtypename VARCHAR(16),
 			effect VARCHAR(64),
 			cost INT,
+			maxworkers INT,
 			PRIMARY KEY (buildingtypename)
 			);');
 		// Game Tables

@@ -136,17 +136,19 @@ class Page
 			echo('</div>' . "\n");
 			
 			echo('<div class="navelementwide">');
-			$refreshform = new Form(Page::get_current_site(), 'post', null, null, '300px');
+			/*
+			$refreshform = new Form(Page::get_current_site(), 'post', null, null, array('formcolumnmedium', 'formcolumnnarrow'));
 			$options = array(0 => 'No Refresh', 2 => '2 Seconds', 4 => '4 Seconds',
 				12 => '12 Seconds', 24 => '24 Seconds', 48 => '48 Seconds');
 			$refreshform->add_dropdown_field('Auto-Refresh', $options, true, true);
-			$refreshform->add_column_break('200px');
+			$refreshform->add_column_break();
 			$refreshform->add_submit('Refresh');
 			$refreshform->print();
 			if(!empty($_SESSION['refresh']))
 				{
 				$this->print_inline_text('(Currently ' . $_SESSION['refresh'] . ' Seconds)', 'smalltext');
 				}
+			*/
             echo('</div>' . "\n");
 				
 			echo('<div class="navelementnarrow">');

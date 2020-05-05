@@ -10,7 +10,7 @@ class SavageryInfo extends GameInfo
 		parent::__construct('Savagery',
 			'127.0.0.1', 'Savagery', 'qhB4gdpf',
 			'login.php', 'index.php',
-			array('Overview' => 'index.php'),
+			array('Overview' => 'index.php', 'Town' => 'town.php', 'Armies' => 'armies.php'),
 			array('kruemelkeksfan', 'kruemel'), 'log.txt');
 		}
 	}

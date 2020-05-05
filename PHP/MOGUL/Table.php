@@ -3,23 +3,19 @@ class Table
 	{
 	private $page;
 	private $title;
+	private $columnclasses;
 	private $tableclass;
 	private $cellclass;
 	private $borderclass;
-	private $columnclasses;
 	private $columns;
 	private $data;
 		
 	function __construct(Page $page = null, string $title = null,
-			string $tableclass = 'table', string $cellclass = 'tablecell',
-			string $borderclass = 'tableborder',
-			array $columnclasses = array('tablecolumnmedium'))
+			array $columnclasses = array('tablecolumnmedium'),
+			string $tableclass = 'table', string $cellclass = 'tablecell', string $borderclass = 'tableborder')
 		{
 		$this->page = $page;
 		$this->title = $title;
-		$this->tableclass = $tableclass;
-		$this->cellclass = $cellclass;
-		$this->borderclass = $borderclass;
 		if(count($columnclasses) > 0)
 			{
 			$this->columnclasses = $columnclasses;
@@ -28,6 +24,9 @@ class Table
 			{
 			ErrorHandler::handle_error('No Column Widths supplied for new Table ' . $title . '!');
 			}
+		$this->tableclass = $tableclass;
+		$this->cellclass = $cellclass;
+		$this->borderclass = $borderclass;
 		
 		$this->columns = array();
 		$this->data = array();
