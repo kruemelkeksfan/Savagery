@@ -10,7 +10,7 @@ abstract class ErrorHandlerAPI
 		
 	public static function handle_error(string $message)
 		{
-		var_dump('Something just went wrong, please contact Admin!'); // TODO: Add E-Mail-Address and/or Contact Form
+		var_dump('Something just went wrong, please contact Admin! Message: '. $message); // TODO: Add E-Mail-Address and/or Contact Form
 		error_log('ERROR: ' . $message . PHP_EOL . 'Caused by ' . "API" . PHP_EOL, 3, constant('LOG_FILE'));
 		exit();
 		}
