@@ -16,6 +16,9 @@ function post($path, $data){
 
     var_dump($curl);
 
+    $test = file_get_contents($this->base_url."api_test.php");
+    var_dump($test);
+
     $json_response = curl_exec($curl);
 
     curl_close($curl);
