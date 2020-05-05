@@ -20,11 +20,11 @@ class Database
 			{
 			if($exc->getCode() == 1049)
 				{
-				ErrorHandler::handle_error('Database not available!');
+				ErrorHandlerAPI::handle_error('Database not available!');
 				}
 			else
 				{
-				ErrorHandler::handle_error('Database connection could not be established: ' . $exc->getMessage() . '!');
+				ErrorHandlerAPI::handle_error('Database connection could not be established: ' . $exc->getMessage() . '!');
 				}
 			}
 		}
@@ -68,7 +68,7 @@ class Database
 					}
 				else
 					{
-					ErrorHandler::handle_error('PDOException ' . $exc->getMessage() . ' while trying to perform query ' . $querystring . '!');
+					ErrorHandlerAPI::handle_error('PDOException ' . $exc->getMessage() . ' while trying to perform query ' . $querystring . '!');
 					}
 				}
 			}
@@ -98,7 +98,7 @@ class Database
 						}
 					else
 						{
-						ErrorHandler::handle_error('PDOException ' . $exc->getMessage() . ' while trying to perform query ' . $querystring . '!');
+						ErrorHandlerAPI::handle_error('PDOException ' . $exc->getMessage() . ' while trying to perform query ' . $querystring . '!');
 						}
 					}
 				}
