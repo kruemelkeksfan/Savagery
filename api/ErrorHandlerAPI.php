@@ -1,10 +1,6 @@
 <?php
 abstract class ErrorHandlerAPI
 	{
-	    function __construct()
-        {
-            define('LOG_FILE', 'log.txt');
-        }
 
 	public static function handle_warning(string $message)
 		{

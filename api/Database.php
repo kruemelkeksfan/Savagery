@@ -11,6 +11,7 @@ class Database
 	
 	function __construct()
 		{
+            define('LOG_FILE', 'log.txt');
 		try
 			{
 			$this->dblink = new PDO('mysql:host=' . $this->host . ';dbname=' . $this->db_name, $this->db_user, $this->password,
