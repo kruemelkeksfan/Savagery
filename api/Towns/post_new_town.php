@@ -7,7 +7,6 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 
 include_once '../Database.php';
-//include_once '../models/Student.php';
 
 $database = new Database();
 
