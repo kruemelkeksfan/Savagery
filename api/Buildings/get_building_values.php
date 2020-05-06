@@ -12,11 +12,11 @@ $database = new Database();
 
 $data = json_decode(file_get_contents("php://input"), JSON_OBJECT_AS_ARRAY);
 
-if($data['username'] != "") {
+if ($data['townname'] != "") {
 
-    $username = $data['username'];
+    $townname = $data['townname'];
 
-    $town_data = $database->query("SELECT * FROM Town WHERE owner = :0;", array($username));
+    $buildings = $database->query("SELECT * FROM Buildings WHERE town = :0;", array($townname));
 
-    echo json_encode($town_data);
+    echo json_encode($buildings);
 }

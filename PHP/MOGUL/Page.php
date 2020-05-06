@@ -14,6 +14,14 @@ class Page
 		$this->errors = array();
 		
 		$this->httpHelper = new HttpHelper();
+
+            // PHP Settings
+            ini_set('session.use_strict_mode', '1');
+            ini_set('max_execution_time', 10);
+            ignore_user_abort(true);
+
+            // Start Session
+            session_start();
 		}
 		
 	// TODO: Use in Map for Cells and other Locations where $_SERVER['PHP_SELF'] was used before
@@ -57,13 +65,7 @@ class Page
 		
 	function print_header(string $heading = null)
 		{
-		// PHP Settings
-		ini_set('session.use_strict_mode', '1');
-		ini_set('max_execution_time', 10);
-		ignore_user_abort(true);
-		
-		// Start Session
-		session_start();
+
 		
 		// Check Login Status
 		if($this->restricted)
