@@ -95,7 +95,7 @@ if(!empty($action))
 		$page->add_error('The data leech is not satisfied by your sacrifice, feed him more to gain his approval!');
 		}
 	else if($action === 'init_DB'){
-	    echo "pressed DB init";
+	    //echo "pressed DB init";
 	    //$test = $http->get("api_test.php");
 	    //var_dump($test);
         $result = $http->get("DBinit.php");
