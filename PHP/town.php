@@ -28,7 +28,7 @@ $buildingtable->add_data(array(array('1', 'Blacksmith', '2', '4', $upgradeform, 
 $buildingtable->print();
 
 //Get Buildingtypes
-$types = $http->get("Buildingtypes/get_buildingtypes.php");
+$types = $http->get("Buildingtypes/get_buildingtypes.php")[0];
 foreach ($types as $row){
     $constructionform = new Form('town.php' . '&action=construct&building=' . $types['buildingtypename'],
         'post', null, null, array('formcolumn width100per'));
