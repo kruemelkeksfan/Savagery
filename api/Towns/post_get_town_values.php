@@ -16,7 +16,7 @@ if($data['username'] != "") {
 
     $username = $data['username'];
 
-    $town_data = $database->query("SELECT * FROM Town WHERE owner = :0;", array($username));
+    $town_data = $database->query("SELECT * FROM Towns WHERE owner = :0;", array($username));
 
     echo json_encode($town_data);
 }
