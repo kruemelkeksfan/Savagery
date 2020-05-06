@@ -9,6 +9,9 @@ $database = new Database();
 $timestamps = array(array('User_Reset', time()), array('Game_Start', time()));
 // Define Balance Settings
 $settings = array(array('Map_Size', '100'), array('Start_Gold', '100'), array('Start_Tax', '5'), array('Start_Population', '5'));
+//Define Buildingtypes
+$buildingtypes = array(array('Blacksmith', 'Increases the Attack Strength of all Armies of this Town.', '20', '10'),
+    array('Tavern', 'Increase Attach of Armies, decrease marching speed.', '10', '5'));
 
 // Create Tables
 // Administration Tables
@@ -78,6 +81,8 @@ $peaceTreatySuccess = $database->query('CREATE TABLE IF NOT EXISTS PeaceTreaty (
 $fillTimetable = $database->query('INSERT INTO Timetable (timename, record) VALUES (:0, :1);', $timestamps);
 // Save Balance Settings
 $fillBalaceSettings = $database->query('INSERT INTO BalanceSettings (settingname, value) VALUES (:0, :1);', $settings);
+
+$database->query('INSERT INTO Buildingtypes (buildingtypename, effect, cost, maxworkers) VALUES (:0, :1, :2, :3);', $buildingtypes);
 
 
 if($success && $fillBalaceSettings && $fillTimetable && $peaceTreatySuccess){
