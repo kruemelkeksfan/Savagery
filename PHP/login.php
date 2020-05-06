@@ -7,7 +7,6 @@ $http = new HttpHelper();
 
 // PAGE HEADER
 $page = new Page(new SavageryInfo());
-$page->print_header();
 
 // Get previous Page
 $previouspage = InputHelper::get_get_string('page', '');
@@ -102,6 +101,8 @@ if(!empty($action))
         //var_dump($result);
     }
 	}
+
+$page->print_header();
 
 // ERROR PANEL
 $page->print_errors();
