@@ -16,8 +16,8 @@ function post($path, $data){
 
     $json_response = curl_exec($curl);
 
-    echo "json-response";
-    var_dump($json_response);
+    //echo "json-response";
+    //var_dump($json_response);
 
     if (curl_errno($curl)) {
         print curl_error($curl);

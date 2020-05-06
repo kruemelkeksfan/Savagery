@@ -10,16 +10,11 @@ include_once '../Database.php';
 
 $database = new Database();
 
-$data = json_decode(file_get_contents("php://input"), true);
+$data = json_decode(file_get_contents("php://input"), JSON_OBJECT_AS_ARRAY);
 
 if($data['username'] != "") {
 
     $username = $data['username'];
-    $tax = $data['tax'];
 
-    if($database->query("UPDATE Towns SET tax = :1 WHERE owner = :0;", array($username, $tax))){
-        echo json_encode(array("message"=>"Tax adjusted", "success"=>true));
-    }else {
-        echo json_encode(array("message"=>"Failed to adjust Tax", "success"=>false));
-    }
+    $town_data = $database->query("SELECT * FROM Town WHERE owner = :0;", array($username));
 }
