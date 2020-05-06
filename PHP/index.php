@@ -10,6 +10,7 @@ $page->print_header();
 $http = new HttpHelper();
 
 $town = $http->post('Towns/post_get_town_values.php', array('username' => $_SESSION['username']));
+var_dump($town);
 
 $action = InputHelper::get_get_string('action', null);
 $tax = InputHelper::get_post_int('field_0_0', null);
@@ -26,6 +27,7 @@ if(!empty($action))
 	}
 
 $gold = $http->post('User/post_get_gold.php', array('username' => $_SESSION['username']))['gold'];
+var_dump($http->post('User/post_get_gold.php', array('username' => $_SESSION['username'])));
 
 $page->print_text('Current Gold: ' . $gold . '$');
 $page->print_text('Current Population: ' . $town['population']);

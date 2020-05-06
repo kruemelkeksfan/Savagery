@@ -16,7 +16,7 @@ if ($data['townname'] != "") {
 
     $townname = $data['townname'];
 
-    $buildings = $database->query("SELECT * FROM Buildings WHERE town = :0;", array($townname));
+    $buildings = $database->query("SELECT building_id, buildingtype, level, workers  FROM Buildings WHERE town = :0;", array($townname));
 
     echo json_encode($buildings);
 }
