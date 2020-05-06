@@ -15,7 +15,6 @@ function post($path, $data){
     curl_setopt($curl, CURLOPT_POSTFIELDS, $postdata);
 
     $json_response = curl_exec($curl);
-	var_dump($json_response);
 
     //echo "json-response";
     //var_dump($json_response);

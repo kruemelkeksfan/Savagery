@@ -21,6 +21,6 @@ if($data['username'] != "") {
 
     $new_tax = $database->query("SELECT tax FROM Towns WHERE owner = :0", array($username));
 
-    echo json_encode($new_tax);
+    echo json_encode($new_tax[0]);
 
 }
