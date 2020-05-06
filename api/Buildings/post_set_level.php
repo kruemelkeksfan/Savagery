@@ -17,9 +17,9 @@ if ($data['building_id'] != "") {
 
     $building_id = $data['building_id'];
 
-    if ($database->query("UPDATE Buildings SET level = level + 1 WHERE building_id = :0;", array($building_id))) {
-        echo json_encode(array("message" => "Workers sent", "success" => true));
-    } else {
-        echo json_encode(array("message" => "Failed to send Workers", "success" => false));
-    }
+    $database->query("UPDATE Buildings SET level = level + 1 WHERE building_id = :0;", array($building_id));
+
+    $level = $database->query("SELECT level FORM Buildings WHERE building_id = :O", array($building_id));
+
+    echo json_encode($level[0]);
 }

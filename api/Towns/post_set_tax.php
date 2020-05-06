@@ -17,9 +17,10 @@ if($data['username'] != "") {
     $username = $data['username'];
     $tax = $data['tax'];
 
-    if($database->query("UPDATE Towns SET tax = :1 WHERE owner = :0;", array($username, $tax))){
-        echo json_encode(array("message"=>"Tax adjusted", "success"=>true));
-    }else {
-        echo json_encode(array("message"=>"Failed to adjust Tax", "success"=>false));
-    }
+    $database->query("UPDATE Towns SET tax = :1 WHERE owner = :0;", array($username, $tax));
+
+    $new_tax = $database->query("SELECT tax FROM Towns WHERE owner = :0", array($username));
+
+    echo json_encode($new_tax[0]);
+
 }

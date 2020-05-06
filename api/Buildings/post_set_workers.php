@@ -17,9 +17,10 @@ if($data['building_id'] != "") {
     $building_id = $data['building_id'];
     $workers = $data['workers'];
 
-    if($database->query("UPDATE Buildings SET workers = :1 WHERE building_id = :0;", array($building_id, $workers))){
-        echo json_encode(array("message"=>"Workers sent", "success"=>true));
-    }else {
-        echo json_encode(array("message"=>"Failed to send Workers", "success"=>false));
-    }
+    $database->query("UPDATE Buildings SET workers = :1 WHERE building_id = :0;", array($building_id, $workers));
+
+    $deployed_workers = $database->query("SELECT workers FORM Buildings WHERE building_id = :O", array($building_id));
+
+    echo json_encode($deployed_workers[0]);
+
 }
