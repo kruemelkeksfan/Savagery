@@ -82,7 +82,7 @@ $fillTimetable = $database->query('INSERT INTO Timetable (timename, record) VALU
 // Save Balance Settings
 $fillBalaceSettings = $database->query('INSERT INTO BalanceSettings (settingname, value) VALUES (:0, :1);', $settings);
 
-$database->query('INSERT INTO Buildingtypes (buildingtypename, effect, cost, maxworkers) VALUES (:0, :1, :2, :3);', $settings);
+$database->query('INSERT INTO Buildingtypes (buildingtypename, effect, cost, maxworkers) VALUES (:0, :1, :2, :3);', $buildingtypes);
 
 
 if($success && $fillBalaceSettings && $fillTimetable && $peaceTreatySuccess){
