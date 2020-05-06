@@ -9,5 +9,5 @@ $database = new Database();
 $record = $database->query('SELECT record FROM Timetable WHERE timename=:0;', array('User_Reset'));
 
     echo json_encode(
-        array('record' => $record, 'success'=>true)
+        array('record' => $record[0]['record'], 'success'=>true)
     );
