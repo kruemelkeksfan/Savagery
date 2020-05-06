@@ -65,10 +65,10 @@ $database->query('CREATE TABLE IF NOT EXISTS Armies (
 			PRIMARY KEY (army_id),
 			FOREIGN KEY (hometown) REFERENCES Towns(townname)
 			);');
-$database->query('CREATE TABLE IF NOT EXISTS PeaceTreaty (
+$peaceTreatySuccess = $database->query('CREATE TABLE IF NOT EXISTS PeaceTreaty (
 			user1 VARCHAR(16),
 			user2 VARCHAR(16),
-			expiry_time VARCHAR(16),
+			expiry_time INT,
 			PRIMARY KEY (user1, user2),
 			FOREIGN KEY (user1) REFERENCES Users(username),
 			FOREIGN KEY (user2) REFERENCES Users(username),
@@ -80,12 +80,12 @@ $fillTimetable = $database->query('INSERT INTO Timetable (timename, record) VALU
 $fillBalaceSettings = $database->query('INSERT INTO BalanceSettings (settingname, value) VALUES (:0, :1);', $settings);
 
 
-if($success && $fillBalaceSettings && $fillTimetable){
+if($success && $fillBalaceSettings && $fillTimetable && $peaceTreatySuccess){
     echo json_encode(
         array('message' => 'Tables Created Successfully')
     );
 } else {
     echo json_encode(
-        array('message' => 'Tables Not Created Successfully' . $fillTimetable . $fillBalaceSettings)
+        array('message' => 'Tables Not Created Successfully' . $fillTimetable . $fillBalaceSettings . $peaceTreatySuccess)
     );
 }

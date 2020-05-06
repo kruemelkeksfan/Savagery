@@ -96,6 +96,8 @@ if(!empty($action))
 		}
 	else if($action === 'init_DB'){
 	    echo "pressed DB init";
+	    $test = $http->get("api_test.php");
+	    var_dump($test);
         $result = $http->get("DBinit.php");
         var_dump($result);
     }
