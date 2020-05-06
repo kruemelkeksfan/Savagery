@@ -71,7 +71,7 @@ $peaceTreatySuccess = $database->query('CREATE TABLE IF NOT EXISTS PeaceTreaty (
 			expiry_time INT,
 			PRIMARY KEY (user1, user2),
 			FOREIGN KEY (user1) REFERENCES Users(username),
-			FOREIGN KEY (user2) REFERENCES Users(username),
+			FOREIGN KEY (user2) REFERENCES Users(username)
 			);');
 
 // Save Timestamps
