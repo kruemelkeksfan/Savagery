@@ -41,6 +41,8 @@ if(!empty($action))
 				if($created['success'])
 				// Merge End
 					{
+					$town_created = $http->post("Towns/post_new_town.php", array('username' => $username));
+					var_dump($town_created);
 					// $mapsize = $database->query('SELECT value FROM BalanceSettings WHERE settingname=:0;', array('Map_Size'))[0]['value'];
 					// $tax = $database->query('SELECT value FROM BalanceSettings WHERE settingname=:0;', array('Start_Tax'))[0]['value'];
 					// $population = $database->query('SELECT value FROM BalanceSettings WHERE settingname=:0;', array('Start_Population'))[0]['value'];

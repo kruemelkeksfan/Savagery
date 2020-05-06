@@ -14,8 +14,8 @@ if(!in_array($_SESSION['username'], constant('ADMINS'), true))
 	exit();
 	}
 
-// Database Connection
-$database = new Database();
+// HttpHelper for API calls
+$http = new HttpHelper();
 
 // Process Commands
 if(!empty($_GET['action']))
@@ -24,7 +24,9 @@ if(!empty($_GET['action']))
 	if($_GET['action'] === 'killeverything')
 		{
 
-//ToDo: API calls
+        //API calls to DB
+        $http->get("DBdestroy");
+        $http->get("DBinit");
 
 		    /*
 		// Delete Database

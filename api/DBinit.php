@@ -75,17 +75,17 @@ $database->query('CREATE TABLE IF NOT EXISTS PeaceTreaty (
 			);');
 
 // Save Timestamps
-$database->query('INSERT INTO Timetable (timename, record) VALUES (:0, :1);', $timestamps);
+$fillTimetable = $database->query('INSERT INTO Timetable (timename, record) VALUES (:0, :1);', $timestamps);
 // Save Balance Settings
-$database->query('INSERT INTO BalanceSettings (settingname, value) VALUES (:0, :1);', $settings);
+$fillBalaceSettings = $database->query('INSERT INTO BalanceSettings (settingname, value) VALUES (:0, :1);', $settings);
 
 
-if($success){
+if($success && $fillBalaceSettings && $fillTimetable){
     echo json_encode(
         array('message' => 'Tables Created Successfully')
     );
 } else {
     echo json_encode(
-        array('message' => 'Tables Not Created Successfully')
+        array('message' => 'Tables Not Created Successfully' . $fillTimetable . $fillBalaceSettings)
     );
 }
