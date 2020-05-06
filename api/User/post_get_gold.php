@@ -18,7 +18,7 @@ if($data['username'] != "") {
 
     $gold = $database->query("SELECT gold FROM Users WHERE username = :0;", array($username));
 
-    echo json_encode($gold)[0];
+    echo json_encode($gold[0]);
 } else {
     echo json_encode("Irgendetwas stimmt mit deinem Array nicht ...");
 }

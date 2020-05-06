@@ -9,7 +9,7 @@ $page->print_header();
 
 $http = new HttpHelper();
 
-$town = $http->post('Towns/post_get_town_values.php', array('username' => $_SESSION['username']));
+$town = $http->post('Towns/post_get_town_values.php', array('username' => $_SESSION['username']))[0];
 var_dump($town);
 
 $action = InputHelper::get_get_string('action', null);

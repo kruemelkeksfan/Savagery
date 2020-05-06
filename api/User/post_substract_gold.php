@@ -20,5 +20,5 @@ if($data['username'] != "") {
     $database->query("UPDATE Users SET gold = gold - :1 WHERE username = :0;", array($username, $value));
     $gold = $database->query("SELECT gold FROM Users WHERE username = :0;", array($username));
 
-    echo json_encode($gold)[0];
+    echo json_encode($gold[0]);
 }
