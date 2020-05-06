@@ -33,7 +33,8 @@ foreach ($types as $row){
     $constructionform = new Form('town.php' . '&action=construct&building=' . $types['buildingtypename'],
         'post', null, null, array('formcolumn width100per'));
     $constructionform->add_submit('Build');
-    $row[3] = $constructionform;
+    $row = array_values($row);
+    $row[] = $constructionform;
 }
 
 $constructiontable = new Table($page, 'Construction', array('tablecolumn width200px'));
