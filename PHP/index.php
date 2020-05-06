@@ -7,13 +7,13 @@ new AutoLoader();
 $page = new Page(new SavageryInfo(), 'Overview', true);
 $page->print_header();
 
-// Setup Database Connection
-//$database = $page->get_database();
+$gold = $http->post('User/post_get_gold.php', array('username' => $_SESSION['username']))[0]['gold'];
 
+$page->print_text('Current Gold: ' . $gold . '$');
 $page->print_text('Current Population: ' . 10);
 $page->print_text('Current Tax Income: ' . 10 * 5 . '$');
 
-$taxform = new Form('index.php'/*?action=settax*/,
+$taxform = new Form('index.php?action=settax',
 	'post', $page, 'Set Tax per Head', array('formcolumn width150px', 'formcolumn  width150px'));
 $taxform->add_field('', true, 'number', 5/*currenttax*/, true, 1, 'width50px',
 	0, 10/*maxtax*/);
