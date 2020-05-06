@@ -91,7 +91,7 @@ class Page
 					$_SESSION['last_active'] = time();
 					$postdata =  json_encode(array($_SESSION['last_active'], $_SESSION['username']));
 					$result = $this->httpHelper->post('User/post_last_active.php', $postdata);
-					var_dump($result);
+					//var_dump($result);
 					}
 				}
 			
