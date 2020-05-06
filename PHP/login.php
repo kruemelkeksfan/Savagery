@@ -23,49 +23,41 @@ if(!empty($action))
 	$username = InputHelper::get_post_string('Username', '');
 	$password = InputHelper::get_post_string('Password', '');
 	$repeatpassword = InputHelper::get_post_string('Repeat_Password', '');
-	$alphakey = InputHelper::get_post_string('Alpha-Key', '');
 	// REGISTRATION
 	if($action === 'register' && !empty($username) && !empty($password) && !empty($repeatpassword) && !empty($alphakey))
 		{
-		if($alphakey === 'GDPR')
+		if($password === $repeatpassword)
 			{
-			if($password === $repeatpassword)
+			// Merge Start
+			// $gold = $database->query('SELECT value FROM BalanceSettings WHERE settingname=:0;', array('Start_Gold'))[0]['value'];
+
+            //call API using the HttpHelper
+			$postdata = array('username'=>$username, 'password'=>$password);
+			$created = $http->post('User/post_new_user.php', $postdata);
+			if($created['success'])
+			// Merge End
 				{
-				// Merge Start
-				// $gold = $database->query('SELECT value FROM BalanceSettings WHERE settingname=:0;', array('Start_Gold'))[0]['value'];
+				$town_created = $http->post("Towns/post_new_town.php", array('username' => $username));
+				//var_dump($town_created);
+				// $mapsize = $database->query('SELECT value FROM BalanceSettings WHERE settingname=:0;', array('Map_Size'))[0]['value'];
+				// $tax = $database->query('SELECT value FROM BalanceSettings WHERE settingname=:0;', array('Start_Tax'))[0]['value'];
+				// $population = $database->query('SELECT value FROM BalanceSettings WHERE settingname=:0;', array('Start_Population'))[0]['value'];
+				// $database->query('INSERT INTO Towns (townname, position, tax, population, owner) VALUES (:0, :1, :2, :3, :4);',
+				//	array($username . 's Town', mt_rand(0, $mapsize - 1), $tax, $population, $username));
+					
+				$_SESSION['username'] = $username;
 
-                //call API using the HttpHelper
-				$postdata = array('username'=>$username, 'password'=>$password);
-				$created = $http->post('User/post_new_user.php', $postdata);
-				if($created['success'])
-				// Merge End
-					{
-					$town_created = $http->post("Towns/post_new_town.php", array('username' => $username));
-					//var_dump($town_created);
-					// $mapsize = $database->query('SELECT value FROM BalanceSettings WHERE settingname=:0;', array('Map_Size'))[0]['value'];
-					// $tax = $database->query('SELECT value FROM BalanceSettings WHERE settingname=:0;', array('Start_Tax'))[0]['value'];
-					// $population = $database->query('SELECT value FROM BalanceSettings WHERE settingname=:0;', array('Start_Population'))[0]['value'];
-					// $database->query('INSERT INTO Towns (townname, position, tax, population, owner) VALUES (:0, :1, :2, :3, :4);',
-					//	array($username . 's Town', mt_rand(0, $mapsize - 1), $tax, $population, $username));
-						
-					$_SESSION['username'] = $username;
-
-					header('Location: ' . (empty($previouspage) ? constant('OVERVIEW_PAGE') : $previouspage));
-					exit();
-					}
-				else
-					{
-					$page->add_error('Tell me your name and I will tell you that it is already in use!');
-					}
+				header('Location: ' . (empty($previouspage) ? constant('OVERVIEW_PAGE') : $previouspage));
+				exit();
 				}
 			else
 				{
-				$page->add_error('Entering the same password twice is not exactly rocket science!');
+				$page->add_error('Tell me your name and I will tell you that it is already in use!');
 				}
 			}
 		else
 			{
-			$page->add_error('This is a closed Alpha and you are not stinky enough to be invited!');
+			$page->add_error('Entering the same password twice is not exactly rocket science!');
 			}
 		}
 	// LOGIN
@@ -114,8 +106,6 @@ $registrationform->add_field('Username', true, 'text', '', true);
 $registrationform->set_pattern(4, 64);
 $registrationform->add_field('Password', true, 'password', '', true);
 $registrationform->add_field('Repeat Password', true, 'password', '', true);
-$registrationform->set_pattern(4, 16);
-$registrationform->add_field('Alpha-Key', true, 'password', '', true);
 $registrationform->add_submit('Register');
 $registrationform->print();
 
