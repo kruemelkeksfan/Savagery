@@ -12,7 +12,7 @@ class Table
 		
 	function __construct(Page $page = null, string $title = null,
 			array $columnclasses = array('tablecolumn width200px'),
-			string $tableclass = 'table', string $cellclass = 'tablecell', string $borderclass = 'tableborder')
+			string $tableclass = 'table', string $cellclass = 'tablecellcenter', string $borderclass = 'tableborder')
 		{
 		$this->page = $page;
 		$this->title = $title;
