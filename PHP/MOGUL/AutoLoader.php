@@ -29,11 +29,5 @@ class AutoLoader
 			var_dump($prefix . $classname . '.php');	
 			}
 		}
-		
-	function add_prefix(string $prefix)
-		{
-		$this->prefixes[] = $prefix;
-		}
 	}
-
 ?>

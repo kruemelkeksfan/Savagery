@@ -35,6 +35,7 @@ $recruitform = new Form('armies.php'/*?action=recruit*/,
 $recruitform->add_field('', true, 'number', 1, true, 1, 'width50px', 0);
 $recruitform->add_column_break();
 $recruitform->add_submit('Recruit Army');
+$recruitform->print();
 
 $page->print_text('Cost per Soldier: ' . 5 . '$');
 
