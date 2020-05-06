@@ -3,12 +3,12 @@
 include_once('MOGUL/AutoLoader.php');
 new AutoLoader();
 
+//HttpHelper
+$http = new HttpHelper();
+
 // Page Header
 $page = new Page(new SavageryInfo(), 'Your Town', true);
 $page->print_header();
-
-// Setup Database Connection
-$database = $page->get_database();
 
 $buildingtable = new Table($page, 'Upgrades', array('tablecolumn width200px'));
 $buildingtable->add_columns('ID', 'Building', 'Level', 'Workers', 'Upgrade', 'Set Workers');
@@ -27,6 +27,12 @@ $workerform->add_submit('Set Workers');
 $buildingtable->add_data(array(array('1', 'Blacksmith', '2', '4', $upgradeform, $workerform)));
 $buildingtable->print();
 
+//Get Buildingtypes
+$types = $http->get("Buildingtypes/get_buildingtypes.php");
+foreach ($types as $row){
+    $row[3] = $constructionform;
+}
+
 $constructiontable = new Table($page, 'Construction', array('tablecolumn width200px'));
 $constructiontable->add_columns('Building', 'Effect', 'Cost', 'Build');
 
@@ -34,7 +40,7 @@ $constructionform = new Form('town.php'/*?tag=' . $towntag . '&action=construct&
 	'post', null, null, array('formcolumn width100per'));
 $constructionform->add_submit('Build');
 
-$constructiontable->add_data(array(array('Blacksmith', 'Increases the Attack Strength of all Armies of this Town.', '20', $constructionform)));
+$constructiontable->add_data($types); //array(array('Blacksmith', 'Increases the Attack Strength of all Armies of this Town.', '20', $constructionform)));
 $constructiontable->print();
 
 // Page Footer
