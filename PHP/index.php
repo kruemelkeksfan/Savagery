@@ -25,6 +25,7 @@ if(!empty($action))
 		}
 	}
 
+var_dump($http->post('User/post_get_gold.php', array('username' => $_SESSION['username'])));
 $gold = $http->post('User/post_get_gold.php', array('username' => $_SESSION['username']))['gold'];
 
 $page->print_text('Current Gold: ' . $gold . '$');
