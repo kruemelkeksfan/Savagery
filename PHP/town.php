@@ -30,15 +30,14 @@ $buildingtable->print();
 //Get Buildingtypes
 $types = $http->get("Buildingtypes/get_buildingtypes.php");
 foreach ($types as $row){
+    $constructionform = new Form('town.php' . '&action=construct&building=' . $types['buildingtypename'],
+        'post', null, null, array('formcolumn width100per'));
+    $constructionform->add_submit('Build');
     $row[3] = $constructionform;
 }
 
 $constructiontable = new Table($page, 'Construction', array('tablecolumn width200px'));
 $constructiontable->add_columns('Building', 'Effect', 'Cost', 'Build');
-
-$constructionform = new Form('town.php'/*?tag=' . $towntag . '&action=construct&building=' . $buildingindex*/,
-	'post', null, null, array('formcolumn width100per'));
-$constructionform->add_submit('Build');
 
 $constructiontable->add_data($types); //array(array('Blacksmith', 'Increases the Attack Strength of all Armies of this Town.', '20', $constructionform)));
 $constructiontable->print();
