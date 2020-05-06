@@ -65,6 +65,14 @@ $database->query('CREATE TABLE IF NOT EXISTS Armies (
 			PRIMARY KEY (army_id),
 			FOREIGN KEY (hometown) REFERENCES Towns(townname)
 			);');
+$database->query('CREATE TABLE IF NOT EXISTS PeaceTreaty (
+			user1 VARCHAR(16),
+			user2 VARCHAR(16),
+			expiry_time VARCHAR(16),
+			PRIMARY KEY (user1, user2),
+			FOREIGN KEY (user1) REFERENCES Users(username),
+			FOREIGN KEY (user2) REFERENCES Users(username),
+			);');
 
 // Save Timestamps
 $database->query('INSERT INTO Timetable (timename, record) VALUES (:0, :1);', $timestamps);

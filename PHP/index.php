@@ -24,7 +24,7 @@ $taxform->print();
 $page->print_text('Next Payday: ' . '15:03'/*Calculate and display real time*/);
 
 $paydayform = new Form('index.php'/*?action=collect*/,
-	'post', null, null, array('formcolumnnarrow');
+	'post', null, null, array('formcolumnnarrow'));
 $paydayform->add_submit('Collect Taxes');
 $paydayform->print();
 
