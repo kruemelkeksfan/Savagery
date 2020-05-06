@@ -8,7 +8,7 @@ private $base_url = "http://localhost:8000/";
 function post($path, $data){
     $postdata = json_encode($data);
     $url = $this->base_url.$path;
-    var_dump(json_decode($postdata, true));
+    //var_dump(json_decode($postdata, true));
     $curl = curl_init($url);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($curl, CURLOPT_POST, true);
