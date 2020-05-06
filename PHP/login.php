@@ -24,7 +24,7 @@ if(!empty($action))
 	$password = InputHelper::get_post_string('Password', '');
 	$repeatpassword = InputHelper::get_post_string('Repeat_Password', '');
 	// REGISTRATION
-	if($action === 'register' && !empty($username) && !empty($password) && !empty($repeatpassword) && !empty($alphakey))
+	if($action === 'register' && !empty($username) && !empty($password) && !empty($repeatpassword))
 		{
 		if($password === $repeatpassword)
 			{
