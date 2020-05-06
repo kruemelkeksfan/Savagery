@@ -65,11 +65,10 @@ class Page
 		
 	function print_header(string $heading = null)
 		{
-
-		
 		// Check Login Status
 		if($this->restricted)
 			{
+			/*
 			// On Login save first last_active Timestamp
 			if(empty($_SESSION['last_active']))
 				{
@@ -96,6 +95,7 @@ class Page
 					//var_dump($result);
 					}
 				}
+			*/
 			
 			// Redirect User to Login if he is not logged in
 			if(empty($_SESSION['username'])) // Double Check, since Session could be unset above
