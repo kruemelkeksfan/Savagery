@@ -29,13 +29,15 @@ $buildingtable->print();
 
 //Get Buildingtypes
 $types = $http->get("Buildingtypes/get_buildingtypes.php")[0];
-foreach ($types as $row){
+foreach ($types as &$row){
     $constructionform = new Form('town.php' . '&action=construct&building=' . $types['buildingtypename'],
         'post', null, null, array('formcolumn width100per'));
     $constructionform->add_submit('Build');
     $row = array_values($row);
     $row[] = $constructionform;
 }
+
+var_dump($http->get("User/get_all_users.php"));
 
 $constructiontable = new Table($page, 'Construction', array('tablecolumn width200px'));
 $constructiontable->add_columns('Building', 'Effect', 'Cost', 'Build');
