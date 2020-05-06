@@ -7,6 +7,8 @@ new AutoLoader();
 $page = new Page(new SavageryInfo(), 'Overview', true);
 $page->print_header();
 
+$http = new HttpHelper();
+
 $gold = $http->post('User/post_get_gold.php', array('username' => $_SESSION['username']))[0]['gold'];
 
 $page->print_text('Current Gold: ' . $gold . '$');
