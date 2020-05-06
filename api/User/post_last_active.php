@@ -10,7 +10,7 @@ include_once '../Database.php';
 
 $database = new Database();
 
-$data = json_decode(file_get_contents("php://input"));
+$data = json_decode(file_get_contents("php://input"), true);
 
 if($data['username'] != "") {
 

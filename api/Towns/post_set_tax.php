@@ -15,17 +15,11 @@ $data = json_decode(file_get_contents("php://input"), true);
 if($data['username'] != "") {
 
     $username = $data['username'];
-    $password = $data['password'];
+    $tax = $data['tax'];
 
-    $userdata = $database->query('SELECT password FROM Users WHERE username=:0;', array($username));
-
-    if(count($userdata) > 0 && password_verify($password, $userdata[0]['password'])){
-        echo json_encode(
-            array('message' => 'User Verified', 'success'=>true)
-        );
-    } else {
-        echo json_encode(
-            array('message' => 'User Not Found', 'success'=>false)
-        );
+    if($database->query("UPDATE Towns SET tax = :1 WHERE owner = :0", array($username, $tax))){
+        echo json_encode(array("message"=>"Tax adjusted", "success"=>true));
+    }else {
+        echo json_encode(array("message"=>"Failed to adjust Tax", "success"=>false));
     }
 }

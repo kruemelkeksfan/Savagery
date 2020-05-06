@@ -79,7 +79,7 @@ class Page
 				{
 				// Check if User was last_active before the User Table was wiped and act accordingly
 				$userreset = $this->httpHelper->get('Timetable/get_record_reset.php');
-				var_dump($userreset);
+				//var_dump($userreset);
 				if($_SESSION['last_active'] <= $userreset['record'])
 					{
 					// Force-logout the User

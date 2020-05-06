@@ -86,6 +86,6 @@ if($success && $fillBalaceSettings && $fillTimetable && $peaceTreatySuccess){
     );
 } else {
     echo json_encode(
-        array('message' => 'Tables Not Created Successfully' . $fillTimetable . $fillBalaceSettings . $peaceTreatySuccess)
+        array('message' => 'Tables Not Created Successfully')
     );
 }
