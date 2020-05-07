@@ -12,11 +12,9 @@ $database = new Database();
 
 $data = json_decode(file_get_contents("php://input"), true);
 
-if ($data['army_id'] != "") {
-
-    $army_id = $data['army_id'];
-
-    $army = $database->query("SELECT army_id, armyname, strength FROM Armies WHERE army_id=:0;", array($army_id))[0];
-
-    echo json_encode($army);
-}
+if($data['username'] != "")
+	{
+    $database->query('DELETE FROM Armies 
+		INNER JOIN Towns ON Armies.hometown=Towns.townname
+		WHERE Towns.owner=:0;', array($data['username']));
+	}

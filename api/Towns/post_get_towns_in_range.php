@@ -17,7 +17,7 @@ if($data['max'] != "") {
     $max = $data['max'];
     $min = $data['min'];
 
-    $targets = $database->query('SELECT townname FROM Towns WHERE position <= :0 AND position >= :1;', array($max, $min));
+    $targets = $database->query('SELECT townname, owner FROM Towns WHERE position <= :0 AND position >= :1;', array($max, $min));
 
     echo json_encode($targets);
 }
