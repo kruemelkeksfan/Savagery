@@ -84,10 +84,10 @@ if(!empty($action))
 			*/
 
             $attackstrength = $http->post('BattleStats/post_get_attack_strength.php',
-                array('buildingtype'=>'Blacksmith', 'army_id'=>$army));
+                array('buildingtype'=>'Blacksmith', 'army_id'=>$army))[0]['i.nr*sum(a.strength)'];
 
             $defensestrength = $http->post('BattleStats/post_get_defense_strength.php',
-                array('buildingtype'=>'Tavern', 'username'=>$targetowner));
+                array('buildingtype'=>'Tavern', 'username'=>$targetowner))[0]['i.nr*sum(a.strength)'];
 
                 $tabletitle = 'Attack Results';
 			$spoils = 0;
