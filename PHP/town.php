@@ -80,7 +80,7 @@ $next_id = count($buildings);
 
 foreach($types as $type)
 	{
-	$types[$type['buildingname']] = $type;
+	$types[$type['buildingtypename']] = $type;
 	}
 
 // General Info
