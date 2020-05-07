@@ -12,10 +12,10 @@ $page->print_header();
 
 // Retrieve Info
 //$types = $http->get("Buildingtypes/get_buildingtypes.php")[0];
-//$buildings = $http->post("Buildings/post_get_building_values.php", array('username' => $_SESSION['username']));
+$buildings = $http->post("Buildings/post_get_building_values.php", array('username' => $_SESSION['username']));
 $gold = $http->post('User/post_get_gold.php', array('username' => $_SESSION['username']))['gold'];
 //$town = $http->post('Towns/post_get_town_values.php', array('username' => $_SESSION['username']))[0];
-//$next_id = count($buildings);
+$next_id = count($buildings);
 //var_dump($next_id);
 //var_dump($buildings);
 //var_dump($http->get("Buildings/get_all_buildings.php"));
@@ -40,7 +40,8 @@ if(!empty($action))
 		if($gold >= 100)
 			{
 			$http->post('User/post_subtract_gold.php', array('username' => $_SESSION['username'], 'value' => 100));
-			$http->post('Buildings/post_set_level.php', array('username' => $_SESSION['username'], $building));
+			$levelneu = $http->post('Buildings/post_set_level.php', array('username' => $_SESSION['username'], 'building_id' => $building));
+			var_dump($levelneu);
 			}
 		else
 			{
@@ -51,7 +52,8 @@ if(!empty($action))
 		{
 		if($workerinput <= ($town['population'] - $workers))
 			{
-			$http->post('Buildings/post_set_workers.php', array('username' => $_SESSION['username'], $building, $workerinput));
+			$newworkers = $http->post('Buildings/post_set_workers.php', array('username' => $_SESSION['username'],'building_id'=>$building, 'workers'=>$workerinput));
+			var_dump($newworkers);
 			}
 		else
 			{
