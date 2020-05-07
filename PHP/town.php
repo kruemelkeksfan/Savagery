@@ -78,6 +78,11 @@ $buildings = $http->post("Buildings/post_get_building_values.php", array('userna
 $town = $http->post('Towns/post_get_town_values.php', array('username' => $_SESSION['username']))[0];
 $next_id = count($buildings);
 
+foreach($types as $type)
+	{
+	$types[$type['buildingname']] = $type;
+	}
+
 // General Info
 $page->print_text('Current Gold: ' . $gold . '$');
 $page->print_text('Current Population: ' . $town['population']);
@@ -86,9 +91,6 @@ $page->print_text('Current unemployed Population: ' . ($town['population'] - $wo
 // Building Table
 $buildingtable = new Table($page, 'Upgrades', array('tablecolumn width200px'));
 $buildingtable->add_columns('ID', 'Building', 'Level', 'Workers', 'Upgrade', 'Set Workers');
-
-var_dump($types);
-var_dump($buildings);
 
 foreach($buildings as &$building)
 	{
