@@ -10,7 +10,7 @@ new AutoLoader();
         $users = array();
         foreach ($rows as $row) {
             $users[] = array_combine($header, $row);
-            $users['password'] = password_hash($users['password'], PASSWORD_DEFAULT);
+            $users[]['password'] = password_hash($users[]['password'], PASSWORD_DEFAULT);
         }
         var_dump($users);
         foreach ($users as $user) {
@@ -26,7 +26,7 @@ new AutoLoader();
         foreach ($rows as $row) {
             $towns[] = array_combine($header, $row);
         }
-        var_dump($towns);
+        //var_dump($towns);
         foreach ($towns as $town) {
             $http->post('Towns/post_new_town.php', $town);
         }
@@ -40,7 +40,7 @@ new AutoLoader();
         foreach ($rows as $row) {
             $buildings[] = array_combine($header, $row);
         }
-        var_dump($buildings);
+        //var_dump($buildings);
         foreach ($buildings as $building) {
             $http->post('Buildings/post_new_building.php', $building);
         }
@@ -54,7 +54,7 @@ new AutoLoader();
         foreach ($rows as $row) {
             $armies[] = array_combine($header, $row);
         }
-        var_dump($armies);
+        //var_dump($armies);
         foreach ($armies as $army) {
             $http->post('Armies/post_new_army.php', $army);
         }
