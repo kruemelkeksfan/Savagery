@@ -13,13 +13,17 @@ $database = new Database();
 
 $data = json_decode(file_get_contents("php://input"), true);
 
-if ($data['building_id'] != "") {
+if ($data['username'] != "" && $data['building_id'] != "") {
 
     $building_id = $data['building_id'];
 
-    $database->query("UPDATE Buildings SET level = level + 1 WHERE building_id = :0;", array($building_id));
+    $database->query("UPDATE Buildings, Towns
+		INNER JOIN Towns ON Buildings.town=Towns.townname
+		SET Buildings.level=Buildings.level + 1 WHERE Towns.owner=:0 AND Buildings.building_id=:1;", array($data['username'], $building_id));
 
-    $level = $database->query("SELECT level FORM Buildings WHERE building_id = :O", array($building_id));
+    $level = $database->query("SELECT Buildings.level FROM Buildings
+		INNER JOIN Towns ON Buildings.town=Towns.townname
+		WHERE Towns.owner=:0 AND Buildings.building_id=:1", array($data['username'], $building_id));
 
     echo json_encode($level[0]);
 }

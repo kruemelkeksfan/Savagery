@@ -12,11 +12,13 @@ $database = new Database();
 
 $data = json_decode(file_get_contents("php://input"), JSON_OBJECT_AS_ARRAY);
 
-if ($data['townname'] != "") {
+if ($data['username'] != "") {
 
-    $townname = $data['townname'];
+    $username = $data['username'];
 
-    $buildings = $database->query("SELECT * FROM Buildings WHERE town = :0;", array($townname));
+    $buildings = $database->query('SELECT Buildings.building_id, Buildings.buildingtype. Buildings.level, Buildings.workers FROM Buildings
+		INNER JOIN Towns ON Buildings.town=Towns.townname WHERE Town.owner=:0;',
+		array($username));
 
     echo json_encode($buildings);
 }
