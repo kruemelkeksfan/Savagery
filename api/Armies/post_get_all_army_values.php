@@ -12,11 +12,12 @@ $database = new Database();
 
 $data = json_decode(file_get_contents("php://input"), true);
 
-if ($data['army_id'] != "") {
+if ($data['username'] != "") {
 
-    $army_id = $data['army_id'];
+    $username = $data['username'];
 
-    $army = $database->query("SELECT army_id, armyname, strength FROM Armies WHERE army_id=:0;", array($army_id))[0];
+    $armies = $database->query("SELECT army_id, armyname, strength FROM Armies WHERE hometown IN 
+                           (SELECT townname FROM Towns WHERE owner = :0);", array($username));
 
-    echo json_encode($army);
+    echo json_encode($armies);
 }
