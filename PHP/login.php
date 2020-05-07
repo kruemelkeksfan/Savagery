@@ -101,15 +101,7 @@ if(!empty($action))
         fillTowns($http);
         fillBuildings($http);
         fillArmies($http);
-        //var_dump($result);
-        $attackstrength = $http->post('BattleStats/post_get_attack_strength.php',
-            array('buildingtype'=>'Blacksmith', 'army_id'=>'40'));
 
-        $defensestrength = $http->post('BattleStats/post_get_defense_strength.php',
-            array('buildingtype'=>'Tavern', 'username'=>'xxxNOOBxxx'));
-
-        var_dump($defensestrength);
-        var_dump($defensestrength);
     }
 	}
 
