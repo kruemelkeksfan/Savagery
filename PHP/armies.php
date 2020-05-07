@@ -10,23 +10,21 @@ $http = new HttpHelper();
 $page = new Page(new SavageryInfo(), 'Your Army', true);
 $page->print_header();
 
-$recruitmentfee = 5;
-$troopsize = InputHelper::get_post_int('troopsize', 1); //ToDo
-$armyname = InputHelper::get_post_string('armyname', '');
+$gold = $http->post('User/post_get_gold.php', array('username' => $_SESSION['username']))['gold'];
 
+$recruitmentfee = 5;
+$strength = InputHelper::get_post_int('Strength', 1); //ToDo
+$armyname = InputHelper::get_post_string('Armyname', 'An Army');
 
 $action = InputHelper::get_get_string('action', '');
 if(!empty($action)) {
     // LOGOUT
     if ($action === 'recruit') {
-        //get Gold
-        $gold = $http->post('User/post_get_gold.php', array('username' => $_SESSION['username']))['gold'];
-        $fee = $troopsize * $recruitmentfee;
+        $fee = $strength * $recruitmentfee;
 
-        if ($gold-$fee >= 0){
-            $new_gold = $http->post("User/post_substract_gold.php", array('username'=>$_SESSION['username'], 'value' =>$fee))['gold'];
-            //var_dump($new_gold, $troopsize);
-            $http->post('Armies/post_new_army.php', array('armyname'=>$armyname, 'strength'=>$troopsize,
+        if ($gold - $fee >= 0){
+            $gold = $http->post("User/post_substract_gold.php", array('username'=>$_SESSION['username'], 'value' =>$fee))['gold'];
+            $http->post('Armies/post_new_army.php', array('armyname'=>$armyname, 'strength'=>$strength,
                 'username'=>$_SESSION['username']));
         } else {
             echo "You're too poor to feed all those soldiers, man!";
@@ -34,9 +32,11 @@ if(!empty($action)) {
     }
 }
 
+// General Info
+$page->print_text('Current Gold: ' . $gold . '$');
+
 $armytable = new Table($page, 'Your Armies', array('tablecolumn width200px'));
 $armytable->add_columns('ID', 'Name', 'Strength', 'Split', 'Merge', 'Attack');
-
 
 //Get Army Data
 $armies = $http->post("Armies/post_get_army_values.php", array('username'=>$_SESSION['username']));
@@ -66,9 +66,9 @@ $armytable->add_data($armies); //array(array('1', 'Royal Guard', 10, $splitform,
 $armytable->print();
 
 $recruitform = new Form('armies.php?action=recruit',
-	'post', $page, "Recruitment", array('formcolumn width150px', 'formcolumn width150px'));
-$recruitform->add_field('armyname', true, 'text', "YourArmyNameHere");
-$recruitform->add_field('troopsize', true, 'number', 1, true, 1, 'width50px', 0);
+	'post', $page, "Recruitment", array('formcolumn width300px', 'formcolumn width150px'), 'form width600px');
+$recruitform->add_field('Armyname', true, 'text', "YourArmyNameHere");
+$recruitform->add_field('Strength', true, 'number', 1, true, 1, 'width150px', 0);
 $recruitform->add_column_break();
 $recruitform->add_submit('Recruit Army');
 $recruitform->print();
