@@ -11,21 +11,21 @@ $page = new Page(new SavageryInfo(), 'Your Town', true);
 $page->print_header();
 
 // Retrieve Info
-$types = $http->get("Buildingtypes/get_buildingtypes.php")[0];
-$buildings = $http->post("Buildings/post_get_building_values.php", array('username' => $_SESSION['username']));
+//$types = $http->get("Buildingtypes/get_buildingtypes.php")[0];
+//$buildings = $http->post("Buildings/post_get_building_values.php", array('username' => $_SESSION['username']));
 $gold = $http->post('User/post_get_gold.php', array('username' => $_SESSION['username']))['gold'];
-$town = $http->post('Towns/post_get_town_values.php', array('username' => $_SESSION['username']))[0];
-$next_id = count($buildings);
-var_dump($next_id);
+//$town = $http->post('Towns/post_get_town_values.php', array('username' => $_SESSION['username']))[0];
+//$next_id = count($buildings);
+//var_dump($next_id);
 //var_dump($buildings);
 //var_dump($http->get("Buildings/get_all_buildings.php"));
 
 // Count Workers
-$workers = 0;
-foreach($buildings as $building)
+$workers = $http->post('Buildings/post_get_sum_workers.php', array('username' => $_SESSION['username']))[0]['sum(workers)'];
+/*foreach($buildings as $building)
 	{
 	$workers += $building['workers'];
-	}
+	}*/
 
 $action = InputHelper::get_get_string('action', null);
 $building = InputHelper::get_get_string('building', null);
@@ -69,6 +69,13 @@ if(!empty($action))
             }
         }
 	}
+
+// Retrieve Info
+$types = $http->get("Buildingtypes/get_buildingtypes.php")[0];
+$buildings = $http->post("Buildings/post_get_building_values.php", array('username' => $_SESSION['username']));
+$town = $http->post('Towns/post_get_town_values.php', array('username' => $_SESSION['username']))[0];
+$next_id = count($buildings);
+
 
 // General Info
 $page->print_text('Current Gold: ' . $gold . '$');

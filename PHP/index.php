@@ -10,7 +10,6 @@ $page->print_header();
 $http = new HttpHelper();
 
 $town = $http->post('Towns/post_get_town_values.php', array('username' => $_SESSION['username']))[0];
-$gold = $http->post('User/post_get_gold.php', array('username' => $_SESSION['username']))['gold'];
 
 $action = InputHelper::get_get_string('action', null);
 $tax = InputHelper::get_post_int('field_0_0', null);
@@ -50,6 +49,8 @@ if(!empty($action))
 			}
 		}
 	}
+
+$gold = $http->post('User/post_get_gold.php', array('username' => $_SESSION['username']))['gold'];
 
 $page->print_heading($town['townname']);
 
