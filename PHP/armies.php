@@ -57,6 +57,7 @@ if(!empty($action))
 		$targetowner = InputHelper::get_post_string('Target', null);
 		if(!empty($army) && !empty($targetowner))
 			{
+			/*
 			$attacker = $http->post('Armies/post_get_army_values.php', array('army_id'=>$army));
 			$defenders = $http->post('Armies/post_get_all_army_values.php', array('username'=>$targetowner));
 
@@ -80,8 +81,15 @@ if(!empty($action))
 				{
 				$defensestrength += $d['strength'] * $defensebonus;
 				}
+			*/
 
-			$tabletitle = 'Attack Results';
+            $attackstrength = $http->post('BattleStats/post_get_attack_strength.php',
+                array('buildingtype'=>'Blacksmith', 'army_id'=>$army));
+
+            $defensestrength = $http->post('BattleStats/post_get_defense_strength.php',
+                array('buildingtype'=>'Tavern', 'username'=>$targetowner));
+
+                $tabletitle = 'Attack Results';
 			$spoils = 0;
 			if($attackstrength > $defensestrength)
 				{
