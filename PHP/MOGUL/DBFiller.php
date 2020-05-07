@@ -10,10 +10,10 @@ new AutoLoader();
         $users = array();
         foreach ($rows as $row) {
             $users[] = array_combine($header, $row);
-            end($users)['password'] = password_hash($users[]['password'], PASSWORD_DEFAULT);
         }
-        var_dump($users);
+        //var_dump($users);
         foreach ($users as $user) {
+            $user['password'] = password_hash($user['password'], PASSWORD_DEFAULT);
             $http->post('User/post_new_user.php', $user);
         }
     }
