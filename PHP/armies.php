@@ -17,17 +17,11 @@ $troopsize = InputHelper::get_post_int('troopsize', 1); //ToDo
 $armyname = InputHelper::get_post_string('armyname', '');
 
 $army_strength = $http->post('Armies/post_get_sum_soldiers.php', array('username' => $_SESSION['username']))[0]['strength'];
-//$range_mult = $http->post('BalanceSettings/post_get_setting.php', array('value'=>'Range_Multiplier'))[0]['value'];
-//$range = $army_strength * $range_mult;
-//$position = $http->post('Towns/post_get_town_values.php', array('username' => $_SESSION['username']))[0]['position'];
-//$mapsize = $http->post('BalanceSettings/post_get_setting.php', array('value'=>'Map_Size'))[0]['value'];
-//$min = max(0,$position-$range);
-//$max = min($mapsize, $position+$range);
-
-//var_dump($min, $max);
+$position = $http->post('Towns/post_get_town_values.php', array('username' => $_SESSION['username']))[0]['position'];
+$mapsize = $http->post('BalanceSettings/post_get_setting.php', array('value'=>'Map_Size'))[0]['value'];
 
 //$targets = $http->post('Towns/post_get_towns_in_range.php', array('max'=>$max,'min'=>$min));
-var_dump($targets);
+//var_dump($targets);
 
 $action = InputHelper::get_get_string('action', '');
 if(!empty($action))
@@ -141,8 +135,15 @@ foreach ($armies as &$row){
 
     $attackform = new Form('armies.php?action=attack&army=' . $row['army_id'],
         'post', null, null, array('formcolumn width150px', 'formcolumn width150px'), 'form width300px');
-	$position = $http->post("Towns/post_get_town_values.php", array('username'=>$_SESSION['username']))['position'];
-	$range = $http->post("BalanceSettings/post_get_setting.php", array('settingname'=>$_SESSION['Attack_Range']));
+
+    $range_mult = $http->post('BalanceSettings/post_get_setting.php', array('value'=>'Range_Multiplier'))[0]['value'];
+    $range = $row['strength'] * $range_mult;
+    $min = max(0,$position-$range);
+    $max = min($mapsize, $position+$range);
+
+    var_dump($min, $max);
+
+	//$range = $http->post("BalanceSettings/post_get_setting.php", array('settingname'=>$_SESSION['Attack_Range']));
 	$targets = $http->post("Towns/post_get_towns_in_range.php", array('max' => ($position + $range), 'min' => ($position - $range)));
 	$targetoptions = array();
 	foreach($targets as $target)
