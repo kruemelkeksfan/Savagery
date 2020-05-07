@@ -41,19 +41,19 @@ if(!empty($action))
 			{
 			$http->post('User/post_subtract_gold.php', array('username' => $_SESSION['username'], 'value' => 100));
 			$levelneu = $http->post('Buildings/post_set_level.php', array('username' => $_SESSION['username'], 'building_id' => $building));
-			var_dump($levelneu);
+			//var_dump($levelneu);
 			}
 		else
 			{
 			$page->add_error('You need at least 100$ to upgrade a Building!');
 			}
 		}
-	else if($action === 'setworkers' && !empty($building) && !empty($workerinput))
+	else if($action === 'setworkers' && isset($building) && isset($workerinput))
 		{
 		if($workerinput <= ($town['population'] - $workers))
 			{
 			$newworkers = $http->post('Buildings/post_set_workers.php', array('username' => $_SESSION['username'],'building_id'=>$building, 'workers'=>$workerinput));
-			var_dump($newworkers);
+			//var_dump($newworkers);
 			}
 		else
 			{
@@ -67,7 +67,7 @@ if(!empty($action))
              $new=$http->post("Buildings/post_new_building.php",
                  array('building_id'=>$next_id, 'buildingtype' =>$buildingtype, 'username'=>$_SESSION['username']));
              $new_gold = $http->post("User/post_substract_gold.php", array('username'=>$_SESSION['username'], 'value' =>$cost))['gold'];
-            var_dump($new);
+            //var_dump($new);
             }
         }
 	}
@@ -91,10 +91,6 @@ $page->print_text('Current unemployed Population: ' . ($town['population'] - $wo
 // Building Table
 $buildingtable = new Table($page, 'Upgrades', array('tablecolumn width200px'));
 $buildingtable->add_columns('ID', 'Building', 'Level', 'Workers', 'Upgrade', 'Set Workers');
-
-var_dump($buildings[0]['buildingtype']);
-var_dump($types[$buildings[0]['buildingtype']]['maxworkers']);
-var_dump($types);
 
 foreach($buildings as &$building)
 	{
