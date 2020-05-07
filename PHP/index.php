@@ -60,7 +60,7 @@ $page->print_text('Current Tax Income: ' . ($town['population'] * $town['tax']) 
 
 $taxform = new Form('index.php?action=settax',
 	'post', $page, 'Set Tax per Head', array('formcolumn width150px', 'formcolumn  width150px'));
-$taxform->add_field('', true, 'number', $tax, true, 1, 'width50px', 1);
+$taxform->add_field('', true, 'number', $town['tax'], true, 1, 'width50px', 1);
 $taxform->add_column_break();
 $taxform->add_submit('Set Tax');
 $taxform->print();
