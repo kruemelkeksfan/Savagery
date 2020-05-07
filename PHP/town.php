@@ -35,13 +35,13 @@ $cost = InputHelper::get_get_int('cost', null);
 
 if(!empty($action))
 	{
-	if($action === 'upgrade' && !empty($building))
+	if($action === 'upgrade' && isset($building))
 		{
 		if($gold >= 100)
 			{
 			$http->post('User/post_subtract_gold.php', array('username' => $_SESSION['username'], 'value' => 100));
 			$levelneu = $http->post('Buildings/post_set_level.php', array('username' => $_SESSION['username'], 'building_id' => $building));
-			//var_dump($levelneu);
+			var_dump($levelneu);
 			}
 		else
 			{
