@@ -12,7 +12,7 @@ $page->print_header();
 
 // Retrieve Info
 $types = $http->get("Buildingtypes/get_buildingtypes.php")[0];
-$buildings = $http->get("Buildings/post_building_values.php", array('username' => $_SESSION['username']))[0];
+$buildings = $http->get("Buildings/post_building_values.php", array('username' => $_SESSION['username']));
 $gold = $http->post('User/post_get_gold.php', array('username' => $_SESSION['username']))['gold'];
 $town = $http->post('Towns/post_get_town_values.php', array('username' => $_SESSION['username']))[0];
 
@@ -29,6 +29,8 @@ foreach($buildings as $building)
 $action = InputHelper::get_get_string('action', null);
 $building = InputHelper::get_get_string('building', null);
 $workerinput = InputHelper::get_post_int('field_0_0', null);
+$buildingtype = InputHelper::get_get_string('buildingtype', null);
+$cost = InputHelper::get_get_int('cost', null);
 if(!empty($action))
 	{
 	if($action === 'upgrade' && !empty($building))
@@ -54,13 +56,15 @@ if(!empty($action))
 			$page->add_error('Not enough free Workers!');
 			}
 		}
-//	else if($action === 'construct')
-//        {
-//        if ()
-//            {
-//
-//            }
-//        }
+	else if($action === 'construct' && !empty($buildingtype) && !empty($cost))
+        {
+        if ($gold-$cost >= 0)
+            {
+             $http->post("Buildings/post_new_building.php",
+                 array('building_id'=>'0', 'buildingtype' =>$buildingtype, 'username'=>$_SESSION['username']));
+             $new_gold = $http->post("User/post_substract_gold.php", array('username'=>$_SESSION['username'], 'value' =>$cost))['gold'];
+            }
+        }
 	}
 
 // General Info
@@ -99,7 +103,7 @@ $constructiontable->add_columns('Building', 'Effect', 'Max Workers', 'Cost', 'Bu
 var_dump($types);
 foreach($types as &$row)
 	{
-    $constructionform = new Form('town.php' . '&action=construct&building=' . $types['buildingtypename'] . '&cost=' . $types['cost'],
+    $constructionform = new Form('town.php' . '&action=construct&buildingtype=' . $types['buildingtypename'] . '&cost=' . $types['cost'],
         'post', null, null, array('formcolumn width100per'));
     $constructionform->add_submit('Build');
     $row = array_values($row);
