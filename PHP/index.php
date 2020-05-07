@@ -27,12 +27,7 @@ if(!empty($action))
 		$http->post('Towns/post_set_population.php', array('username' => $_SESSION['username'], 'population' => $pop));
 		
 		// Update Workers
-		$buildings = $http->get("Buildings/post_get_building_values.php", array('username' => $_SESSION['username']));
-		$workers = 0;
-		foreach($buildings as $building)
-			{
-			$workers += $building['workers'];
-			}
+		$workers = $http->post('Buildings/post_get_sum_workers.php', array('username' => $_SESSION['username']))[0]['sum(workers)'];
 		
 		$i = 0;
 		while($workers > $town['population'])
@@ -40,13 +35,16 @@ if(!empty($action))
 			$http->post('Buildings/post_set_workers.php', array('username' => $_SESSION['username'], $i++, 0));
 			
 			// TODO: Copy-pasted code cz "What kind of fool sorcery is this "function"-thing that you keep talking about?!"
-			$buildings = $http->get("Buildings/post_get_building_values.php", array('username' => $_SESSION['username']));
-			$workers = 0;
-			foreach($buildings as $building)
-				{
-				$workers += $building['workers'];
-				}
-			}
+                //ToDo: maybe juuuust take a look to see that I have already written an api for this?
+            $workers = $http->post('Buildings/post_get_sum_workers.php', array('username' => $_SESSION['username']))[0]['sum(workers)'];
+
+                /*$buildings = $http->get("Buildings/post_get_building_values.php", array('username' => $_SESSION['username']));
+                $workers = 0;
+                foreach($buildings as $building)
+                    {
+                    $workers += $building['workers'];
+                    }*/
+                }
 		}
 	}
 
