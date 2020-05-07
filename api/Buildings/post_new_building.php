@@ -20,9 +20,20 @@ if($data['building_id'] != "") {
 
     $townname = $database->query('SELECT townname FROM Towns WHERE owner = :0', array($username))[0]['townname'];
 
+    if (empty($data[workers])){
+        $workers = 1;
+    } else {
+        $workers = $data['workers'];
+    }
+
+    if (empty($data['level'])){
+        $level = 1;
+    } else {
+        $level = $data['level'];
+    }
 
     if ($success = $database->query('INSERT INTO Buildings (building_id, workers, level, town, buildingtype) VALUES (:0, :1, :2, :3, :4);',
-        array($building_id, 1, 1, $townname, $buildingtype))) {
+        array($building_id, $workers, $level, $townname, $buildingtype))) {
 
         echo json_encode(
             array('message' => 'User Created', 'success' => true)
