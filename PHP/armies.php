@@ -30,7 +30,7 @@ $max = min($mapsize, $position+$range);
 var_dump($min);
 //var_dump($targets);
 
-$action = InputHelper::get_get_string('action', '');
+$action = InputHelper::get_get_string('action', null);
 if(!empty($action))
 	{
     // LOGOUT
@@ -55,7 +55,7 @@ if(!empty($action))
 		// Elaborate Use Case
 		$army = InputHelper::get_get_int('army', null);
 		$targetowner = InputHelper::get_post_string('Target', null);
-		if(!empty($army) && !empty($targetowner))
+		if(isset($army) && isset($targetowner))
 			{
 			/*
 			$attacker = $http->post('Armies/post_get_army_values.php', array('army_id'=>$army));

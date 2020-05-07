@@ -35,7 +35,7 @@ $cost = InputHelper::get_get_int('cost', null);
 
 if(!empty($action))
 	{
-	if($action === 'upgrade' && !empty($building))
+	if($action === 'upgrade' && isset($building))
 		{
 		if($gold >= 100)
 			{
@@ -48,7 +48,7 @@ if(!empty($action))
 			$page->add_error('You need at least 100$ to upgrade a Building!');
 			}
 		}
-	else if($action === 'setworkers' && !empty($building) && !empty($workerinput))
+	else if($action === 'setworkers' && isset($building) && isset($workerinput))
 		{
 		if($workerinput <= ($town['population'] - $workers))
 			{
@@ -67,7 +67,7 @@ if(!empty($action))
              $new=$http->post("Buildings/post_new_building.php",
                  array('building_id'=>$next_id, 'buildingtype' =>$buildingtype, 'username'=>$_SESSION['username']));
              $new_gold = $http->post("User/post_substract_gold.php", array('username'=>$_SESSION['username'], 'value' =>$cost))['gold'];
-            var_dump($new);
+            //var_dump($new);
             }
         }
 	}
@@ -78,6 +78,11 @@ $buildings = $http->post("Buildings/post_get_building_values.php", array('userna
 $town = $http->post('Towns/post_get_town_values.php', array('username' => $_SESSION['username']))[0];
 $next_id = count($buildings);
 
+foreach($types as $type)
+	{
+	$types[$type['buildingtypename']] = $type;
+	}
+
 // General Info
 $page->print_text('Current Gold: ' . $gold . '$');
 $page->print_text('Current Population: ' . $town['population']);
@@ -86,9 +91,6 @@ $page->print_text('Current unemployed Population: ' . ($town['population'] - $wo
 // Building Table
 $buildingtable = new Table($page, 'Upgrades', array('tablecolumn width200px'));
 $buildingtable->add_columns('ID', 'Building', 'Level', 'Workers', 'Upgrade', 'Set Workers');
-
-var_dump($types);
-var_dump($buildings);
 
 foreach($buildings as &$building)
 	{
