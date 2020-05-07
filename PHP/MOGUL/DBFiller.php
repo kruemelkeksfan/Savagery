@@ -10,7 +10,7 @@ new AutoLoader();
         $users = array();
         foreach ($rows as $row) {
             $users[] = array_combine($header, $row);
-            $users[]['password'] = password_hash($users[]['password'], PASSWORD_DEFAULT);
+            end($users)['password'] = password_hash($users[]['password'], PASSWORD_DEFAULT);
         }
         var_dump($users);
         foreach ($users as $user) {
