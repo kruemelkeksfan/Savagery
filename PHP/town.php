@@ -16,7 +16,7 @@ $buildings = $http->post("Buildings/post_get_building_values.php", array('userna
 $gold = $http->post('User/post_get_gold.php', array('username' => $_SESSION['username']))['gold'];
 $town = $http->post('Towns/post_get_town_values.php', array('username' => $_SESSION['username']))[0];
 
-var_dump($buildings);
+//var_dump($buildings);
 //var_dump($http->get("Buildings/get_all_buildings.php"));
 
 // Count Workers
@@ -29,8 +29,7 @@ foreach($buildings as $building)
 $action = InputHelper::get_get_string('action', null);
 $building = InputHelper::get_get_string('building', null);
 $workerinput = InputHelper::get_post_int('field_0_0', null);
-$buildingtype = InputHelper::get_get_string('buildingtype', null);
-$cost = InputHelper::get_get_int('cost', null);
+
 if(!empty($action))
 	{
 	if($action === 'upgrade' && !empty($building))
@@ -56,8 +55,10 @@ if(!empty($action))
 			$page->add_error('Not enough free Workers!');
 			}
 		}
-	else if($action === 'construct' && !empty($buildingtype) && !empty($cost))
+	else if($action === 'construct' /*&& !empty($buildingtype) && !empty($cost)*/)
         {
+            $buildingtype = InputHelper::get_get_string('buildingtype', null);
+            $cost = InputHelper::get_get_int('cost', null);
         if ($gold-$cost >= 0)
             {
              $http->post("Buildings/post_new_building.php",
@@ -102,7 +103,7 @@ $buildingtable->print();
 $constructiontable = new Table($page, 'Construction', array('tablecolumn width200px'));
 $constructiontable->add_columns('Building', 'Effect', 'Max Workers', 'Cost', 'Build');
 
-var_dump($types);
+//var_dump($types);
 foreach($types as &$row)
 	{
     $constructionform = new Form('town.php' . '&action=construct&buildingtype=' . $row['buildingtypename'] . '&cost=' . $row['cost'],
