@@ -39,7 +39,7 @@ if(!empty($action))
 				{
 				$town_created = $http->post("Towns/post_new_town.php", array('username' => $username));
 				$townhall_built = $http->post("Buildings/post_new_building.php",
-                    array('building_id'=>'0', 'buildingtype' =>'Townhall', 'username'=>$_SESSION['username']));
+                    array('building_id'=>'0', 'buildingtype' =>'Townhall', 'username'=>$username));
 				//var_dump($town_created);
 				// $mapsize = $database->query('SELECT value FROM BalanceSettings WHERE settingname=:0;', array('Map_Size'))[0]['value'];
 				// $tax = $database->query('SELECT value FROM BalanceSettings WHERE settingname=:0;', array('Start_Tax'))[0]['value'];
