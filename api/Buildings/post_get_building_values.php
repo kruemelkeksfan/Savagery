@@ -16,7 +16,7 @@ if ($data['username'] != "") {
 
     $username = $data['username'];
 
-    $buildings = $database->query('SELECT Buildings.building_id, Buildings.buildingtype. Buildings.level, Buildings.workers FROM Buildings
+    $buildings = $database->query('SELECT Buildings.building_id, Buildings.buildingtype, Buildings.level, Buildings.workers FROM Buildings
 		INNER JOIN Towns ON Buildings.town=Towns.townname WHERE Town.owner=:0;',
 		array($username));
 
