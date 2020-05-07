@@ -21,7 +21,7 @@ if($data['building_id'] != "") {
     $townname = $database->query('SELECT townname FROM Towns WHERE owner = :0', array($username))[0]['townname'];
 
 
-    if ($success = $database->query('INSERT INTO Buildings (builing_id, workers, level, town, buildingtype) VALUES (:0, :1, :2, :3, :4);',
+    if ($success = $database->query('INSERT INTO Buildings (building_id, workers, level, town, buildingtype) VALUES (:0, :1, :2, :3, :4);',
         array($building_id, 1, 1, $townname, $buildingtype))) {
 
         echo json_encode(
