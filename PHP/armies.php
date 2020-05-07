@@ -10,14 +10,15 @@ $http = new HttpHelper();
 $page = new Page(new SavageryInfo(), 'Your Town', true);
 $page->print_header();
 
+$troopsize = InputHelper::get_post_int('troopsize', 1); //ToDo
+$armyname = InputHelper::get_post_string('armyname', '');
+
 
 $action = InputHelper::get_get_string('action', '');
 if(!empty($action)) {
     // LOGOUT
     if ($action === 'recruit') {
         //get Inputs
-        $troopsize = InputHelper::get_post_int('troopsize');
-        $armyname = InputHelper::get_post_string('armyname');
 
         $http->post('Armies/post_new_army.php', array('armyname'=>$armyname, 'strength'=>$troopsize,
             'username'=>$_SESSION['username']));
