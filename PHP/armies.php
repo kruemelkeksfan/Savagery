@@ -152,7 +152,7 @@ foreach ($armies as &$row){
         'post', null, null, array('formcolumn width150px', 'formcolumn width150px'), 'form width300px');
 
     $range_mult = $http->post('BalanceSettings/post_get_setting.php', array('value'=>'Range_Multiplier'))[0]['value'];
-    $range = $row['strength'] * $range_mult;
+    $range = 50;//$row['strength'] * $range_mult;
     $min = max(0,$position-$range);
     $max = min($mapsize, $position+$range);
 
