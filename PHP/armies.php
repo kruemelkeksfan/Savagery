@@ -7,7 +7,7 @@ new AutoLoader();
 $http = new HttpHelper();
 
 // Page Header
-$page = new Page(new SavageryInfo(), 'Your Town', true);
+$page = new Page(new SavageryInfo(), 'Your Army', true);
 $page->print_header();
 
 $recruitmentfee = 5;
@@ -25,7 +25,7 @@ if(!empty($action)) {
 
         if ($gold-$fee >= 0){
             $new_gold = $http->post("User/post_substract_gold.php", array('username'=>$_SESSION['username'], 'value' =>$fee))['gold'];
-            var_dump($new_gold);
+            //var_dump($new_gold, $troopsize);
             $http->post('Armies/post_new_army.php', array('armyname'=>$armyname, 'strength'=>$troopsize,
                 'username'=>$_SESSION['username']));
         } else {
@@ -66,7 +66,7 @@ $armytable->add_data($armies); //array(array('1', 'Royal Guard', 10, $splitform,
 $armytable->print();
 
 $recruitform = new Form('armies.php?action=recruit',
-	'post', null, "Recruitment", array('formcolumn width150px', 'formcolumn width150px'));
+	'post', $page, "Recruitment", array('formcolumn width150px', 'formcolumn width150px'));
 $recruitform->add_field('armyname', true, 'text', "YourArmyNameHere");
 $recruitform->add_field('troopsize', true, 'number', 1, true, 1, 'width50px', 0);
 $recruitform->add_column_break();

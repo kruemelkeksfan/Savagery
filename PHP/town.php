@@ -62,7 +62,7 @@ $page->print_text('Current unemployed Population: ' . ($town['population'] - $wo
 $buildingtable = new Table($page, 'Upgrades', array('tablecolumn width200px'));
 $buildingtable->add_columns('ID', 'Building', 'Level', 'Workers', 'Upgrade', 'Set Workers');
 
-foreach($building as $buildingindex => $building)
+foreach($buildings as &$building)
 	{
 	$upgradeform = new Form('town.php?action=upgrade&building=' . $building['building_id'],
 		'post', null, null, array('formcolumnsingle'));
@@ -75,8 +75,8 @@ foreach($building as $buildingindex => $building)
 	$workerform->add_column_break();
 	$workerform->add_submit('Set Workers');
 	
-	$buildings[$buildingindex][] = $upgradeform;
-	$buildings[$buildingindex][] = $workerform;
+	$building[] = $upgradeform;
+	$building[] = $workerform;
 	}
 
 $buildingtable->add_data($buildings);
@@ -86,6 +86,7 @@ $buildingtable->print();
 $constructiontable = new Table($page, 'Construction', array('tablecolumn width200px'));
 $constructiontable->add_columns('Building', 'Effect', 'Max Workers', 'Cost', 'Build');
 
+$types = $http->get("Buildingtypes/get_buildingtypes.php")[0];
 foreach($types as &$row)
 	{
     $constructionform = new Form('town.php' . '&action=construct&building=' . $types['buildingtypename'],

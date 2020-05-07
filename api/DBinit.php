@@ -62,7 +62,7 @@ $database->query('CREATE TABLE IF NOT EXISTS Buildings (
 			);');
 $database->query('CREATE TABLE IF NOT EXISTS Armies (
 			army_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-			armyname INT,
+			armyname VARCHAR(32),
 			strength INT,
 			hometown VARCHAR(32),
 			PRIMARY KEY (army_id),
