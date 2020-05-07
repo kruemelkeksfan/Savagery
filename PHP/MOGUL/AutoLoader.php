@@ -5,7 +5,7 @@ class AutoLoader
 	
 	function __construct()
 		{
-		$this->prefixes = array('', 'MOGUL/', 'MOGUL/Prefabs/', 'MOGUL/Math/', 'MOGUL/Map/');
+		$this->prefixes = array('', 'MOGUL/', 'MOGUL/res/', 'MOGUL/Math/', 'MOGUL/Map/');
 		
 		spl_autoload_register(array($this, 'load'));
 		}

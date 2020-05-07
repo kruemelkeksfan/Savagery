@@ -94,10 +94,10 @@ if(!empty($action))
 	    //$test = $http->get("api_test.php");
 	    //var_dump($test);
         $result = $http->get("DBinit.php");
-        fillUsers($http);
-        fillTowns($http);
-        fillBuildings($http);
-        fillArmies($http);
+        DBFiller::fillUsers($http);
+        DBFiller::fillTowns($http);
+        DBFiller::fillBuildings($http);
+        DBFiller::fillArmies($http);
         //var_dump($result);
     }
 	}
