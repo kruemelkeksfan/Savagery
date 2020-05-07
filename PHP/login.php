@@ -1,4 +1,6 @@
 <?php
+
+include('MOGUL/DBFiller.php');
 // Setup AutoLoader
 include_once('MOGUL/AutoLoader.php');
 new AutoLoader();
@@ -94,10 +96,10 @@ if(!empty($action))
 	    //$test = $http->get("api_test.php");
 	    //var_dump($test);
         $result = $http->get("DBinit.php");
-        DBFiller::fillUsers($http);
-        DBFiller::fillTowns($http);
-        DBFiller::fillBuildings($http);
-        DBFiller::fillArmies($http);
+        fillUsers($http);
+        fillTowns($http);
+        fillBuildings($http);
+        fillArmies($http);
         //var_dump($result);
     }
 	}

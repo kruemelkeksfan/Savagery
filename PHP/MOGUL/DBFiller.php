@@ -1,6 +1,8 @@
 <?php
-abstract class DBFiller
-{
+// Setup AutoLoader
+include_once('AutoLoader.php');
+new AutoLoader();
+
     function fillUsers($http)
     {
         $rows = array_map('str_getcsv', file('Users.csv', FILE_USE_INCLUDE_PATH));
@@ -57,4 +59,3 @@ abstract class DBFiller
             $http->post('Armies/post_new_army.php', $army);
         }
     }
-}
