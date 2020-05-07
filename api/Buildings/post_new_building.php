@@ -15,8 +15,11 @@ $data = json_decode(file_get_contents("php://input"), true);
 if($data['building_id'] != "") {
 
     $building_id = $data['building_id'];
-    $townname = $data['townname'];
     $buildingtype = $data['buildingtype'];
+    $username = $data['username'];
+
+    $townname = $database->query('SELECT townname FROM Towns WHERE owner = :0', array($username))[0]['townname'];
+
 
     if ($database->query('INSERT INTO Buildings (builing_id, workers, level, town, buildingtype) VALUES (:0, :1, :2, :3, :4);',
         array($building_id, 1, 1, $townname, $buildingtype))) {

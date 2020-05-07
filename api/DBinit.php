@@ -11,7 +11,8 @@ $timestamps = array(array('User_Reset', time()), array('Game_Start', time()));
 $settings = array(array('Map_Size', '100'), array('Start_Gold', '100'), array('Start_Tax', '5'), array('Start_Population', '5'));
 //Define Buildingtypes
 $buildingtypes = array(array('Blacksmith', 'Increases the Attack Strength of all Armies of this Town.', '20', '10'),
-    array('Tavern', 'Increase Attach of Armies, decrease marching speed.', '10', '5'));
+    array('Tavern', 'Increase Attach of Armies, decrease marching speed.', '10', '5'),
+    array('Townhall', 'Home to the mayor of the city (you).', '0', '1'));
 
 // Create Tables
 // Administration Tables

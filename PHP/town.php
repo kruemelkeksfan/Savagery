@@ -16,6 +16,8 @@ $buildings = $http->get("Buildings/post_building_values.php", array('username' =
 $gold = $http->post('User/post_get_gold.php', array('username' => $_SESSION['username']))['gold'];
 $town = $http->post('Towns/post_get_town_values.php', array('username' => $_SESSION['username']))[0];
 
+var_dump($buildings);
+
 // Count Workers
 $workers = 0;
 foreach($buildings as $building)
@@ -86,7 +88,7 @@ $buildingtable->print();
 $constructiontable = new Table($page, 'Construction', array('tablecolumn width200px'));
 $constructiontable->add_columns('Building', 'Effect', 'Max Workers', 'Cost', 'Build');
 
-$types = $http->get("Buildingtypes/get_buildingtypes.php")[0];
+var_dump($types);
 foreach($types as &$row)
 	{
     $constructionform = new Form('town.php' . '&action=construct&building=' . $types['buildingtypename'],

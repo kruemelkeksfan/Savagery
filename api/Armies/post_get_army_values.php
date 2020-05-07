@@ -16,7 +16,7 @@ if ($data['username'] != "") {
 
     $username = $data['username'];
 
-    $armies = $database->query("SELECT * FROM Armies WHERE hometown IN 
+    $armies = $database->query("SELECT army_id, armyname, strength FROM Armies WHERE hometown IN 
                            (SELECT townname FROM Towns WHERE owner = :0);", array($username));
 
     echo json_encode($armies);
