@@ -12,7 +12,7 @@ $page->print_header();
 
 // Retrieve Info
 $types = $http->get("Buildingtypes/get_buildingtypes.php")[0];
-$buildings = $http->get("Buildings/get_building_values.php")[0];
+$buildings = $http->get("Buildings/post_building_values.php", array('username' => $_SESSION['username']))[0];
 $gold = $http->post('User/post_get_gold.php', array('username' => $_SESSION['username']))['gold'];
 $town = $http->post('Towns/post_get_town_values.php', array('username' => $_SESSION['username']))[0];
 
