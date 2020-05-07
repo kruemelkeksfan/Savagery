@@ -106,7 +106,7 @@ $constructiontable->add_columns('Building', 'Effect', 'Max Workers', 'Cost', 'Bu
 //var_dump($types);
 foreach($types as &$row)
 	{
-    $constructionform = new Form('town.php' . '&action=construct&buildingtype=' . $row['buildingtypename'] . '&cost=' . $row['cost'],
+    $constructionform = new Form('town.php' . '?action=construct&buildingtype=' . $row['buildingtypename'] . '&cost=' . $row['cost'],
         'post', null, null, array('formcolumn width100per'));
     $constructionform->add_submit('Build');
     $row = array_values($row);
