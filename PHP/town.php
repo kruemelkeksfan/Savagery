@@ -53,7 +53,7 @@ if(!empty($action))
 		if($workerinput <= ($town['population'] - $workers))
 			{
 			$newworkers = $http->post('Buildings/post_set_workers.php', array('username' => $_SESSION['username'],'building_id'=>$building, 'workers'=>$workerinput));
-			//var_dump($newworkers);
+			var_dump($newworkers);
 			}
 		else
 			{

@@ -17,13 +17,13 @@ if ($data['username'] != "" && $data['building_id'] != "") {
 
     $building_id = $data['building_id'];
 
-    $database->query("UPDATE Buildings, Towns
+    $database->query("UPDATE Buildings
 		INNER JOIN Towns ON Buildings.town=Towns.townname
 		SET Buildings.level=Buildings.level + 1 WHERE Towns.owner=:0 AND Buildings.building_id=:1;", array($data['username'], $building_id));
 
     $level = $database->query("SELECT Buildings.level FROM Buildings
 		INNER JOIN Towns ON Buildings.town=Towns.townname
-		WHERE Towns.owner=:0 AND Buildings.building_id=:1", array($data['username'], $building_id));
+		WHERE Towns.owner=:0 AND Buildings.building_id=:1;", array($data['username'], $building_id));
 
     echo json_encode($level[0]);
 }
