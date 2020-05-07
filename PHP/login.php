@@ -45,15 +45,6 @@ if(!empty($action))
 				$guard_established = $http->post('Armies/post_new_army.php', array('armyname'=>'City Guard', 'strength'=>'10',
                     'username'=>$username));
 
-                    $attackstrength = $http->post('BattleStats/post_get_attack_strength.php',
-                        array('buildingtype'=>'Blacksmith', 'army_id'=>'40'));
-
-                    $defensestrength = $http->post('BattleStats/post_get_defense_strength.php',
-                        array('buildingtype'=>'Tavern', 'username'=>'xxxNOOBxxx'));
-
-                    var_dump($defensestrength);
-                    var_dump($defensestrength);
-
                     //var_dump($town_created);
 				// $mapsize = $database->query('SELECT value FROM BalanceSettings WHERE settingname=:0;', array('Map_Size'))[0]['value'];
 				// $tax = $database->query('SELECT value FROM BalanceSettings WHERE settingname=:0;', array('Start_Tax'))[0]['value'];
@@ -111,6 +102,14 @@ if(!empty($action))
         fillBuildings($http);
         fillArmies($http);
         //var_dump($result);
+        $attackstrength = $http->post('BattleStats/post_get_attack_strength.php',
+            array('buildingtype'=>'Blacksmith', 'army_id'=>'40'));
+
+        $defensestrength = $http->post('BattleStats/post_get_defense_strength.php',
+            array('buildingtype'=>'Tavern', 'username'=>'xxxNOOBxxx'));
+
+        var_dump($defensestrength);
+        var_dump($defensestrength);
     }
 	}
 
