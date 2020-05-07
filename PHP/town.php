@@ -29,6 +29,8 @@ foreach($buildings as $building)
 $action = InputHelper::get_get_string('action', null);
 $building = InputHelper::get_get_string('building', null);
 $workerinput = InputHelper::get_post_int('field_0_0', null);
+$buildingtype = InputHelper::get_get_string('buildingtype', null);
+$cost = InputHelper::get_get_int('cost', null);
 
 if(!empty($action))
 	{
@@ -57,13 +59,12 @@ if(!empty($action))
 		}
 	else if($action === 'construct' /*&& !empty($buildingtype) && !empty($cost)*/)
         {
-            $buildingtype = InputHelper::get_get_string('buildingtype', null);
-            $cost = InputHelper::get_get_int('cost', null);
         if ($gold-$cost >= 0)
             {
-             $http->post("Buildings/post_new_building.php",
+             $new=$http->post("Buildings/post_new_building.php",
                  array('building_id'=>'0', 'buildingtype' =>$buildingtype, 'username'=>$_SESSION['username']));
              $new_gold = $http->post("User/post_substract_gold.php", array('username'=>$_SESSION['username'], 'value' =>$cost))['gold'];
+            var_dump($new);
             }
         }
 	}
