@@ -27,7 +27,7 @@ if(!empty($action))
 		$http->post('Towns/post_set_population.php', array('username' => $_SESSION['username'], 'population' => $pop));
 		
 		// Update Workers
-		$buildings = $http->get("Buildings/post_get_building_values.php", array('username' => $_SESSION['username']))[0];
+		$buildings = $http->get("Buildings/post_get_building_values.php", array('username' => $_SESSION['username']));
 		$workers = 0;
 		foreach($buildings as $building)
 			{
@@ -40,7 +40,7 @@ if(!empty($action))
 			$http->post('Buildings/post_set_workers.php', array('username' => $_SESSION['username'], $i++, 0));
 			
 			// TODO: Copy-pasted code cz "What kind of fool sorcery is this "function"-thing that you keep talking about?!"
-			$buildings = $http->get("Buildings/post_get_building_values.php", array('username' => $_SESSION['username']))[0];
+			$buildings = $http->get("Buildings/post_get_building_values.php", array('username' => $_SESSION['username']));
 			$workers = 0;
 			foreach($buildings as $building)
 				{
