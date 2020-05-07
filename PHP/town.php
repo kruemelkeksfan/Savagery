@@ -90,7 +90,7 @@ $page->print_text('Current unemployed Population: ' . ($town['population'] - $wo
 
 // Building Table
 $buildingtable = new Table($page, 'Upgrades',
-	array('tablecolumn width50px', 'tablecolumn width200px', 'tablecolumn width50px', 'tablecolumn width50px',
+	array('tablecolumn width100px', 'tablecolumn width200px', 'tablecolumn width100px', 'tablecolumn width100px',
 	'tablecolumn width150px', 'tablecolumn width300px'));
 $buildingtable->add_columns('ID', 'Building', 'Level', 'Workers', 'Upgrade', 'Set Workers');
 
@@ -118,7 +118,7 @@ $buildingtable->print();
 
 // Construction Table
 $constructiontable = new Table($page, 'Construction',
-	array('tablecolumn width200px', 'tablecolumn width400px', 'tablecolumn width50px', 'tablecolumn width50px', 'tablecolumn width150px'));
+	array('tablecolumn width200px', 'tablecolumn width400px', 'tablecolumn width100px', 'tablecolumn width100px', 'tablecolumn width150px'));
 $constructiontable->add_columns('Building', 'Effect', 'Max Workers', 'Cost', 'Build');
 
 //var_dump($types);

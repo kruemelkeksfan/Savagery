@@ -132,7 +132,7 @@ if(!empty($resulttable))
 // General Info
 $page->print_text('Current Gold: ' . $gold . '$');
 
-$armytable = new Table($page, 'Your Armies', array('tablecolumn width50px', 'tablecolumn width200px', 'tablecolumn width50px', 'tablecolumn width300px'));
+$armytable = new Table($page, 'Your Armies', array('tablecolumn width100px', 'tablecolumn width200px', 'tablecolumn width100px', 'tablecolumn width300px'));
 $armytable->add_columns('ID', 'Name', 'Strength', /*'Split', 'Merge',*/ 'Attack');
 
 //Get Army Data
