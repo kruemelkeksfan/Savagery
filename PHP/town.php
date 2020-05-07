@@ -17,6 +17,7 @@ $gold = $http->post('User/post_get_gold.php', array('username' => $_SESSION['use
 $town = $http->post('Towns/post_get_town_values.php', array('username' => $_SESSION['username']))[0];
 
 var_dump($buildings);
+var_dump($http->get("Buildings/get_all_buildings.php"));
 
 // Count Workers
 $workers = 0;
@@ -53,6 +54,13 @@ if(!empty($action))
 			$page->add_error('Not enough free Workers!');
 			}
 		}
+//	else if($action === 'construct')
+//        {
+//        if ()
+//            {
+//
+//            }
+//        }
 	}
 
 // General Info
@@ -91,7 +99,7 @@ $constructiontable->add_columns('Building', 'Effect', 'Max Workers', 'Cost', 'Bu
 var_dump($types);
 foreach($types as &$row)
 	{
-    $constructionform = new Form('town.php' . '&action=construct&building=' . $types['buildingtypename'],
+    $constructionform = new Form('town.php' . '&action=construct&building=' . $types['buildingtypename'] . '&cost=' . $types['cost'],
         'post', null, null, array('formcolumn width100per'));
     $constructionform->add_submit('Build');
     $row = array_values($row);
