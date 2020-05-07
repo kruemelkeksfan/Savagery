@@ -10,13 +10,15 @@ include_once '../Database.php';
 
 $database = new Database();
 
-$data = json_decode(file_get_contents("php://input"), JSON_OBJECT_AS_ARRAY);
+$data = json_decode(file_get_contents("php://input"), true);
 
 if($data['armyname'] != "") {
 
     $armyname = $data['armyname'];
     $strength = $data['strength'];
-    $townname = $data['townname'];
+    $username = $data['username'];
+
+    $townname = $database->query('SELECT townname FROM Towns WHERE owner = :0', array($username))[0]['townname'];
 
     if ($database->query('INSERT INTO Armies (armyname, strength, hometown) VALUES (:0, :1, :2);',
         array($armyname, $strength, $townname))) {

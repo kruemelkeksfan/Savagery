@@ -10,13 +10,14 @@ include_once '../Database.php';
 
 $database = new Database();
 
-$data = json_decode(file_get_contents("php://input"), JSON_OBJECT_AS_ARRAY);
+$data = json_decode(file_get_contents("php://input"), true);
 
-if ($data['townname'] != "") {
+if ($data['username'] != "") {
 
-    $townname = $data['townname'];
+    $username = $data['username'];
 
-    $armies = $database->query("SELECT * FROM Armies WHERE hometown = :0;", array($townname));
+    $armies = $database->query("SELECT * FROM Armies WHERE hometown IN 
+                           (SELECT townname FROM Towns WHERE owner = :0);", array($username));
 
     echo json_encode($armies);
 }

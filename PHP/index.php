@@ -9,14 +9,13 @@ $page->print_header();
 
 $http = new HttpHelper();
 
-$town = $http->post('Towns/post_get_town_values.php', array('username' => $_SESSION['username']));
-
 $action = InputHelper::get_get_string('action', null);
 $tax = InputHelper::get_post_int('field_0_0', null);
 if(!empty($action))
 	{
 	if($action === 'collect')
 		{
+        $town = $http->post('Towns/post_get_town_values.php', array('username' => $_SESSION['username']))[0];
 		$http->post('User/post_add_gold.php', array('username' => $_SESSION['username'], 'value' => ($town['population'] * $town['tax'])));
 		}
 	else if($action === 'settax' && !empty($tax))
@@ -25,7 +24,10 @@ if(!empty($action))
 		}
 	}
 
+$town = $http->post('Towns/post_get_town_values.php', array('username' => $_SESSION['username']))[0];
 $gold = $http->post('User/post_get_gold.php', array('username' => $_SESSION['username']))['gold'];
+
+$page->print_heading($town['townname']);
 
 $page->print_text('Current Gold: ' . $gold . '$');
 $page->print_text('Current Population: ' . $town['population']);
