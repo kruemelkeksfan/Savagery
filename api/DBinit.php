@@ -9,7 +9,7 @@ $database = new Database();
 $timestamps = array(array('User_Reset', time()), array('Game_Start', time()));
 // Define Balance Settings
 $settings = array(array('Map_Size', '100'), array('Start_Gold', '100'), array('Start_Tax', '5'),
-    array('Start_Population', '5'), array('Range_Multiplier', '0.2'), array('Upgrade_Multiplier', '50'));
+    array('Start_Population', '5'), array('Range_Multiplier', '10'), array('Upgrade_Multiplier', '50'));
 //Define Buildingtypes
 $buildingtypes = array(array('Blacksmith', 'Increases the Defense of all Armies of this Town.', '10', '6'),
     array('Tavern', 'Increases Attack Strength of every Soldier of this Town.', '20', '4'),
