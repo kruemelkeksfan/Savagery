@@ -92,6 +92,10 @@ $page->print_text('Current unemployed Population: ' . ($town['population'] - $wo
 $buildingtable = new Table($page, 'Upgrades', array('tablecolumn width200px'));
 $buildingtable->add_columns('ID', 'Building', 'Level', 'Workers', 'Upgrade', 'Set Workers');
 
+var_dump($buildings[0]['buildingtype']);
+var_dump($types[$buildings[0]['buildingtype']]['maxworkers']);
+var_dump($types);
+
 foreach($buildings as &$building)
 	{
 	$upgradeform = new Form('town.php?action=upgrade&building=' . $building['building_id'],
