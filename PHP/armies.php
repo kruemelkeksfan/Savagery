@@ -132,7 +132,7 @@ if(!empty($resulttable))
 // General Info
 $page->print_text('Current Gold: ' . $gold . '$');
 
-$armytable = new Table($page, 'Your Armies', array('tablecolumn width200px'));
+$armytable = new Table($page, 'Your Armies', array('tablecolumn width50px', 'tablecolumn width200px', 'tablecolumn width50px', 'tablecolumn width300px'));
 $armytable->add_columns('ID', 'Name', 'Strength', /*'Split', 'Merge',*/ 'Attack');
 
 //Get Army Data
@@ -149,7 +149,7 @@ foreach ($armies as &$row){
 //    $mergeform->add_submit('Merge Army');
 
     $attackform = new Form('armies.php?action=attack&army=' . $row['army_id'],
-        'post', null, null, array('formcolumn width150px', 'formcolumn width150px'), 'form width300px');
+        'post', null, null, array('formcolumn width300px', 'formcolumn width100px'), 'form width400px');
 
     $range_mult = $http->post('BalanceSettings/post_get_setting.php', array('value'=>'Range_Multiplier'))[0]['value'];
     $range = $row['strength'] * $range_mult;
@@ -178,9 +178,12 @@ foreach ($armies as &$row){
 $armytable->add_data($armies);
 $armytable->print();
 
+$page->print_text('<br />');
+
 $recruitform = new Form('armies.php?action=recruit',
-	'post', $page, "Recruitment", array('formcolumn width150px', 'formcolumn width150px'));
-$recruitform->add_field('armyname', true, 'text', "YourArmyNameHere");
+	'post', $page, "Recruitment", array('formcolumn width300px', 'formcolumn width150px', 'formcolumn width150px'), 'form width600px');
+$recruitform->add_field('armyname', true, 'text', "YourArmyNameHere", true, null, 'width150px');
+$recruitform->add_column_break();
 $recruitform->add_field('troopsize', true, 'number', 1, true, 1, 'width50px', 0);
 $recruitform->add_column_break();
 $recruitform->add_submit('Recruit Army');

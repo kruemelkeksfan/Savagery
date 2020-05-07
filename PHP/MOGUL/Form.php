@@ -87,6 +87,7 @@ class Form
 			}
 		}
 	
+	// TODO: Number Field as extra Method
 	function add_field(string $name = null, bool $required = true, string $type = 'text', $value = null, bool $singleline = false, float $step = null,
 		string $class = '', int $min = null, int $max = null)
 		{			

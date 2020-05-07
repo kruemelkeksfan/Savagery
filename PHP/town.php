@@ -89,7 +89,9 @@ $page->print_text('Current Population: ' . $town['population']);
 $page->print_text('Current unemployed Population: ' . ($town['population'] - $workers));
 
 // Building Table
-$buildingtable = new Table($page, 'Upgrades', array('tablecolumn width200px'));
+$buildingtable = new Table($page, 'Upgrades',
+	array('tablecolumn width50px', 'tablecolumn width200px', 'tablecolumn width50px', 'tablecolumn width50px',
+	'tablecolumn width150px', 'tablecolumn width300px'));
 $buildingtable->add_columns('ID', 'Building', 'Level', 'Workers', 'Upgrade', 'Set Workers');
 
 foreach($buildings as &$building)
@@ -99,7 +101,7 @@ foreach($buildings as &$building)
 	$upgradeform->add_submit('Upgrade');
 
 	$workerform = new Form('town.php?action=setworkers&building=' . $building['building_id'],
-		'post', null, null, array('formcolumn width100px', 'formcolumn width100px'));
+		'post', null, null, array('formcolumn width150px', 'formcolumn width150px'), 'form width300px');
 	$workerform->add_field('', true, 'number', $types[$building['buildingtype']]['maxworkers'], true, 1, 'width50px',
 		0, $types[$building['buildingtype']]['maxworkers']);
 	$workerform->add_column_break();
@@ -115,7 +117,8 @@ $buildingtable->add_data($buildings);
 $buildingtable->print();
 
 // Construction Table
-$constructiontable = new Table($page, 'Construction', array('tablecolumn width200px'));
+$constructiontable = new Table($page, 'Construction',
+	array('tablecolumn width200px', 'tablecolumn width400px', 'tablecolumn width50px', 'tablecolumn width50px', 'tablecolumn width150px'));
 $constructiontable->add_columns('Building', 'Effect', 'Max Workers', 'Cost', 'Build');
 
 //var_dump($types);

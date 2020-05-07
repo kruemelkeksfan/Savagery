@@ -52,7 +52,7 @@ if(!empty($action))
 
 $gold = $http->post('User/post_get_gold.php', array('username' => $_SESSION['username']))['gold'];
 
-$page->print_heading($town['townname']);
+$page->print_heading($town['townname'], false);
 
 $page->print_text('Current Gold: ' . $gold . '$');
 $page->print_text('Current Population: ' . $town['population']);
@@ -64,6 +64,8 @@ $taxform->add_field('', true, 'number', $town['tax'], true, 1, 'width50px', 1);
 $taxform->add_column_break();
 $taxform->add_submit('Set Tax');
 $taxform->print();
+
+$page->print_text('<br />');
 
 $paydayform = new Form('index.php?action=collect',
 	'post', null, null, array('formcolumnnarrow'));
