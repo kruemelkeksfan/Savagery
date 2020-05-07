@@ -14,6 +14,18 @@ $recruitmentfee = 5;
 $troopsize = InputHelper::get_post_int('troopsize', 1); //ToDo
 $armyname = InputHelper::get_post_string('armyname', '');
 
+$army_strength = $http->post('Armies/post_get_sum_soldiers.php', array('username' => $_SESSION['username']))[0]['strength'];
+$range_mult = $http->post('BalanceSettings/post_get_setting.php', array('value'=>'Range_Multiplier'))[0]['value'];
+$range = $army_strength * $range_mult;
+$position = $http->post('Towns/post_get_town_values.php', array('username' => $_SESSION['username']))[0]['position'];
+$mapsize = $http->post('BalanceSettings/post_get_setting.php', array('value'=>'Map_Size'))[0]['value'];
+$min = max(0,$position-$range);
+$max = min($mapsize, $position+$range);
+
+var_dump($min, $max);
+
+$targets = $http->post('Towns/post_get_towns_in_range.php', array('max'=>$max,'min'=>$min));
+var_dump($targets);
 
 $action = InputHelper::get_get_string('action', '');
 if(!empty($action)) {
@@ -35,29 +47,29 @@ if(!empty($action)) {
 }
 
 $armytable = new Table($page, 'Your Armies', array('tablecolumn width200px'));
-$armytable->add_columns('ID', 'Name', 'Strength', 'Split', 'Merge', 'Attack');
+$armytable->add_columns('ID', 'Name', 'Strength', /*'Split', 'Merge',*/ 'Attack');
 
 
 //Get Army Data
 $armies = $http->post("Armies/post_get_army_values.php", array('username'=>$_SESSION['username']));
 foreach ($armies as &$row){
-    $splitform = new Form('armies.php'/*?action=split*/,
-        'post', null, null, array('formcolumn width150px', 'formcolumn width150px'));
-    $splitform->add_field('', true, 'number', floor(10/*armystrength*/ / 2), true, 1, 'width50px', 0, 10/*armystrength*/);
-    $splitform->add_column_break();
-    $splitform->add_submit('Split Army');
-
-    $mergeform = new Form('armies.php'/*?action=merge*/,
-        'post', null, null, array('formcolumn width150px'));
-    $mergeform->add_submit('Merge Army');
+//    $splitform = new Form('armies.php'/*?action=split*/,
+//        'post', null, null, array('formcolumn width150px', 'formcolumn width150px'));
+//    $splitform->add_field('', true, 'number', floor(10/*armystrength*/ / 2), true, 1, 'width50px', 0, 10/*armystrength*/);
+//    $splitform->add_column_break();
+//    $splitform->add_submit('Split Army');
+//
+//    $mergeform = new Form('armies.php'/*?action=merge*/,
+//        'post', null, null, array('formcolumn width150px'));
+//    $mergeform->add_submit('Merge Army');
 
     $attackform = new Form('armies.php'/*?action=attack*/,
         'post', null, null, array('formcolumn width150px'));
     $attackform->add_submit('Attack');
 
     $row = array_values($row);
-    $row[] = $splitform;
-    $row[] = $mergeform;
+//    $row[] = $splitform;
+//    $row[] = $mergeform;
     $row[] = $attackform;
 }
 
@@ -74,6 +86,8 @@ $recruitform->add_submit('Recruit Army');
 $recruitform->print();
 
 $page->print_text('Cost per Soldier: ' . $recruitmentfee . '$');
+
+$page->print_text('Current Troop Strength: ' . $army_strength);
 
 // Page Footer
 $page->print_footer();

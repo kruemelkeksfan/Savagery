@@ -12,12 +12,12 @@ $page->print_header();
 
 // Retrieve Info
 $types = $http->get("Buildingtypes/get_buildingtypes.php")[0];
-$buildings = $http->get("Buildings/post_get_building_values.php", array('username' => $_SESSION['username']))[0];
+$buildings = $http->post("Buildings/post_get_building_values.php", array('username' => $_SESSION['username']))[0];
 $gold = $http->post('User/post_get_gold.php', array('username' => $_SESSION['username']))['gold'];
 $town = $http->post('Towns/post_get_town_values.php', array('username' => $_SESSION['username']))[0];
 
 var_dump($buildings);
-var_dump($http->get("Buildings/get_all_buildings.php"));
+//var_dump($http->get("Buildings/get_all_buildings.php"));
 
 // Count Workers
 $workers = 0;
@@ -35,7 +35,7 @@ if(!empty($action))
 	{
 	if($action === 'upgrade' && !empty($building))
 		{
-		if($gold >= 100)		// TODO: Remove magic Number by introducing a BalanceSetting
+		if($gold >= 100)
 			{
 			$http->post('User/post_subtract_gold.php', array('username' => $_SESSION['username'], 'value' => 100));
 			$http->post('Buildings/post_set_level.php', array('username' => $_SESSION['username'], $building));
@@ -88,7 +88,9 @@ foreach($buildings as &$building)
 		0, $types[$building['buildingtype']]['maxworkers']);
 	$workerform->add_column_break();
 	$workerform->add_submit('Set Workers');
-	
+
+	$building = array_values($building);
+
 	$building[] = $upgradeform;
 	$building[] = $workerform;
 	}
@@ -103,7 +105,7 @@ $constructiontable->add_columns('Building', 'Effect', 'Max Workers', 'Cost', 'Bu
 var_dump($types);
 foreach($types as &$row)
 	{
-    $constructionform = new Form('town.php' . '&action=construct&buildingtype=' . $types['buildingtypename'] . '&cost=' . $types['cost'],
+    $constructionform = new Form('town.php' . '&action=construct&buildingtype=' . $row['buildingtypename'] . '&cost=' . $row['cost'],
         'post', null, null, array('formcolumn width100per'));
     $constructionform->add_submit('Build');
     $row = array_values($row);
