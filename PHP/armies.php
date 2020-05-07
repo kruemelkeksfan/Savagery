@@ -10,6 +10,7 @@ $http = new HttpHelper();
 $page = new Page(new SavageryInfo(), 'Your Town', true);
 $page->print_header();
 
+$recruitmentfee = 5;
 $troopsize = InputHelper::get_post_int('troopsize', 1); //ToDo
 $armyname = InputHelper::get_post_string('armyname', '');
 
@@ -18,10 +19,18 @@ $action = InputHelper::get_get_string('action', '');
 if(!empty($action)) {
     // LOGOUT
     if ($action === 'recruit') {
-        //get Inputs
+        //get Gold
+        $gold = $http->post('User/post_get_gold.php', array('username' => $_SESSION['username']))['gold'];
+        $fee = $troopsize * $recruitmentfee;
 
-        $http->post('Armies/post_new_army.php', array('armyname'=>$armyname, 'strength'=>$troopsize,
-            'username'=>$_SESSION['username']));
+        if ($gold-$fee >= 0){
+            $new_gold = $http->post("User/post_substract_gold.php", array('username'=>$_SESSION['username'], 'value' =>$fee))['gold'];
+            var_dump($new_gold);
+            $http->post('Armies/post_new_army.php', array('armyname'=>$armyname, 'strength'=>$troopsize,
+                'username'=>$_SESSION['username']));
+        } else {
+            echo "You're too poor to feed all those soldiers, man!";
+        }
     }
 }
 
@@ -64,7 +73,7 @@ $recruitform->add_column_break();
 $recruitform->add_submit('Recruit Army');
 $recruitform->print();
 
-$page->print_text('Cost per Soldier: ' . 5 . '$');
+$page->print_text('Cost per Soldier: ' . $recruitmentfee . '$');
 
 // Page Footer
 $page->print_footer();
