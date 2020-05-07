@@ -16,8 +16,8 @@ if(!empty($action)) {
     // LOGOUT
     if ($action === 'recruit') {
         //get Inputs
-        $troopsize = InputHelper::get_get_int('troopsize');
-        $armyname = InputHelper::get_get_string('armyname');
+        $troopsize = InputHelper::get_post_int('troopsize');
+        $armyname = InputHelper::get_post_string('armyname');
 
         $http->post('Armies/post_new_army.php', array('armyname'=>$armyname, 'strength'=>$troopsize,
             'username'=>$_SESSION['username']));
