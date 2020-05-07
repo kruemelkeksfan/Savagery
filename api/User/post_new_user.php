@@ -17,11 +17,14 @@ if($data['username'] != "") {
     $username = $data['username'];
     $password = $data['password'];
 
-    $gold = $database->query('SELECT value FROM BalanceSettings WHERE settingname=:0;', array('Start_Gold'))[0]['value'];
-
+    if(empty($data['gold'])) {
+        $gold = $database->query('SELECT value FROM BalanceSettings WHERE settingname=:0;', array('Start_Gold'))[0]['value'];
+    } else {
+        $gold = $data['gold'];
+    }
 
     if ($database->query('INSERT INTO Users (username, password, last_active, gold) VALUES (:0, :1, :2, :3);',
-        array($username, password_hash($password, PASSWORD_DEFAULT), time(), $gold))) {
+        array($username, $password, time(), $gold))) {
 
         echo json_encode(
             array('message' => 'User Created', 'success' => true)

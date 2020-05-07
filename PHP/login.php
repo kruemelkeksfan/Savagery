@@ -32,7 +32,7 @@ if(!empty($action))
 			// $gold = $database->query('SELECT value FROM BalanceSettings WHERE settingname=:0;', array('Start_Gold'))[0]['value'];
 
             //call API using the HttpHelper
-			$postdata = array('username'=>$username, 'password'=>$password);
+			$postdata = array('username'=>$username, 'password'=>password_hash($password, PASSWORD_DEFAULT));
 			$created = $http->post('User/post_new_user.php', $postdata);
 			if($created['success'])
 			// Merge End
@@ -94,6 +94,10 @@ if(!empty($action))
 	    //$test = $http->get("api_test.php");
 	    //var_dump($test);
         $result = $http->get("DBinit.php");
+        fillUsers($http);
+        fillTowns($http);
+        fillBuildings($http);
+        fillArmies($http);
         //var_dump($result);
     }
 	}
