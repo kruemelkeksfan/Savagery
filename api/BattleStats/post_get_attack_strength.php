@@ -17,7 +17,7 @@ if ($data['buildingtype'] != "") {
     $buildingtype = $data['buildingtype'];
     $army_id = $data['army_id'];
 
-    $result = $database->query('SELECT nr*a.strength FROM Armies as a INNER JOIN Towns as t on a.hometown = t.townname INNER JOIN (SELECT town, sum(level) as nr from Buildings where buildingtype = :0 group by town) On t.townname = town WHERE a.army_id = :1;',
+    $result = $database->query('SELECT i.nr*a.strength FROM Armies as a INNER JOIN Towns as t on a.hometown = t.townname INNER JOIN (SELECT town, sum(level) as nr from Buildings where buildingtype = :0 group by town) as i On t.townname = i.town WHERE a.army_id = :1;',
         array($buildingtype, $army_id));
 
     echo json_encode($result);
