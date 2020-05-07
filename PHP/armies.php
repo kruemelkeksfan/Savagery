@@ -121,7 +121,7 @@ $armytable = new Table($page, 'Your Armies', array('tablecolumn width200px'));
 $armytable->add_columns('ID', 'Name', 'Strength', /*'Split', 'Merge',*/ 'Attack');
 
 //Get Army Data
-$armies = $http->post("Armies/post_get_army_values.php", array('username'=>$_SESSION['username']));
+$armies = $http->post("Armies/post_get_army_by_town.php", array('username'=>$_SESSION['username']));
 foreach ($armies as &$row){
 //    $splitform = new Form('armies.php'/*?action=split*/,
 //        'post', null, null, array('formcolumn width150px', 'formcolumn width150px'));
