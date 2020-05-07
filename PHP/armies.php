@@ -16,7 +16,8 @@ $recruitmentfee = 5;
 $troopsize = InputHelper::get_post_int('troopsize', 1);
 $armyname = InputHelper::get_post_string('armyname', '');
 
-$army_strength = $http->post('Armies/post_get_sum_soldiers.php', array('username' => $_SESSION['username']))[0]['sum'];
+$army_strength = $http->post('Armies/post_get_sum_soldiers.php', array('username' => $_SESSION['username']));
+var_dump($army_strength);
 $position = $http->post('Towns/post_get_town_values.php', array('username' => $_SESSION['username']))[0]['position'];
 $mapsize = $http->post('BalanceSettings/post_get_setting.php', array('value'=>'Map_Size'))[0]['value'];
 

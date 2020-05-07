@@ -15,7 +15,7 @@ $types = $http->get("Buildingtypes/get_buildingtypes.php")[0];
 $buildings = $http->post("Buildings/post_get_building_values.php", array('username' => $_SESSION['username']));
 $gold = $http->post('User/post_get_gold.php', array('username' => $_SESSION['username']))['gold'];
 $town = $http->post('Towns/post_get_town_values.php', array('username' => $_SESSION['username']))[0];
-$next_id = ob_get_length($buildings);
+$next_id = count($buildings);
 var_dump($next_id);
 //var_dump($buildings);
 //var_dump($http->get("Buildings/get_all_buildings.php"));
