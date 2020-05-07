@@ -20,7 +20,7 @@ if($data['building_id'] != "") {
 
     $townname = $database->query('SELECT townname FROM Towns WHERE owner = :0', array($username))[0]['townname'];
 
-    if (empty($data[workers])){
+    if (empty($data['workers'])){
         $workers = 1;
     } else {
         $workers = $data['workers'];
