@@ -18,8 +18,8 @@ if ($data['username'] != "") {
     $username = $data['username'];
     $buildingtype = $data['buildingtype'];
 
-    $result = $database->query('SELECT i.nr, a.strength FROM Armies as a INNER JOIN Towns as t on a.hometown = t.townname INNER JOIN (SELECT town, sum(level) as nr from Buildings where buildingtype = :0 group by town) as i On t.townname = i.town WHERE t.owner = :1 group by a.hometown;',
-        array($buildingtype, $username));
+    $result = $database->query('SELECT sum(a.strength) FROM Armies as a INNER JOIN Towns as t on a.hometown = t.townname WHERE t.owner = :1 group by a.hometown;',
+        array($buildingtype, $username)); //todo: experiment with group by
 
     echo json_encode($result);
 }
