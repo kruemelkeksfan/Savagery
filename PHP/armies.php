@@ -167,7 +167,7 @@ foreach ($armies as &$row){
 	$targetoptions = array();
 	foreach($targets as $target)
 		{
-		$targetoptions[$target['townname']] = $target['owner'];
+		$targetoptions[/*$target['townname']*/] = $target['owner'];
 		}
 	$attackform->add_dropdown_field('Target', $targetoptions, true, true);
 	$attackform->add_column_break();

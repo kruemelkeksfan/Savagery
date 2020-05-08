@@ -49,7 +49,7 @@ if(!empty($action))
 	}
 
 $gold = $http->post('User/post_get_gold.php', array('username' => $_SESSION['username']))['gold'];
-var_dump($gold);
+//var_dump($gold);
 
 $page->print_heading($town['townname'], false);
 

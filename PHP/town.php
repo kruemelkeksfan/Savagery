@@ -122,7 +122,7 @@ $constructiontable = new Table($page, 'Construction',
 	array('tablecolumn width200px', 'tablecolumn width400px', 'tablecolumn width100px', 'tablecolumn width100px', 'tablecolumn width150px'));
 $constructiontable->add_columns('Building', 'Effect', 'Max Workers', 'Cost', 'Build');
 
-//var_dump($types);
+var_dump($types);
 foreach($types as &$row)
 	{
     $constructionform = new Form('town.php' . '?action=construct&buildingtype=' . $row['buildingtypename'] . '&cost=' . $row['cost'],
@@ -131,7 +131,7 @@ foreach($types as &$row)
     $row = array_values($row);
     $row[] = $constructionform;
 	}
-var_dump($types);
+//var_dump($types);
 $constructiontable->add_data($types);
 $constructiontable->print();
 
