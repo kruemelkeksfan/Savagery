@@ -127,6 +127,8 @@ if(!empty($resulttable))
 	$resulttable->print();
 	}
 
+$gold = $http->post('User/post_get_gold.php', array('username' => $_SESSION['username']))['gold'];
+
 // General Info
 $page->print_text('Current Gold: ' . $gold . '$');
 
