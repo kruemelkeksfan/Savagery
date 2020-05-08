@@ -41,7 +41,7 @@ if(!empty($action))
 			{
 			$http->post('User/post_subtract_gold.php', array('username' => $_SESSION['username'], 'value' => 100));
 			$levelneu = $http->post('Buildings/post_set_level.php', array('username' => $_SESSION['username'], 'building_id' => $building));
-			var_dump($levelneu);
+			//var_dump($levelneu);
 			}
 		else
 			{
@@ -53,7 +53,7 @@ if(!empty($action))
 		if($workerinput <= ($town['population'] - $workers))
 			{
 			$newworkers = $http->post('Buildings/post_set_workers.php', array('username' => $_SESSION['username'],'building_id'=>$building, 'workers'=>$workerinput));
-			var_dump($newworkers);
+			//var_dump($newworkers);
 			}
 		else
 			{
@@ -77,7 +77,6 @@ $types = $http->get("Buildingtypes/get_buildingtypes.php")[0];
 $buildings = $http->post("Buildings/post_get_building_values.php", array('username' => $_SESSION['username']));
 $town = $http->post('Towns/post_get_town_values.php', array('username' => $_SESSION['username']))[0];
 $next_id = count($buildings);
-var_dump($types);
 
 foreach($types as $type)
 	{
@@ -123,7 +122,7 @@ $constructiontable = new Table($page, 'Construction',
 $constructiontable->add_columns('Building', 'Effect', 'Max Workers', 'Cost', 'Build');
 
 $types = $http->get("Buildingtypes/get_buildingtypes.php")[0];
-var_dump($types);
+
 foreach($types as &$row)
 	{
     $constructionform = new Form('town.php' . '?action=construct&buildingtype=' . $row['buildingtypename'] . '&cost=' . $row['cost'],
@@ -132,7 +131,7 @@ foreach($types as &$row)
     $row = array_values($row);
     $row[] = $constructionform;
 	}
-//var_dump($types);
+
 $constructiontable->add_data($types);
 $constructiontable->print();
 
