@@ -122,6 +122,7 @@ $constructiontable = new Table($page, 'Construction',
 	array('tablecolumn width200px', 'tablecolumn width400px', 'tablecolumn width100px', 'tablecolumn width100px', 'tablecolumn width150px'));
 $constructiontable->add_columns('Building', 'Effect', 'Max Workers', 'Cost', 'Build');
 
+$types = $http->get("Buildingtypes/get_buildingtypes.php")[0];
 var_dump($types);
 foreach($types as &$row)
 	{
