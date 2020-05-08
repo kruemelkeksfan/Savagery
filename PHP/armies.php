@@ -83,6 +83,7 @@ if(!empty($action))
                 array('buildingtype'=>'Blacksmith', 'army_id'=>$army))[0]['i.nr*a.strength'];
             //var_dump($attackstrength);
             //var_dump($targetowner);
+            if(empty($attackstrength)) $attackstrength = 0;
 
             $defensestrength = $http->post('BattleStats/post_get_defense_strength.php',
                 array('buildingtype'=>'Tavern', 'username'=>$targetowner))[0]['i.nr*sum(a.strength)'];
