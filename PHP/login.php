@@ -93,14 +93,17 @@ if(!empty($action))
 		$page->add_error('The data leech is not satisfied by your sacrifice, feed him more to gain his approval!');
 		}
 	else if($action === 'init_DB'){
-	    //echo "pressed DB init";
-	    //$test = $http->get("api_test.php");
-	    //var_dump($test);
         $result = $http->get("DBinit.php");
         fillUsers($http);
         fillTowns($http);
         fillBuildings($http);
         fillArmies($http);
+
+        $attackstrength = $http->post('BattleStats/post_get_attack_strength.php',
+            array('buildingtype'=>'Blacksmith', 'army_id'=>'4'));
+
+        $defensestrength = $http->post('BattleStats/post_get_defense_strength.php',
+            array('buildingtype'=>'Tavern', 'username'=>'xxxNOOBxxx'));
 
     }
 	}
