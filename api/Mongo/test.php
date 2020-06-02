@@ -9,7 +9,7 @@ include_once '../MongoDB.php';
 
 $db = new MongoDatabase();
 
-$db->add_document('test_col', array('test'=>'Hello World!'));
+$added = $db->add_document('test_col', array('test'=>'Hello World!'));
 $data = $db->find_document('test_col');
 
-echo json_encode($data);
+echo json_encode(array('add'=>$added, 'data'=>$data));

@@ -108,6 +108,7 @@ if(!empty($action))
     }
 	else if($action === 'init_Mongo'){
         $result = $http->changeDB();
+        var_dump($result);
     }
 	}
 
