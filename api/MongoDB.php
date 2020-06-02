@@ -1,7 +1,7 @@
 <?php
 include('ErrorHandlerAPI.php');
 
-class Database
+class MongoDatabase
 	{
 	private $host = "sql";
 	private $db_name = "Savagery";
@@ -11,21 +11,36 @@ class Database
 	
 	function __construct()
 		{
-        define('LOG_FILE', 'log.txt');
-		
-		try
-			{
-			$this->dblink = new MongoClient();
-			}
-		catch (PDOException $exc)
-			{
-			ErrorHandlerAPI::handle_error('Database connection could not be established: ' . $exc->getMessage() . '!');
-			}
+        $db = new MongoClient();
+        $this->dblink = $db->savagery_mongo;
+
 		}
 		
 	function new_collection(string $name)
 		{
 		$this->dblink->createCollection($name);
 		}
+
+	function add_document(string $collection, $data)
+        {
+            $col = $this->dblink->$collection;
+            try {
+                $col->insert($data);
+                return('ok');
+            } catch (MongoCursorTimeoutException $e) {
+                return($e);
+            } catch (MongoCursorException $e) {
+                return($e);
+            } catch (MongoException $e) {
+                return($e);
+            }
+        }
+
+    function find_document(string $collection, $criteria = []){
+        $col = $this->dblink->$collection;
+        $cursor = $col->find($criteria);
+        return($cursor);
+    }
+
 	}
 ?>

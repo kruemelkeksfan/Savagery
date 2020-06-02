@@ -107,7 +107,7 @@ if(!empty($action))
 
     }
 	else if($action === 'init_Mongo'){
-        $result = $http->get("MongoInit.php");
+        $result = $http->changeDB();
     }
 	}
 
