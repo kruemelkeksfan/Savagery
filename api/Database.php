@@ -13,12 +13,6 @@ class Database
 		{
             define('LOG_FILE', 'log.txt');
 
-            if($mongo){
-                $this->host='mongo';
-                $this->db_name='savagery_mongo';
-                $this->db_user='user';
-                $this->password='password';
-            }
 		try
 			{
 			$this->dblink = new PDO('mysql:host=' . $this->host . ';dbname=' . $this->db_name, $this->db_user, $this->password,
