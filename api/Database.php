@@ -9,9 +9,16 @@ class Database
 	private $password = "password";
 	private $dblink;
 	
-	function __construct()
+	function __construct($mongo = false)
 		{
             define('LOG_FILE', 'log.txt');
+
+            if($mongo){
+                $this->host='mongo';
+                $this->db_name='savagery_mongo';
+                $this->db_user='user';
+                $this->password='password';
+            }
 		try
 			{
 			$this->dblink = new PDO('mysql:host=' . $this->host . ';dbname=' . $this->db_name, $this->db_user, $this->password,

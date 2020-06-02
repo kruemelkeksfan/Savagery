@@ -39,4 +39,10 @@ function get($path) {
 
     return json_decode($json_response, true);
 }
+
+    function changeDB() {
+        $this->base_url = $this->base_url . "Mongo/";
+
+        //todo: call mongo DB init
+    }
 }
