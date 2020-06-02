@@ -35,6 +35,8 @@ function get($path) {
 
     $json_response = curl_exec($curl);
 
+    var_dump($json_response);
+
     curl_close($curl);
 
     return json_decode($json_response, true);

@@ -11,7 +11,7 @@ class MongoDatabase
 	
 	function __construct()
 		{
-        $db = new MongoClient();
+        $db = new MongoClient("mongodb://user:password@localhost:27017");
         $this->dblink = $db->savagery_mongo;
 
 		}

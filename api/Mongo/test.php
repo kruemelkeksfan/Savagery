@@ -9,6 +9,10 @@ include_once '../MongoDB.php';
 
 $db = new MongoDatabase();
 
+if (empty($db)){
+    echo json_encode('db empty');
+}
+
 $added = $db->add_document('test_col', array('test'=>'Hello World!'));
 $data = $db->find_document('test_col');
 
