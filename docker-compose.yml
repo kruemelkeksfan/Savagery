@@ -13,6 +13,16 @@ services:
       - MYSQL_DATABASE=Savagery
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
 
+   mongo:
+     image: mongo
+     container_name: mongo
+     environment:
+       MONGO_INITDB_ROOT_USERNAME: user
+       MONGO_INITDB_ROOT_PASSWORD: password
+       MONGO_INITDB_DATABASE: imse_mongo_db
+     ports:
+       - "27017:27017"
+
 
   api:
     #this tells docker where to look for the Dockerfile to build the image
