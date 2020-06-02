@@ -106,6 +106,9 @@ if(!empty($action))
             array('buildingtype'=>'Tavern', 'username'=>'xxxNOOBxxx'));*/
 
     }
+	else if($action === 'init_Mongo'){
+        $result = $http->get("MongoInit.php");
+    }
 	}
 
 $page->print_header();
@@ -133,7 +136,12 @@ $loginform->print();
 
 //DB-Fill Button
 $dbButton = new Form('login.php?action=init_DB' . (!empty($previouspage) ? ('&page=' . $previouspage) : ''), 'post', $page);
-$dbButton->add_submit('Initialize DB');
+$dbButton->add_submit('Initialize and fill DB');
+$dbButton->print();
+
+//Mongo-Fill Button
+$dbButton = new Form('login.php?action=init_Mongo' . (!empty($previouspage) ? ('&page=' . $previouspage) : ''), 'post', $page);
+$dbButton->add_submit('Initialize and migrate Data to Mongo');
 $dbButton->print();
 
 // Cookie Notice
