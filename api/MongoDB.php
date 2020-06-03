@@ -36,7 +36,11 @@ class MongoDatabase
             }*/
             $bulk = new MongoDB\Driver\BulkWrite;
             $bulk->insert($data);
-            $this->dblink->executeBulkWrite($this->db_name.$collection, $bulk);
+            try {
+                $this->dblink->executeBulkWrite($this->db_name . $collection, $bulk);
+            } catch (Exception $e) {
+                echo($e);
+            }
 
         }
 
