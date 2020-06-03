@@ -3,17 +3,17 @@ include('ErrorHandlerAPI.php');
 
 class MongoDatabase
 	{
-	private $host = "sql";
-	private $db_name = "Savagery";
-	private $db_user = "Savagery";
+	private $host = "mongo";
+	private $db_name = "savagery_mongo.";
+	private $db_user = "user";
 	private $password = "password";
 	private $dblink;
 	
 	function __construct()
 		{
-        $db = new MongoClient("mongodb://user:password@localhost:27017");
-        $this->dblink = $db->savagery_mongo;
-
+        /*$db = new MongoClient("mongodb://user:password@localhost:27017");
+        $this->dblink = $db->savagery_mongo;*/
+        $this->dblink = new MongoDB\Driver\Manager("mongodb://".$this->db_user.":".$this->password."@localhost:27017");
 		}
 		
 	function new_collection(string $name)
@@ -23,7 +23,7 @@ class MongoDatabase
 
 	function add_document(string $collection, $data)
         {
-            $col = $this->dblink->$collection;
+            /*$col = $this->dblink->$collection;
             try {
                 $col->insert($data);
                 return('ok');
@@ -33,12 +33,22 @@ class MongoDatabase
                 return($e);
             } catch (MongoException $e) {
                 return($e);
-            }
+            }*/
+            $bulk = new MongoDB\Driver\BulkWrite;
+            $bulk->insert($data);
+            $this->dblink->executeBulkWrite($this->db_name.$collection, $bulk);
+
         }
 
     function find_document(string $collection, $criteria = []){
-        $col = $this->dblink->$collection;
-        $cursor = $col->find($criteria);
+        /*$col = $this->dblink->$collection;
+        $cursor = $col->find($criteria);*/
+        $query = new MongoDB\Driver\Query($criteria, []);
+        try {
+            $cursor = $this->dblink->executeQuery($this->db_name . $collection, $query);
+        } catch (\MongoDB\Driver\Exception\Exception $e) {
+            return($e);
+        }
         return($cursor);
     }
 
