@@ -16,8 +16,9 @@ if (empty($db)){
 $db->add_document('test_col', array('test'=>'Hello World!', 'town'=>array('name'=>'my_town',
     'armies'=>array(array('armyname'=>'cattroopers', 'strength'=>5),array('armyname'=>'catguard', 'strength'=>15))), 'username'=>'stupidcat'));
 
-$db->add_document('test_col', array('cat'=>'miau'));
+$db->add_field('test_col', array('test'=>'Hello World!'), array('town.armies'=>array('armyname'=>'catguard', 'strength'=>15)));
+$db->update_field('test_col', array('test'=>'Hello World!'), array('test'=>'Goodbye World!'));
 
-$data = $db->find_document('test_col', [], array('projection'=>array('_id'=>0, 'cat'=>1))); //['test'=>'Hello World!'], $options = array('projection'=>array('_id'=>0, 'town.armies'=>1)));
+$data = $db->find_document('test_col'); //['test'=>'Hello World!'], $options = array('projection'=>array('_id'=>0, 'town.armies'=>1)));
 
 echo json_encode(array('data'=>$data));
