@@ -23,17 +23,6 @@ class MongoDatabase
 
 	function add_document(string $collection, $data)
         {
-            /*$col = $this->dblink->$collection;
-            try {
-                $col->insert($data);
-                return('ok');
-            } catch (MongoCursorTimeoutException $e) {
-                return($e);
-            } catch (MongoCursorException $e) {
-                return($e);
-            } catch (MongoException $e) {
-                return($e);
-            }*/
             $bulk = new MongoDB\Driver\BulkWrite;
             $bulk->insert($data);
             try {
@@ -44,9 +33,31 @@ class MongoDatabase
 
         }
 
+    function add_field(string $collection, $filter, $data) {
+        $bulk = new MongoDB\Driver\BulkWrite;
+        $bulk->update($filter, array('$set'=>$data, array('multi'=>true)));
+        try {
+            $this->dblink->executeBulkWrite($this->db_name . $collection, $bulk);
+        } catch (Exception $e) {
+            return($e);
+        }
+    }
+
+    function update_field(string $collection, $filter, $data) {
+        $bulk = new MongoDB\Driver\BulkWrite;
+        $bulk->update($filter, array('$set'=>$data));
+        try {
+            $this->dblink->executeBulkWrite($this->db_name . $collection, $bulk);
+        } catch (Exception $e) {
+            return($e);
+        }
+    }
+
+    function delete_field(string $collection, $filter, $data) {
+
+    }
+
     function find_document(string $collection, $criteria = [], $options = []){
-        /*$col = $this->dblink->$collection;
-        $cursor = $col->find($criteria);*/
         $query = new MongoDB\Driver\Query($criteria, $options);
         try {
             $cursor = $this->dblink->executeQuery($this->db_name . $collection, $query);
