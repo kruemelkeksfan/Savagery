@@ -1,6 +1,6 @@
 <?php
 
-include('MOGUL/DBFiller.php');
+include_once('MOGUL/DBFiller.php');
 // Setup AutoLoader
 include_once('MOGUL/AutoLoader.php');
 new AutoLoader();

@@ -1,5 +1,5 @@
 <?php
-include('ErrorHandlerAPI.php');
+include_once('ErrorHandlerAPI.php');
 
 class MongoDatabase
 	{
