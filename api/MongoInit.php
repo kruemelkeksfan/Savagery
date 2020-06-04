@@ -15,7 +15,7 @@ foreach($settingdata as $setting)
 	$settings[$setting['settingname']] =  $setting['value'];
 }
 
-(new MongoDatabase())->add_document('Balancesettings', $settings);
+(new MongoDatabase())->add_document('BalanceSettings', $settings);
 //Define Buildingtypes
 /*$database->add_document('Buildingtypes',
 	array('Blacksmith' => array('Effect' => 'Increases the Defense of all Armies of this Town.', 'Cost' => '10', 'Maxworkers' => '6'),
