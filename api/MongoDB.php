@@ -53,8 +53,24 @@ class MongoDatabase
         }
     }
 
-    function delete_field(string $collection, $filter, $data) {
+    function add_to_array(string $collection, $filter, $data) {
+        $bulk = new MongoDB\Driver\BulkWrite;
+        $bulk->update($filter, array('$push'=>$data));
+        try {
+            $this->dblink->executeBulkWrite($this->db_name . $collection, $bulk);
+        } catch (Exception $e) {
+            return($e);
+        }
+    }
 
+    function delete_field(string $collection, $filter, $data) {
+        $bulk = new MongoDB\Driver\BulkWrite;
+        $bulk->update($filter, array('$unset'=>$data));
+        try {
+            $this->dblink->executeBulkWrite($this->db_name . $collection, $bulk);
+        } catch (Exception $e) {
+            return($e);
+        }
     }
 
     function find_document(string $collection, $criteria = [], $options = []){
