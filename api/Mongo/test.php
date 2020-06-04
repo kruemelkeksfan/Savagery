@@ -16,8 +16,9 @@ if (empty($db)){
 $db->add_document('test_col', array('test'=>'Hello World!', 'town'=>array('name'=>'my_town',
     'armies'=>array(array('armyname'=>'cattroopers', 'strength'=>5),array('armyname'=>'catguard', 'strength'=>15))), 'username'=>'stupidcat'));
 
-$db->add_to_array('test_col', array('test'=>'Hello World!'), array('town.armies'=>array('armyname'=>'catguard', 'strength'=>15)));
-$db->add_field('test_col', array('test'=>'Hello World!'), array('password'=>'pwd'));
+$db->update_field('test_col', array('test'=>'Hello World!'), array('town.armies.$name.strength'=>100), array('arrayFilters'=>array('name'=>array('armyname'=>'cattroopers'))));
+$db->add_to_array('test_col', array('test'=>'Hello World!'), array('town.armies'=>array('armyname'=>'catbattallion', 'strength'=>150)));
+$db->add_field('test_col', array('test'=>'Hello World!'), array('town.password'=>'pwd'));
 $db->update_field('test_col', array('test'=>'Hello World!'), array('test'=>'Goodbye World!'));
 $db->delete_field('test_col', array('username'=>''));
 

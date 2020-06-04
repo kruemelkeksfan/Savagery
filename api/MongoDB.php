@@ -43,9 +43,9 @@ class MongoDatabase
         }
     }
 
-    function update_field(string $collection, $filter, $data) {
+    function update_field(string $collection, $filter, $data, $options = []) {
         $bulk = new MongoDB\Driver\BulkWrite;
-        $bulk->update($filter, array('$set'=>$data));
+        $bulk->update($filter, array('$set'=>$data), $options);
         try {
             $this->dblink->executeBulkWrite($this->db_name . $collection, $bulk);
         } catch (Exception $e) {
