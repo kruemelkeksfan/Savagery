@@ -13,7 +13,7 @@ class MongoDatabase
 		{
         /*$db = new MongoClient("mongodb://user:password@localhost:27017");
         $this->dblink = $db->savagery_mongo;*/
-        $this->dblink = new MongoDB\Driver\Manager("mongodb://"./*$this->db_user.":".$this->password.*/"@localhost:27017");
+        $this->dblink = new MongoDB\Driver\Manager("mongodb://"./*$this->db_user.":".$this->password."@".*/"localhost:27017");
 		}
 		
 	function new_collection(string $name)
