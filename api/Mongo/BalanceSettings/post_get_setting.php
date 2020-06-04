@@ -8,14 +8,14 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 include_once '../Database.php';
 
-$database = new Database();
+$database = new MongoDB();
 
 $data = json_decode(file_get_contents("php://input"), true);
 
 if($data['settingname'] != "") {
 
     $settingname = $data['settingname'];
-    $value = $database->query('SELECT value FROM BalanceSettings WHERE settingname=:0;', array($settingname))[0]['value'];
+    $value = $database->find_document('Balancesettings', [], array('projection'=>array('_id'=>0, $settingname=>1)));
 
     echo json_encode($value); //returns not as array, but plain value!!S
 }

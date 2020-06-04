@@ -6,11 +6,6 @@ include_once 'MongoDB.php';
 // Database Connection
 $database = new MongoDB();
 
-// Init Collections
-$database->new_collection('Balancesettings');
-$database->new_collection('Buildingtypes');
-$database->new_collection('Playerdata');
-
 // Define Balance Settings
 $settingdata = (new Database())->query('SELECT settingname, value FROM BalanceSettings;', array());
 
@@ -21,7 +16,6 @@ foreach($settingdata as $setting)
 }
 
 (new MongoDB())->add_document('Balancesettings', $settings);
-
 //Define Buildingtypes
 /*$database->add_document('Buildingtypes',
 	array('Blacksmith' => array('Effect' => 'Increases the Defense of all Armies of this Town.', 'Cost' => '10', 'Maxworkers' => '6'),
