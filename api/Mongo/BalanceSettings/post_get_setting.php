@@ -15,7 +15,7 @@ $data = json_decode(file_get_contents("php://input"), true);
 if($data['settingname'] != "") {
 
     $settingname = $data['settingname'];
-    $value = $database->find_document('Balancesettings', [], array('projection'=>array('_id'=>0, $settingname=>1)));
+    $value = $database->find_document('BalanceSettings', [], array('projection'=>array('_id'=>0, $settingname=>1)));
 
     echo json_encode($value); //returns not as array, but plain value!!S
 }
