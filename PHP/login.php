@@ -109,7 +109,6 @@ if(!empty($action))
 	else if($action === 'init_Mongo'){
         $result = $http->changeDB();
         var_dump($result);
-		$http->get("MongoInit.php");
 		var_dump($http->post("BalanceSettings/post_get_setting.php", array('MapSize')));
     }
 	}

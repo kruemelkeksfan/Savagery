@@ -43,6 +43,8 @@ function get($path) {
 }
 
     function changeDB() {
+        $this->get('MongoInit.php');
+
         $this->base_url = $this->base_url . "Mongo/";
 
         $response = $this->get('test.php');
