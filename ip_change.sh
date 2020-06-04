@@ -1,7 +1,9 @@
 #!/bin/sh
 
-ip = $(hostname -i | awk '{print $1}')
+my_ip=`hostname -i`
 
-sed -i -e "s/localhost/$ip/g" PHP/MOGUL/HttpHelper.php
+echo $my_ip
 
-sed -i -e "s/localhost/$ip/g" api/MongoDB.php
+sed -i -e "s/localhost/$my_ip/g" PHP/MOGUL/HttpHelper.php
+
+sed -i -e "s/localhost/$my_ip/g" api/MongoDB.php
