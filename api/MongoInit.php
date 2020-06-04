@@ -1,6 +1,7 @@
 <?php
 
 include_once 'Database.php';
+include_once 'MongoDB.php';
 
 // Database Connection
 $database = new MongoDB();
@@ -10,11 +11,17 @@ $database->new_collection('Balancesettings');
 $database->new_collection('Buildingtypes');
 $database->new_collection('Playerdata');
 
-//Helper for API calls
-$http = new HttpHelper();
-
 // Define Balance Settings
-$http->get('Migration/get_migrate_settings.php');
+$settingdata = (new Database())->query('SELECT settingname, value FROM BalanceSettings;', array());
+
+$settings = array();
+foreach($settingdata as $setting)
+{
+	$settings[$setting['settingname']] =  $setting['value'];
+}
+
+(new MongoDB())->add_document('Balancesettings', $settings);
+
 //Define Buildingtypes
 /*$database->add_document('Buildingtypes',
 	array('Blacksmith' => array('Effect' => 'Increases the Defense of all Armies of this Town.', 'Cost' => '10', 'Maxworkers' => '6'),
