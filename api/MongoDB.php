@@ -53,7 +53,7 @@ class MongoDatabase
         } catch (\MongoDB\Driver\Exception\Exception $e) {
             return($e);
         }
-        return($cursor);
+        return($cursor->toArray());
     }
 
 	}
