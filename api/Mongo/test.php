@@ -20,7 +20,7 @@ $db->update_field('test_col', array('test'=>'Hello World!'), array('town.armies.
 $db->add_to_array('test_col', array('test'=>'Hello World!'), array('town.armies'=>array('armyname'=>'catbattallion', 'strength'=>150)));
 $db->add_field('test_col', array('test'=>'Hello World!'), array('town.password'=>'pwd'));
 $db->update_field('test_col', array('test'=>'Hello World!'), array('test'=>'Goodbye World!'));
-$db->delete_field('test_col', array('username'=>''));
+$db->delete_field('test_col', array('test'=>'Hello World!'), array('username'=>''));
 
 $data = $db->find_document('test_col'); //['test'=>'Hello World!'], $options = array('projection'=>array('_id'=>0, 'town.armies'=>1)));
 
