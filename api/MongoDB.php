@@ -39,15 +39,15 @@ class MongoDatabase
             try {
                 $this->dblink->executeBulkWrite($this->db_name . $collection, $bulk);
             } catch (Exception $e) {
-                echo($e);
+                return($e);
             }
 
         }
 
-    function find_document(string $collection, $criteria = []){
+    function find_document(string $collection, $criteria = [], $options = []){
         /*$col = $this->dblink->$collection;
         $cursor = $col->find($criteria);*/
-        $query = new MongoDB\Driver\Query($criteria, []);
+        $query = new MongoDB\Driver\Query($criteria, $options);
         try {
             $cursor = $this->dblink->executeQuery($this->db_name . $collection, $query);
         } catch (\MongoDB\Driver\Exception\Exception $e) {

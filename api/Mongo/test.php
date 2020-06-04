@@ -13,9 +13,11 @@ if (empty($db)){
     echo json_encode('db empty');
 }
 
-$added = $db->add_document('test_col', array('test'=>'Hello World!', 'town'=>array('name'=>'my_town',
+$db->add_document('test_col', array('test'=>'Hello World!', 'town'=>array('name'=>'my_town',
     'armies'=>array(array('armyname'=>'cattroopers', 'strength'=>5),array('armyname'=>'catguard', 'strength'=>15))), 'username'=>'stupidcat'));
 
-$data = $db->find_document('test_col');
+$db->add_document('test_col', array('cat'=>'miau'));
+
+$data = $db->find_document('test_col', [], array('projection'=>array('_id'=>0, 'cat'=>1))); //['test'=>'Hello World!'], $options = array('projection'=>array('_id'=>0, 'town.armies'=>1)));
 
 echo json_encode(array('data'=>$data));
