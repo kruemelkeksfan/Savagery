@@ -16,6 +16,6 @@ if (empty($db)){
 $db->add_document('test_col', array('test'=>'Hello World!', 'town'=>array('name'=>'my_town',
     'armies'=>array(array('armyname'=>'cattroopers', 'strength'=>5),array('armyname'=>'catguard', 'strength'=>15))), 'username'=>'stupidcat'));
 
-$data = $db->find_document('test_col', [], $options = array('projection'=>array("armies"=>1)));
+$data = $db->find_document('test_col', ['test'=>'Hello World!'], $options = array('projection'=>array('_id'=>0, 'town.armies'=>1)));
 
 echo json_encode(array('data'=>$data));
