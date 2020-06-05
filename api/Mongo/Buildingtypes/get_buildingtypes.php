@@ -6,7 +6,7 @@ include_once '../../MongoDatabase.php';
 
 $database = new MongoDatabase();
 
-$types = $database->find_document('Buildingtypes');
+$types = $database->find_document('Buildingtypes',[],['projection'=>array('_id'=>0)]);
 
 echo json_encode(
     $types
