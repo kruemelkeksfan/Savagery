@@ -28,4 +28,4 @@ $db->delete_field('test_col', array('test'=>'Goodbye World!'), array('username'=
 $data = $db->find_document('test_col');
 $data2 = $db->find_document('test_col',['test'=>'Hello World!'], $options = array('projection'=>array('_id'=>0, 'town.armies'=>1)));
 
-echo json_encode(array('data'=>$data, 'data'=>$data2, 'error'=>$error));
+echo json_encode(array('data'=>$data, 'data2'=>$data2, 'error'=>$error));
