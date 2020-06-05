@@ -31,7 +31,7 @@ foreach($buildingtypedata as $buildingtype)
 $result = $mongo->add_document('Buildingtypes', $buildingtypes);
 
 // Import Player Data
-$playerdata = $sql->query('SELECT Users.username, Users.password, Users.gold, Towns.townname, Towns.position, Towns.tax, Towns.population, FROM Users
+$playerdata = $sql->query('SELECT Users.username, Users.password, Users.gold, Towns.townname, Towns.position, Towns.tax, Towns.population FROM Users
 	INNER JOIN Towns ON Users.username = Towns.owner;', array());
 
 $players = array();
