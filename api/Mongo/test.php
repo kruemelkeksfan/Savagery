@@ -18,6 +18,7 @@ $db->add_document('test_col', array('test'=>'Hello World!', 'town'=>array('name'
 
 $db->add_document('test_col', array('cat'=>'miau'));
 
+$db->update_array_field('test_col',array('test'=>'Hello World!'), array('town.armies.$[name].strength'=>100), array('name.armyname'=>'cattroopers'));
 //$db->update_field('test_col', array('test'=>'Hello World!'), array('town.armies.$[name].strength'=>100), array('arrayFilters'=>array('name'=>array('armyname'=>'cattroopers', 'strength'=>5))));
 $db->add_to_array('test_col', array('test'=>'Hello World!'), array('town.armies'=>array('armyname'=>'catbattallion', 'strength'=>150)));
 $db->add_field('test_col', array('test'=>'Hello World!'), array('town.password'=>'pwd'));

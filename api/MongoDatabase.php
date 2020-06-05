@@ -53,6 +53,21 @@ class MongoDatabase
         }
     }
 
+    function update_array_field(string $collection, $filter, $data, $arrayFilters) {
+        $cmd = new MongoDB\Driver\Command([
+            'findAndModify'=>$collection,
+            'query'=>$filter,
+            'update'=>array('$set'=>$data),
+            'arrayFilters'=>$arrayFilters
+        ]);
+
+        try {
+            $this->dblink->executeCommand($this->db_name,$cmd);
+        } catch (Exception $e) {
+            return($e);
+        }
+    }
+
     function add_to_array(string $collection, $filter, $data) {
         $bulk = new MongoDB\Driver\BulkWrite;
         $bulk->update($filter, array('$push'=>$data));

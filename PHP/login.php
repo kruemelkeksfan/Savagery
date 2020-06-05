@@ -107,6 +107,7 @@ if(!empty($action))
 
     }
 	else if($action === 'init_Mongo'){
+	    var_dump($http->post('Armies/post_get_army_by_town.php'), array('username'=>'xxxNOOBxxx'));
         $result = $http->changeDB();
         //var_dump($result);
 		var_dump($http->get('test.php'));
