@@ -48,7 +48,7 @@ foreach($playerdata as $player)
 			array('Workers' => $building['workers'], 'Level' => $building['level'], 'Buildingtype' => $building['buildingtype']);
 	}
 	
-	$armydata = $sql->query('SELECT army_id, armyname, strength FROM Armies WHERE town = :0;', array($player['townname']));
+	$armydata = $sql->query('SELECT army_id, armyname, strength FROM Armies WHERE hometown = :0;', array($player['townname']));
 	$players[$player['username']][$player['townname']]['Armies'] = array();
 	foreach($armydata as $army)
 	{
