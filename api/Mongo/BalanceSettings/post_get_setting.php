@@ -6,9 +6,9 @@ header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 
-include_once '../Database.php';
+include_once '../MongoDatabase.php';
 
-$database = new MongoDB();
+$database = new MongoDatabase();
 
 $data = json_decode(file_get_contents("php://input"), true);
 
