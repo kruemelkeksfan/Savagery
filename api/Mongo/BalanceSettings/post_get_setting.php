@@ -19,3 +19,8 @@ if($data['settingname'] != "") {
 
     echo json_encode(1/*$value*/); //returns not as array, but plain value!!S
 }
+// TODO: Delete
+else
+{
+	echo json_encode(2);
+}

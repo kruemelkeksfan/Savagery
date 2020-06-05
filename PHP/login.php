@@ -108,9 +108,10 @@ if(!empty($action))
     }
 	else if($action === 'init_Mongo'){
         $result = $http->changeDB();
-        var_dump($result);
-		var_dump($http->post("BalanceSettings/post_get_setting.php", array('Map_Size')));
-		var_dump($http->post("BalanceSettings/post_get_setting.php", array('Range_Multiplier')));
+        //var_dump($result);
+		var_dump($http->get('test.php'));
+		var_dump($http->post('BalanceSettings/post_get_setting.php', array('Map_Size')));
+		//var_dump($http->post("BalanceSettings/post_get_setting.php", array('Range_Multiplier')));
     }
 	}
 
