@@ -6,15 +6,19 @@ header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 
-include_once '../Database.php';
-
-$database = new Database();
+include_once '../MongoDatabase.php';
 
 $data = json_decode(file_get_contents("php://input"), true);
 
 $username = $data['username'];
 
-$armies = $database->query("SELECT army_id, armyname, strength FROM Armies WHERE hometown IN 
-                           (SELECT townname FROM Towns WHERE owner = :0);", array($username));
+/*$database = new Database();
 
-echo json_encode($armies);
+$armies = $database->query("SELECT army_id, armyname, strength FROM Armies WHERE hometown IN 
+                           (SELECT townname FROM Towns WHERE owner = :0);", array($username));*/
+
+$database = new MongoDatabase();
+
+$armies = $database->find_document('Userdata', array('username'=>$username), array('projection'=>array('_id'=>0, 'town.armies'=>1)));
+
+echo json_encode($armies[0]['town']['armies']);

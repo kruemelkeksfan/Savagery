@@ -6,7 +6,7 @@ header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 
-include_once '../Database.php';
+include_once '../MongoDatabase.php';
 
 $database = new Database();
 
@@ -18,7 +18,7 @@ if($data['armyname'] != "") {
     $strength = $data['strength'];
     $username = $data['username'];
 
-    $townname = $database->query('SELECT townname FROM Towns WHERE owner = :0', array($username))[0]['townname'];
+    /*$townname = $database->query('SELECT townname FROM Towns WHERE owner = :0', array($username))[0]['townname'];
 
     if ($database->query('INSERT INTO Armies (armyname, strength, hometown) VALUES (:0, :1, :2);',
         array($armyname, $strength, $townname))) {
@@ -30,7 +30,12 @@ if($data['armyname'] != "") {
         echo json_encode(
             array('message' => 'Army Not Created', 'success' => false)
         );
-    }
+    }*/
+
+    $database = new MongoDatabase();
+
+    $database->add_to_array('Userdata', array('username'=>$username), array('armyname'=>$armyname, 'strength'=>$strength));
+
 }else {
     echo json_encode(
         $data
