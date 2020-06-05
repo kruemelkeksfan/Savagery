@@ -2,12 +2,12 @@
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 
-include_once '../Database.php';
+include_once '../../MongoDatabase.php';
 
-$database = new Database();
+$database = new MongoDatabase();
 
-$types = $database->query('SELECT buildingtypename, effect, maxworkers, cost FROM Buildingtypes;');
+$types = $database->find_document('Buildingtypes');
 
 echo json_encode(
-    array($types)
+    $types
 );
