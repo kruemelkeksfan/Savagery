@@ -16,20 +16,20 @@ foreach($settingdata as $setting)
 	$settings[$setting['settingname']] = $setting['value'];
 }
 
-$result = $mongo->add_document('BalanceSettings', $settings);
+$result['settings'] = $mongo->add_document('BalanceSettings', $settings);
 
 //Import Buildingtypes
 $buildingtypedata = $sql->query('SELECT buildingtypename, effect, cost, maxworkers FROM Buildingtypes;', array());
 
-$buildingtypes = array();
+/*$buildingtypes = array();
 foreach($buildingtypedata as $buildingtype)
 {
 	$buildingtypes[$buildingtype['buildingtypename']] =
 		array('Effect' => $buildingtype['effect'], 'Cost' => $buildingtype['cost'], 'Maxworkers' => $buildingtype['maxworkers']);
-}
+}*/
 
-$result = $mongo->add_document('Buildingtypes', $buildingtypes);
-
+$result['buildingtypes'] = $mongo->add_document('Buildingtypes', $buildingtypedata);
+/*
 // Import Player Data
 $playerdata = $sql->query('SELECT Users.username, Users.password, Users.gold, Towns.townname, Towns.position, Towns.tax, Towns.population FROM Users
 	INNER JOIN Towns ON Users.username = Towns.owner;', array());
@@ -67,9 +67,7 @@ foreach($playerdata as $player)
 	{
 		$players[$player['username']][$player['townname']]['Treaties'][$treaty['user2']] = $treaty['expiry_time'];
 	}
-}
-
-$result = $mongo->add_document('BalanceSettings', $settings);
+}*/
 
 /*if($success && $fillBalaceSettings && $fillTimetable && $peaceTreatySuccess){
     echo json_encode(
