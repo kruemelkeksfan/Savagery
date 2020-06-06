@@ -109,13 +109,13 @@ if(!empty($action))
 	else if($action === 'init_Mongo'){
 	    //var_dump($http->post('Armies/post_get_army_by_town.php', array('username'=>'xxxNOOBxxx')));
         var_dump($http->post('BalanceSettings/post_get_setting.php', array('settingname'=>'Map_Size')));
-        var_dump($http->get('Buildingtypes/get_buildingtypes.php'));
+        //var_dump($http->get('Buildingtypes/get_buildingtypes.php'));
         $result = $http->changeDB();
         //var_dump($result);
 		//var_dump($http->get('test.php'));
 		var_dump($http->post('BalanceSettings/post_get_setting.php', array('settingname'=>'Map_Size')));
-		var_dump($http->post("BalanceSettings/post_get_setting.php", array('settingname'=>'Range_Multiplier')));
-        var_dump($http->get('Buildingtypes/get_buildingtypes.php'));
+		//var_dump($http->post("BalanceSettings/post_get_setting.php", array('settingname'=>'Range_Multiplier')));
+        //var_dump($http->get('Buildingtypes/get_buildingtypes.php'));
     }
 	}
 
