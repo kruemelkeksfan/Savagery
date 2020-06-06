@@ -18,5 +18,5 @@ if ($data['username'] != "") {
 
     $buildings = $database->find_document('Userdata', array('username'=>$username), array('projection'=>array('_id'=>0, 'buildings'=>1)));
 
-    echo json_encode($buildings/*[0]['buildings']*/);
+    echo json_encode($buildings[0]['buildings']);
 }

@@ -6,7 +6,7 @@ header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 
-include_once '../MongoDatabase.php';
+include_once '../../MongoDatabase.php';
 
 $data = json_decode(file_get_contents("php://input"), true);
 
@@ -16,4 +16,4 @@ $database = new MongoDatabase();
 
 $armies = $database->find_document('Userdata', array('username'=>$username), array('projection'=>array('_id'=>0, 'armies'=>1)));
 
-echo json_encode($armies/*[0]['armies']*/);
+echo json_encode($armies[0]['armies']);
