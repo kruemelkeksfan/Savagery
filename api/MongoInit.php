@@ -69,6 +69,23 @@ foreach($playerdata as $player)
 	}
 }*/
 
+// Import Player Data
+$playerdata = $sql->query('SELECT Users.username, Users.password, Users.gold, Towns.townname, Towns.position, Towns.tax, Towns.population FROM Users
+	INNER JOIN Towns ON Users.username = Towns.owner;', array());
+
+foreach($playerdata as $player) {
+    $buildings = $sql->query('SELECT building_id, buildingtype, level, workers FROM Buildings WHERE town = :0;', array($player['townname']));
+    $armies = $sql->query('SELECT army_id, armyname, strength FROM Armies WHERE hometown = :0;', array($player['townname']));
+    $treaties = $sql->query('SELECT user2, expiry_time FROM PeaceTreaty WHERE user1 = :0;', array($player['username']));
+    $player['armies'] = $armies;
+    $player['buildings'] = $buildings;
+    $player['treaties'] = $treaties;
+
+    $result['userdata'] = $mongo->add_document('Userdata', $player);
+}
+
+echo json_encode($result);
+
 /*if($success && $fillBalaceSettings && $fillTimetable && $peaceTreatySuccess){
     echo json_encode(
         array('message' => 'Tables Created Successfully')
