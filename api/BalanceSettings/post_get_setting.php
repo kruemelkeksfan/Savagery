@@ -17,5 +17,5 @@ if($data['settingname'] != "") {
     $settingname = $data['settingname'];
     $value = $database->query('SELECT value FROM BalanceSettings WHERE settingname=:0;', array($settingname))[0]['value'];
 
-    echo json_encode($value); //returns not as array, but plain value!!S
+    echo json_encode($value[0]['value']); //returns not as array, but plain value!!S
 }
