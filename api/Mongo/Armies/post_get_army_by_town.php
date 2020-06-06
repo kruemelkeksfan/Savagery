@@ -21,4 +21,4 @@ $database = new MongoDatabase();
 
 $armies = $database->find_document('Userdata', array('username'=>$username), array('projection'=>array('_id'=>0, 'town.armies'=>1)));
 
-echo json_encode($armies[0]['town']['armies']);
+echo json_encode($armies[0]['armies']);

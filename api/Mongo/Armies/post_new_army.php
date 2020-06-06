@@ -33,8 +33,8 @@ if($data['armyname'] != "") {
     }*/
 
     $database = new MongoDatabase();
-
-    $database->add_to_array('Userdata', array('username'=>$username), array('armyname'=>$armyname, 'strength'=>$strength));
+//ToDo: army_id
+    $database->add_to_array('Userdata', array('username'=>$username), array('armies'=>array('armyname'=>$armyname, 'strength'=>$strength)));
 
 }else {
     echo json_encode(
