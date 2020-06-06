@@ -4,9 +4,9 @@ header('Content-Type: application/json');
 
 include_once '../Database.php';
 
-$database = new Database();
+$database = new MongoDatabase();
 
-$users = $database->query('SELECT * FROM Users;');
+$users = $database->find_document('Userdata');
 
 echo json_encode(
     array($users)
