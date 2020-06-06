@@ -6,9 +6,7 @@ header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 
-include_once '../Database.php';
-
-$database = new Database();
+include_once '../../MongoDatabase.php';
 
 $data = json_decode(file_get_contents("php://input"), true);
 
@@ -16,11 +14,9 @@ if ($data['username'] != "") {
 
     $username = $data['username'];
 
-    /*$buildings = $database->query('SELECT Buildings.building_id, Buildings.buildingtype, Buildings.level, Buildings.workers FROM Buildings
-		INNER JOIN Towns ON Buildings.town=Towns.townname WHERE Town.owner=:0;',
-		array($username));*/
-    $buildings = $database->query('SELECT building_id, buildingtype, level, workers FROM Buildings WHERE town IN (SELECT townname FROM Towns WHERE owner = :0)',
-        array($username));
+    $database = new MongoDatabase();
 
-    echo json_encode($buildings);
+    $buildings = $database->find_document('Userdata', array('username'=>$username), array('projection'=>array('_id'=>0, 'buildings'=>1)));
+
+    echo json_encode($buildings/*[0]['buildings']*/);
 }
