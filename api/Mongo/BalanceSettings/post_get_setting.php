@@ -17,6 +17,5 @@ if($data['settingname'] != "") {
     $settingname = $data['settingname'];
     $value = $database->find_document('BalanceSettings', [], array('projection'=>array('_id'=>0, $settingname=>1)));
 
-    var_dump(get_class($value[0]));
-    echo json_encode($value[0]->$settingname);
+    echo json_encode(var_dump($value[0]->$settingname));
 }
