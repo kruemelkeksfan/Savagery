@@ -2,7 +2,7 @@
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 
-include_once '../Database.php';
+include_once '../../Database.php';
 
 $database = new MongoDatabase();
 
