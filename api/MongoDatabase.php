@@ -95,6 +95,7 @@ class MongoDatabase
         } catch (\MongoDB\Driver\Exception\Exception $e) {
             return($e);
         }
+        $cursor->setTypeMap(['root' => 'array']);
         return($cursor->toArray());
     }
 
