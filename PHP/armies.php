@@ -18,9 +18,9 @@ $armyname = InputHelper::get_post_string('armyname', '');
 
 $army_strength = $http->post('Armies/post_get_sum_soldiers.php', array('username' => $_SESSION['username']))[0]['sum(strength'];
 $position = $http->post('Towns/post_get_town_values.php', array('username' => $_SESSION['username']))[0]['position'];
-$mapsize = $http->post('BalanceSettings/post_get_setting.php', array('value'=>'Map_Size'))[0];
+$mapsize = $http->post('BalanceSettings/post_get_setting.php', array('value'=>'Map_Size'));
 
-$range_mult = $http->post('BalanceSettings/post_get_setting.php', array('value'=>'Range_Multiplier'))[0];
+$range_mult = $http->post('BalanceSettings/post_get_setting.php', array('value'=>'Range_Multiplier'));
 $range = 10 * $range_mult;
 $min = max(0,$position-$range);
 $max = min($mapsize, $position+$range);
@@ -143,7 +143,7 @@ foreach ($armies as &$row){
     $attackform = new Form('armies.php?action=attack&army=' . $row['army_id'],
         'post', null, null, array('formcolumn width300px', 'formcolumn width100px'), 'form width400px');
 
-    $range_mult = $http->post('BalanceSettings/post_get_setting.php', array('value'=>'Range_Multiplier'))[0];
+    $range_mult = $http->post('BalanceSettings/post_get_setting.php', array('value'=>'Range_Multiplier'));
     $range = 50;//$row['strength'] * $range_mult;
     $min = max(0,$position-$range);
     $max = min($mapsize, $position+$range);
