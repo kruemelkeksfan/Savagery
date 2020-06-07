@@ -18,24 +18,13 @@ if($data['armyname'] != "") {
     $strength = $data['strength'];
     $username = $data['username'];
 
-    /*$townname = $database->query('SELECT townname FROM Towns WHERE owner = :0', array($username))[0]['townname'];
-
-    if ($database->query('INSERT INTO Armies (armyname, strength, hometown) VALUES (:0, :1, :2);',
-        array($armyname, $strength, $townname))) {
-
-        echo json_encode(
-            array('message' => 'Army Created', 'success' => true)
-        );
-    } else {
-        echo json_encode(
-            array('message' => 'Army Not Created', 'success' => false)
-        );
-    }*/
-
     $database = new MongoDatabase();
-//ToDo: army_id
+
+    $id = $database->aggregation('Userdata', array('$match'=>array('username'=>$username), array('$project'=>array('_id'=>0, 'count'=>array('$size'=>'$armies')))));
+
     $database->add_to_array('Userdata', array('username'=>$username), array('armies'=>array('armyname'=>$armyname, 'strength'=>$strength)));
 
+    echo json_encode($id);
 }else {
     echo json_encode(
         $data

@@ -113,8 +113,9 @@ if(!empty($action))
         $result = $http->changeDB();
         //var_dump($result);
 		//var_dump($http->get('test.php'));
-        var_dump($http->post('Armies/post_get_army_by_town.php', array('username'=>'spicyRamen')));
-        var_dump($http->post('Buildings/post_get_building_values.php', array('username'=>'currygom')));
+        var_dump($http->post('Armies/post_new_army.php', array('username'=>'currygom')));
+        //var_dump($http->post('Armies/post_get_army_by_town.php', array('username'=>'spicyRamen')));
+        //var_dump($http->post('Buildings/post_get_building_values.php', array('username'=>'currygom')));
 		//var_dump($http->post('BalanceSettings/post_get_setting.php', array('settingname'=>'Map_Size')));
 		//var_dump($http->post("BalanceSettings/post_get_setting.php", array('settingname'=>'Range_Multiplier')));
         //var_dump($http->get('Buildingtypes/get_buildingtypes.php'));
