@@ -55,10 +55,17 @@ class MongoDatabase
 
     function update_array_field(string $collection, $filter, $data, $arrayFilters) {
         $cmd = new MongoDB\Driver\Command([
-            'findAndModify'=>$collection,
+            /*'findAndModify'=>$collection,
             'query'=>$filter,
             'update'=>array('$set'=>$data),
-            'arrayFilters'=>$arrayFilters
+            'arrayFilters'=>$arrayFilters*/
+
+            'update'=>$collection,
+            'updates'=>array(
+                'q'=>$filter,
+                'u'=>array('$set'=>$data),
+                'arrayFilters'=>$arrayFilters
+            )
         ]);
 
         try {
@@ -71,7 +78,8 @@ class MongoDatabase
     function aggregation(string $collection, $pipe) {
         $cmd = new MongoDB\Driver\Command([
             'aggregate'=>$collection,
-            'pipeline'=>$pipe
+            'pipeline'=>$pipe,
+            'cursor'=>[]
         ]);
 
         try {
