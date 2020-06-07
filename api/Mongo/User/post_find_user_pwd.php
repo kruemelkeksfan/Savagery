@@ -17,7 +17,8 @@ if($data['username'] != "") {
     $username = $data['username'];
     $password = $data['password'];
 
-    $userdata = $database->query('SELECT password FROM Users WHERE username=:0;', array($username));
+    // $userdata = $database->query('SELECT password FROM Users WHERE username=:0;', array($username));
+	$userdata = $database->find_document('Players', array('username' => $username), array('projection'=>array('_id'=>0, 'password'=>1)));
 
     if(count($userdata) > 0 && password_verify($password, $userdata[0]['password'])){
         echo json_encode(
