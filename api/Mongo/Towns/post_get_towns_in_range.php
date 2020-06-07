@@ -6,9 +6,9 @@ header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 
-include_once '../Database.php';
+include_once '../../MongoDatabase.php';
 
-$database = new Database();
+$database = new MongoDatabase();
 
 $data = json_decode(file_get_contents("php://input"), true);
 
@@ -17,7 +17,7 @@ if($data['max'] != "") {
     $max = $data['max'];
     $min = $data['min'];
 
-    $targets = $database->query('SELECT townname, owner FROM Towns WHERE position <= :0 AND position >= :1;', array($max, $min));
+    $targets = $database->find_document('Userdata', array('$and'=>array(['position'=>array('$gte'=>$min)], ['position'=>array('$lte'=>$max)])));
 
-    echo json_encode($targets);
+    echo json_encode($targets); //check if works!!
 }
