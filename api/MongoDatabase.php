@@ -75,7 +75,10 @@ class MongoDatabase
         ]);
 
         try {
-            $this->dblink->executeCommand($this->db_name,$cmd);
+            $cursor = $this->dblink->executeCommand($this->db_name,$cmd);
+
+            $cursor->setTypeMap(['root' => 'array']);
+            return($cursor->toArray());
         } catch (Exception $e) {
             return($e);
         }
