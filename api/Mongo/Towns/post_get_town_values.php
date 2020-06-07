@@ -6,9 +6,9 @@ header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 
-include_once '../Database.php';
+include_once '../../MongoDatabase.php';
 
-$database = new Database();
+$database = new MongoDatabase();
 
 $data = json_decode(file_get_contents("php://input"), true);
 
@@ -16,7 +16,8 @@ if($data['username'] != "") {
 
     $username = $data['username'];
 
-    $town_data = $database->query("SELECT * FROM Towns WHERE owner = :0;", array($username));
+    $town_data = $database->find_document('Userdata',array('username'=>$username),
+        array('$projection'=>array('$_id'=>0, 'position'=>1, 'tax'=>1, 'population'=>1, 'townname'=>1)));
 
     echo json_encode($town_data);
 }
