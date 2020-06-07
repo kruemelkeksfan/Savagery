@@ -6,9 +6,9 @@ header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 
-include_once '../Database.php';
+include_once '../../MongoDatabase.php';
 
-$database = new Database();
+$database = new MongoDatabase();
 
 $data = json_decode(file_get_contents("php://input"), true);
 
@@ -17,9 +17,10 @@ if($data['username'] != "") {
     $username = $data['username'];
     $population = $data['population'];
 
-    $database->query("UPDATE Towns SET population = :1 WHERE owner = :0;", array($username, $population));
+    $database->update_field('Userdata',array('username'=>$username), array('$set'=>array('population'=>$population)));
 
-    $new_pop = $database->query("SELECT population FROM Towns WHERE owner = :0", array($username));
+    $new_pop = $database->find_document('Userdata',array('username'=>$username),array('$projection'=>array('$_id'=>0, 'population'=>1)));
+
 
     echo json_encode($new_pop[0]);
 
