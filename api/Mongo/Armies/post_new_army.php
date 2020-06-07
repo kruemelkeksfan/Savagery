@@ -18,7 +18,7 @@ if($data['armyname'] != "") {
 
     $database = new MongoDatabase();
 
-    $id = $database->aggregation('Userdata', array('$match'=>array('username'=>$username), array('$project'=>array('_id'=>0, 'count'=>array('$size'=>'$armies')))));
+    $id = $database->aggregation('Userdata', array('$match'=>array('username'=>$username), array('$project'=>array(/*'_id'=>0,*/ 'count'=>array('$size'=>'$armies')))));
 
     $database->add_to_array('Userdata', array('username'=>$username), array('armies'=>array('armyname'=>$armyname, 'strength'=>$strength)));
 

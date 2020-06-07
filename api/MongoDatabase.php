@@ -79,15 +79,17 @@ class MongoDatabase
         $cmd = new MongoDB\Driver\Command([
             'aggregate'=>$collection,
             'pipeline'=>$pipe,
-            'cursor'=>[]
+            'cursor'=>'{}'
         ]);
 
         try {
-            $cursor = $this->dblink->executeCommand($this->db_name,$cmd);
+            $cursor = $this->dblink->executeReadCommand($this->db_name,$cmd);
 
             $cursor->setTypeMap(['root' => 'array']);
             return($cursor->toArray());
         } catch (Exception $e) {
+            return($e);
+        } catch (\MongoDB\Driver\Exception\Exception $e) {
             return($e);
         }
     }
