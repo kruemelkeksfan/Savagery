@@ -6,9 +6,9 @@ header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 
-include_once '../Database.php';
+include_once '../../MongoDatabase.php';
 
-$database = new Database();
+$database = new MongoDatabase();
 
 $data = json_decode(file_get_contents("php://input"), true);
 
@@ -18,22 +18,17 @@ if($data['username'] != "") {
     $password = $data['password'];
 
     if(empty($data['gold'])) {
-        $gold = $database->query('SELECT value FROM BalanceSettings WHERE settingname=:0;', array('Start_Gold'))[0]['value'];
+        $gold = $database->find_document('BalanceSettings', [], array('projection'=>array('_id'=>0, 'Start_Gold'=>1)));[0]['Start_Gold'];
     } else {
         $gold = $data['gold'];
     }
 
-    if ($database->query('INSERT INTO Users (username, password, last_active, gold) VALUES (:0, :1, :2, :3);',
-        array($username, $password, time(), $gold))) {
+    $result = $database->add_document('userdata', array('username'=>$username, 'password'=>$password, 'gold'=>$gold));
 
         echo json_encode(
-            array('message' => 'User Created', 'success' => true)
+            array($result)
         );
-    } else {
-        echo json_encode(
-            array('message' => 'User Not Created', 'success' => false)
-        );
-    }
+
 }else {
     echo json_encode(
         $data
