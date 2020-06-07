@@ -6,9 +6,9 @@ header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 
-include_once '../Database.php';
+include_once '../../MongoDatabase.php';
 
-$database = new Database();
+$database = new MongoDatabase();
 
 $data = json_decode(file_get_contents("php://input"), true);
 
@@ -18,7 +18,7 @@ if($data['username'] != "") {
     $password = $data['password'];
 
     // $userdata = $database->query('SELECT password FROM Users WHERE username=:0;', array($username));
-	$userdata = $database->find_document('Players', array('username' => $username), array('projection'=>array('_id'=>0, 'password'=>1)));
+	$userdata = $database->find_document('Userdata', array('username' => $username), array('projection'=>array('_id'=>0, 'password'=>1)));
 
     if(count($userdata) > 0 && password_verify($password, $userdata[0]['password'])){
         echo json_encode(
