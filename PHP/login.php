@@ -112,7 +112,7 @@ if(!empty($action))
         //var_dump($http->get('Buildingtypes/get_buildingtypes.php'));
         $result = $http->changeDB();
         //var_dump($result);
-		//var_dump($http->get('test.php'));
+		var_dump($http->get('test.php'));
         var_dump($http->post('Armies/post_new_army.php', array('username'=>'currygom', 'armyname'=>'xyz')));
         //var_dump($http->post('Armies/post_get_army_by_town.php', array('username'=>'spicyRamen')));
         //var_dump($http->post('Buildings/post_get_building_values.php', array('username'=>'currygom')));
