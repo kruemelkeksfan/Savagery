@@ -47,7 +47,7 @@ function get($path) {
 
         $this->base_url = $this->base_url . "Mongo/";
 
-        //$response = $this->get('test.php');
+        $response = $this->get('test.php');
 
         return($response);
     }
