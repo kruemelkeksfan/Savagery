@@ -18,12 +18,14 @@ $db->add_document('test_col', array('test'=>'Hello World!', 'town'=>array('name'
 
 $db->add_document('test_col', array('cat'=>'miau'));
 
-$error=$db->update_array_field('test_col',array('test'=>'Hello World!'), array('town.armies.$[name].strength'=>100), array('name.armyname'=>'cattroopers'));
+$error=$db->max_update('test_col', array('test'=>'Hello World!'), array('town.armies.$[name].strength'=>100), array('name.armyname'=>'cattroopers'));
+
+/*$error=$db->update_array_field('test_col',array('test'=>'Hello World!'), array('town.armies.$[name].strength'=>100), array('name.armyname'=>'cattroopers'));
 //$db->update_field('test_col', array('test'=>'Hello World!'), array('town.armies.$[name].strength'=>100), array('arrayFilters'=>array('name'=>array('armyname'=>'cattroopers', 'strength'=>5))));
 $db->add_to_array('test_col', array('test'=>'Hello World!'), array('town.armies'=>array('armyname'=>'catbattallion', 'strength'=>150)));
 $db->add_field('test_col', array('test'=>'Hello World!'), array('town.password'=>'pwd'));
 $db->update_field('test_col', array('test'=>'Hello World!'), array('test'=>'Goodbye World!'));
-$db->delete_field('test_col', array('test'=>'Goodbye World!'), array('username'=>''));
+$db->delete_field('test_col', array('test'=>'Goodbye World!'), array('username'=>''));*/
 
 $data = $db->find_document('test_col');
 $data2 = $db->find_document('test_col',['test'=>'Goodbye World!'], $options = array('projection'=>array('_id'=>0, 'town.armies'=>1)));

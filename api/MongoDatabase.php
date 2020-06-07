@@ -42,6 +42,18 @@ class MongoDatabase
             return($e);
         }
     }
+	
+	function max_update(string $collection, $filter, $data, $arrayFilters)
+        {
+            $bulk = new MongoDB\Driver\BulkWrite;
+            $bulk->update($filter, $data, $arrayFilters);
+            try {
+                $this->dblink->executeBulkWrite($this->db_name . $collection, $bulk);
+            } catch (Exception $e) {
+                return($e);
+            }
+
+        }
 
     function update_field(string $collection, $filter, $data, $options = []) {
         $bulk = new MongoDB\Driver\BulkWrite;
