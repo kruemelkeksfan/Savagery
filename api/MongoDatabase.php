@@ -74,6 +74,23 @@ class MongoDatabase
             return($e);
         }
     }
+	
+    function inc_array_field(string $collection, $filter, $data, $arrayFilters) {
+        $cmd = new MongoDB\Driver\Command([
+            'update'=>$collection,
+            'updates'=>array(
+                'q'=>$filter,
+                'u'=>array('$inc'=>$data),
+                'arrayFilters'=>$arrayFilters
+            )
+        ]);
+
+        try {
+            $this->dblink->executeCommand($this->db_name,$cmd);
+        } catch (Exception $e) {
+            return($e);
+        }
+    }
 
     function aggregation(string $collection, $pipe) {
         $cmd = new MongoDB\Driver\Command([

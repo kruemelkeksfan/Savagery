@@ -17,13 +17,19 @@ if ($data['username'] != "" && $data['building_id'] != "") {
 
     $building_id = $data['building_id'];
 
-    $database->query("UPDATE Buildings
+    /*$database->query("UPDATE Buildings
 		INNER JOIN Towns ON Buildings.town=Towns.townname
 		SET Buildings.level=Buildings.level + 1 WHERE Towns.owner=:0 AND Buildings.building_id=:1;", array($data['username'], $building_id));
 
     $level = $database->query("SELECT Buildings.level FROM Buildings
 		INNER JOIN Towns ON Buildings.town=Towns.townname
-		WHERE Towns.owner=:0 AND Buildings.building_id=:1;", array($data['username'], $building_id));
+		WHERE Towns.owner=:0 AND Buildings.building_id=:1;", array($data['username'], $building_id));*/
+	
+	// TODO: Is the Referencing of level and building_id correct?
+	$database->inc_array_field('Userdata', array('username' => $data['username']), array('level' => 1), array('building_id' => $building_id));
+	
+	$level = $database->find_document('Userdata', array('username' => $data['username'], 'buildings.building_id' => $building_id),
+		array('projection'=>array('_id'=>0, 'buildings.level'=>1)));
 
-    echo json_encode($level[0]);
+    echo json_encode($level);
 }

@@ -16,8 +16,10 @@ if ($data['username'] != "") {
 
     $username = $data['username'];
 
-    $workers = $database->query("SELECT sum(workers) FROM Buildings WHERE town IN 
-                           (SELECT townname FROM Towns WHERE owner = :0);", array($username));
+    // $workers = $database->query("SELECT sum(workers) FROM Buildings WHERE town IN 
+    // 	(SELECT townname FROM Towns WHERE owner = :0);", array($username));
+	$workers = $database->aggregation('Userdata',
+		array('$project' => array('sum' => array('$sum' => array('$town.armies.strength')))))['sum'];
 
     echo json_encode($workers);
 }
