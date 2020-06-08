@@ -18,8 +18,6 @@ $db->add_document('test_col', array('test'=>'Hello World!', 'town'=>array('name'
 
 $db->add_document('test_col', array('cat'=>'miau'));
 
-//$error=$db->max_update('test_col', array('test'=>'Hello World!'), array('town.armies.$[name].strength'=>100), array('name.armyname'=>'cattroopers'));
-
 //$error=$db->update_array_field('test_col',array('test'=>'Hello World!'), array('town.armies.$[name].strength'=>100), array('name.armyname'=>'cattroopers'));
 $db->update_field('test_col', array('test'=>'Hello World!'), array('town.armies.$[name].strength'=>100), array('arrayFilters'=>[array('name.armyname'=>'cattroopers')]));
 /*$db->add_to_array('test_col', array('test'=>'Hello World!'), array('town.armies'=>array('armyname'=>'catbattallion', 'strength'=>150)));
