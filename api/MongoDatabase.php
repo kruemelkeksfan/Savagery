@@ -118,7 +118,7 @@ class MongoDatabase
 
     function delete_field(string $collection, $filter, $data) {
         $bulk = new MongoDB\Driver\BulkWrite;
-        $bulk->update($filter, array('$unset'=>$data));
+        $bulk->update($filter, array('$pull'=>$data));
         try {
             $this->dblink->executeBulkWrite($this->db_name . $collection, $bulk);
         } catch (Exception $e) {

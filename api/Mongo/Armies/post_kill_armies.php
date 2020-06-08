@@ -6,15 +6,16 @@ header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 
-include_once '../Database.php';
+include_once '../../MongoDatabase.php';
 
-$database = new Database();
+$database = new MongoDatabase();
 
 $data = json_decode(file_get_contents("php://input"), true);
 
 if($data['username'] != "")
 	{
-    $database->query('DELETE FROM Armies 
+    /*$database->query('DELETE FROM Armies 
 		INNER JOIN Towns ON Armies.hometown=Towns.townname
-		WHERE Towns.owner=:0;', array($data['username']));
+		WHERE Towns.owner=:0;', array($data['username']));*/
+	$database->delete_field('Userdata', array('username' => $data['username']), array('town.armies' => array()));
 	}
