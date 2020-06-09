@@ -19,7 +19,7 @@ if($data['username'] != "" && $data['building_id'] != "" && !empty($data['worker
     $workers = $data['workers'];
 
     //$error=$database->update_field('Userdata',array('username'=>$username),array('$set'=>array('buildings.$[id].workers'=>$workers)), array('arrayFilters'=>[array('id.building_id'=>$building_id)]));
-    $error=$database->update_field('Userdata', array('username'=>$username), array('$set'=>array('buildings.$[name].workers'=>$workers)), array('arrayFilters'=>[array('name.building_id'=>intval($building_id))]));
+    $error=$database->update_field('Userdata', array('username'=>$username), array('$set'=>array('buildings.$[name].workers'=>intval($workers))), array('arrayFilters'=>[array('name.building_id'=>intval($building_id))]));
     $deployed_workers = $database->find_document('Userdata', array('username'=>$username), array('projection'=>array('_id'=>0, 'buildings'=>1)));//$database->find_document('Userdata',array('username'=>$username));//,array('projection'=>array('$_id'=>0, 'buildings'=>1))); //array('$elemMatch'=>array('building_id'=>$building_id)))));
 
     echo json_encode(array($deployed_workers, $error));
