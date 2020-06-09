@@ -31,13 +31,24 @@ foreach($playerdata as $player) {
     $buildings = $sql->query('SELECT building_id, buildingtype, level, workers FROM Buildings WHERE town = :0;', array($player['townname']));
     $armies = $sql->query('SELECT army_id, armyname, strength FROM Armies WHERE hometown = :0;', array($player['townname']));
     $treaties = $sql->query('SELECT user2, expiry_time FROM PeaceTreaty WHERE user1 = :0;', array($player['username']));
+
+    foreach ($armies as &$army) {
+        $army['strength'] = intval($army['strength']);
+        $army['army_id'] = intval($army['army_id']);
+    }
+
+    foreach ($buildings as &$building) {
+        $building['level'] = intval($building['level']);
+        $building['workers'] = intval($building['workers']);
+        $building['building_id'] = intval($building['building_id']);
+    }
+
     $player['armies'] = $armies;
     $player['buildings'] = $buildings;
     $player['treaties'] = $treaties;
 
+    $player['position'] = intval($player['position']);
     $player['gold'] = intval($player['gold']);
-    $player['armies']['strength'] = intval($player['armies']['strength']);
-    $player['buildings']['level'] = intval($player['buildings']['level']);
 
     $result['userdata'] = $mongo->add_document('Userdata', $player);
 }
