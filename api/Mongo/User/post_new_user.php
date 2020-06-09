@@ -18,7 +18,7 @@ if($data['username'] != "") {
     $password = $data['password'];
 
     if(empty($data['gold'])) {
-        $gold = $database->find_document('BalanceSettings', [], array('projection'=>array('_id'=>0, 'Start_Gold'=>1)));[0]['Start_Gold'];
+        $gold = $database->find_document('BalanceSettings', [], array('projection'=>array('_id'=>0, 'Start_Gold'=>1)))[0]['Start_Gold'];
     } else {
         $gold = $data['gold'];
     }

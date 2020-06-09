@@ -17,9 +17,9 @@ if($data['username'] != "") {
     $username = $data['username'];
     $tax = $data['tax'];
 
-    $database->update_field('Userdata',array('username'=>$username), array('$set'=>array('tax'=>$tax)));
+    $database->update_field('Userdata',array('username'=>$username), array('$set'=>array('tax'=>intval($tax))));
 
-    $new_tax = $database->find_document('Userdata',array('username'=>$username),array('projection'=>array('$_id'=>0, 'tax'=>1)));
+    $new_tax = $database->find_document('Userdata',array('username'=>$username),array('projection'=>array('_id'=>0, 'tax'=>1)));
 
     echo json_encode($new_tax[0]);
 
