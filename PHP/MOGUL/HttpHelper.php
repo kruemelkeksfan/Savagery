@@ -9,7 +9,7 @@ class HttpHelper
 	{
 		$this->base_url = "http://localhost:8000/";
 
-		if(count($this->get('MongoInit.php')) > 0)
+		if(count($this->get('MongoCheck.php')) > 0)
 		{
 			$this->base_url = $this->base_url . "Mongo/";
 		}
