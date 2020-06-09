@@ -161,10 +161,9 @@ class MongoDatabase
             return($e);
         }*/
 		
-		/*$mongo = new MongoClient();
-		$mongo->listCollections();*/
+		$mongo = new MongoClient();
 		
-        return(array(1)/*$cursor->toArray()*/);
+        return(array($mongo->listCollections())/*$cursor->toArray()*/);
     }
 
 	}
