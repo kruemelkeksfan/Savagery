@@ -17,6 +17,8 @@ class HttpHelper
 		{
 			$this->base_url = $this->base_url . "Mongo/";
 		}
+		
+		var_dump($filetext . ' ' . $this->base_url);
 	}
 
 	function post($path, $data){
