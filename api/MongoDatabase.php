@@ -153,17 +153,8 @@ class MongoDatabase
         return($cursor->toArray());
     }
 	
-    function get_collections(){
-        /*$query = new MongoDB\Driver\Query(array(), array());
-        try {
-            $cursor = $this->dblink->executeQuery($this->db_name . $collection, 'db.getCollectionNames()');
-        } catch (\MongoDB\Driver\Exception\Exception $e) {
-            return($e);
-        }*/
-		
-		$mongo = new MongoClient();
-		
-        return(array($mongo->listCollections())/*$cursor->toArray()*/);
+    function check(){		
+        return($this->find_document('BalanceSettings'));
     }
 
 	}
