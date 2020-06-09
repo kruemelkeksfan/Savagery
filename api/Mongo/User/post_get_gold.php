@@ -16,7 +16,7 @@ if($data['username'] != "") {
 
     $username = $data['username'];
 
-    $gold = $database->find_document('Userdata',array('username'=>$username),array('projection'=>array('$_id'=>0, 'gold'=>1)));
+    $gold = $database->find_document('Userdata',array('username'=>$username),array('projection'=>array('_id'=>0, 'gold'=>1)));
 
     echo json_encode($gold[0]);
 } else {
