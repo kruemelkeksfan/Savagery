@@ -18,7 +18,8 @@ if($data['username'] != "") {
     $value = $data['value'];
 
     $database->update_field('Userdata',array('username'=>$username),array('$inc'=>array('gold'=>-$value)));
-    $gold = $database->find_document('Userdata',array('username'=>$username),array('$projection'=>array('$_id'=>0, 'gold'=>1)));
+    $gold = $database->find_document('Userdata', array('username'=>$username), array('projection'=>array('_id'=>0, 'gold'=>1)));
+                              //find_document('Userdata',array('username'=>$username),array('projection'=>array('$_id'=>0, 'gold'=>1)));
 
     echo json_encode($gold[0]);
 }

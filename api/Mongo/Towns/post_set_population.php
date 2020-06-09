@@ -19,7 +19,7 @@ if($data['username'] != "") {
 
     $database->update_field('Userdata',array('username'=>$username), array('$set'=>array('population'=>$population)));
 
-    $new_pop = $database->find_document('Userdata',array('username'=>$username),array('$projection'=>array('$_id'=>0, 'population'=>1)));
+    $new_pop = $database->find_document('Userdata',array('username'=>$username),array('projection'=>array('$_id'=>0, 'population'=>1)));
 
 
     echo json_encode($new_pop[0]);
