@@ -5,14 +5,11 @@ class HttpHelper
 {
 	private $base_url;
 
-	private $check;
-
 	function __construct()
 	{
 		$this->base_url = "http://localhost:8000/";
 
-		$this->check = $this->get('MongoCheck.php');
-		if(false)//!empty($this->get('MongoCheck.php')) && count($this->get('MongoCheck.php')) > 0)
+		if(count($this->get('MongoCheck.php')) > 0)
 		{
 			$this->base_url = $this->base_url . "Mongo/";
 		}
@@ -31,8 +28,6 @@ class HttpHelper
 
 	    //echo "json-response";
 	    //var_dump($json_response);
-		var_dump('MONGO-CHECK:');
-		var_dump($this->check);
 
 	    if (curl_errno($curl)) {
 	        print curl_error($curl);
