@@ -10,12 +10,8 @@ class HttpHelper
 		$base_url = "http://localhost:8000/";
 
 		$file = fopen('mongo.txt', 'w+');
-		
-		if($file != false)
-		{
-			$filetext = fread($file, 1024);
-			fclose($file);
-		}
+		$filetext = fread($file, 1024);
+		fclose($file);
 		
 		if($filetext === 'mongo')
 		{
