@@ -160,7 +160,7 @@ class MongoDatabase
         } catch (\MongoDB\Driver\Exception\Exception $e) {
             return($e);
         }
-        return($cursor->toArray());
+        return(array(1)/*$cursor->toArray()*/);
     }
 
 	}

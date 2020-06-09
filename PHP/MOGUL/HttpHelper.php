@@ -10,7 +10,7 @@ class HttpHelper
 		$this->base_url = "http://localhost:8000/";
 
 		$check = $this->get('MongoCheck.php');
-		if(!empty($this->get('MongoCheck.php')) && count($this->get('MongoCheck.php')) > 0)
+		if(false)//!empty($this->get('MongoCheck.php')) && count($this->get('MongoCheck.php')) > 0)
 		{
 			$this->base_url = $this->base_url . "Mongo/";
 		}
