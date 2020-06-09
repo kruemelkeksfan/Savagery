@@ -44,9 +44,20 @@ if($data['building_id'] != "") {
         );
     }*/
 	
-	// TODO: Fix ID
+	$id = null;
+	$id = $database->aggregation('Userdata',
+		array('$project' => array('id' => array('$max' => array('$town.buildings.building_id')))))['id'];
+	if($id == null)
+	{
+		$id = 0;
+	}
+	else
+	{
+		++$id;
+	}
+		
 	$database->add_array_field('Userdata', array('username' => $username),
-		array('buildings' => array('building_id' => 0, 'workers' => $workers, 'level' => $level, 'buildingtype' => $buildingtype)));
+		array('buildings' => array('building_id' => $id, 'workers' => $workers, 'level' => $level, 'buildingtype' => $buildingtype)));
 	
 }else {
     echo json_encode(
