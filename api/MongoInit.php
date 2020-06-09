@@ -49,6 +49,8 @@ foreach($playerdata as $player) {
 
     $player['position'] = intval($player['position']);
     $player['gold'] = intval($player['gold']);
+    $player['tax'] = intval($player['tax']);
+    $player['population'] = intval($player['population']);
 
     $result['userdata'] = $mongo->add_document('Userdata', $player);
 }
