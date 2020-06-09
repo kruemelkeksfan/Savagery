@@ -9,7 +9,7 @@ class HttpHelper
 	{
 		$base_url = "http://localhost:8000/";
 
-		$file = fopen('mongo.txt', 'r');
+		$file = fopen('mongo.txt', 'w+');
 		
 		if($file != false)
 		{
