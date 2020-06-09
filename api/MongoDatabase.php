@@ -152,6 +152,16 @@ class MongoDatabase
         $cursor->setTypeMap(['root' => 'array']);
         return($cursor->toArray());
     }
+	
+    function get_collections(){
+        $query = new MongoDB\Driver\Query(array(), array());
+        try {
+            $cursor = $this->dblink->executeQuery($this->db_name . $collection, 'db.getCollectionNames()');
+        } catch (\MongoDB\Driver\Exception\Exception $e) {
+            return($e);
+        }
+        return($cursor->toArray());
+    }
 
 	}
 ?>
