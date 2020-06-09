@@ -5,6 +5,20 @@ class HttpHelper
 {
 private $base_url = "http://localhost:8000/";
 
+function __construct()
+{
+	$settings = $this->post('BalanceSettings/post_get_setting.php', array());
+	if(empty($settings))
+	{
+		var_dump("Using SQL");
+	}
+	else
+	{
+		$this->base_url = $this->base_url . "Mongo/";
+		var_dump("Using Mongo");
+	}
+}
+
 function post($path, $data){
     $postdata = json_encode($data);
     $url = $this->base_url.$path;
