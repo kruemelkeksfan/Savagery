@@ -3,49 +3,63 @@
 
 class HttpHelper
 {
-private $base_url = "http://localhost:8000/";
+	private $base_url;
 
-function post($path, $data){
-    $postdata = json_encode($data);
-    $url = $this->base_url.$path;
-    //var_dump($url);
-    $curl = curl_init($url);
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($curl, CURLOPT_POST, true);
-    curl_setopt($curl, CURLOPT_POSTFIELDS, $postdata);
+	function __construct()
+	{
+		$this->base_url = "http://localhost:8000/";
 
-    $json_response = curl_exec($curl);
+		if(file_exists('/home/Savagery/mongo.txt'))
+		{
+			$this->base_url = $this->base_url . "Mongo/";
+		}
+	}
 
-    //echo "json-response";
-    var_dump($json_response);
+	function post($path, $data){
+	    $postdata = json_encode($data);
+	    $url = $this->base_url.$path;
+	    //var_dump($url);
+	    $curl = curl_init($url);
+	    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+	    curl_setopt($curl, CURLOPT_POST, true);
+	    curl_setopt($curl, CURLOPT_POSTFIELDS, $postdata);
 
-    if (curl_errno($curl)) {
-        print curl_error($curl);
-    }
+	    $json_response = curl_exec($curl);
 
-    curl_close($curl);
+	    //echo "json-response";
+	    //var_dump($json_response);
 
-    return json_decode($json_response, true);
-}
+	    if (curl_errno($curl)) {
+	        print curl_error($curl);
+	    }
 
-function get($path) {
-    $curl = curl_init($this->base_url.$path);
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($curl, CURLOPT_HTTPGET, true);
+	    curl_close($curl);
 
-    $json_response = curl_exec($curl);
+	    return json_decode($json_response, true);
+	}
 
-    var_dump($json_response);
+	function get($path) {
+	    $curl = curl_init($this->base_url.$path);
+	    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+	    curl_setopt($curl, CURLOPT_HTTPGET, true);
 
-    curl_close($curl);
+	    $json_response = curl_exec($curl);
 
-    return json_decode($json_response, true);
-}
+	    //var_dump($json_response);
+
+	    curl_close($curl);
+
+	    return json_decode($json_response, true);
+	}
 
     function changeDB() {
         $response = $this->get('MongoInit.php');
 
         $this->base_url = $this->base_url . "Mongo/";
+		
+		$file = fopen('/home/Savagery/mongo.txt', 'w');
+		fwrite($file, 'Using MongoDB.');
+		fclose($file);
 
         $response = $this->get('test.php');
 
