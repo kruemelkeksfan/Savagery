@@ -45,9 +45,10 @@ class MongoDatabase
 
     function update_field(string $collection, $filter, $data, $options = []) {
         $bulk = new MongoDB\Driver\BulkWrite;
-        $bulk->update($filter, array('$set'=>$data), $options);
+        $bulk->update($filter, $data, $options);
         try {
-            $this->dblink->executeBulkWrite($this->db_name . $collection, $bulk);
+            $e = $this->dblink->executeBulkWrite($this->db_name . $collection, $bulk);
+            return($e);
         } catch (Exception $e) {
             return($e);
         }
@@ -96,14 +97,14 @@ class MongoDatabase
         $cmd = new MongoDB\Driver\Command([
             'aggregate'=>$collection,
             'pipeline'=>$pipe,
-            'cursor'=>'{}'
+            'cursor'=> array('batchSize'=>1)//new stdClass()
         ]);
 
         try {
             $cursor = $this->dblink->executeReadCommand($this->db_name,$cmd);
 
-            $cursor->setTypeMap(['root' => 'array']);
-            return($cursor->toArray());
+            //$cursor->setTypeMap(['root' => 'array']);
+            return($cursor/*->toArray()*/);
         } catch (Exception $e) {
             return($e);
         } catch (\MongoDB\Driver\Exception\Exception $e) {
