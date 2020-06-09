@@ -8,8 +8,12 @@ class HttpHelper
 	function __construct()
 	{
 		$base_url = "http://localhost:8000/";
-		$settings = $this->post('Mongo/BalanceSettings/post_get_setting.php', array('value' => 'Map_Size'));
-		if(!empty($settings))
+
+		$file = fopen('mongo.txt', 'r');
+		$filetext = fread($file, $filesize);
+		fclose( $file );
+		
+		if($filetext === 'mongo')
 		{
 			$this->base_url = $this->base_url . "Mongo/";
 		}
@@ -56,6 +60,10 @@ class HttpHelper
         $response = $this->get('MongoInit.php');
 
         $this->base_url = $this->base_url . "Mongo/";
+		
+		$file = fopen('mongo.txt', 'w');
+		fwrite($file, 'mongo');
+		fclose($file);
 
         $response = $this->get('test.php');
 
