@@ -15,7 +15,7 @@ $data = json_decode(file_get_contents("php://input"), true);
 if($data['username'] != "") {
 
     $username = $data['username'];
-    $mapsize = $database->$database->find_document('BalanceSettings', [], array('projection'=>array('_id'=>0, 'Map_Size'=>1)))[0]['Map_Size'];
+    $mapsize = $database->find_document('BalanceSettings', [], array('projection'=>array('_id'=>0, 'Map_Size'=>1)))[0]['Map_Size'];
 
     if (empty($data['tax'])) {
         $tax = $database->find_document('BalanceSettings', [], array('projection'=>array('_id'=>0, 'Start_Tax'=>1)))[0]['Start_Tax'];

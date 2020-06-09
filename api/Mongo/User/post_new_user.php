@@ -23,7 +23,7 @@ if($data['username'] != "") {
         $gold = $data['gold'];
     }
 
-    $result = $database->add_document('userdata', array('username'=>$username, 'password'=>$password, 'gold'=>$gold));
+    $result = $database->add_document('Userdata', array('username'=>$username, 'password'=>$password, 'gold'=>$gold));
 
         echo json_encode(
             array($result)
