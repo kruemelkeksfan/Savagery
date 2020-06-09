@@ -35,6 +35,10 @@ foreach($playerdata as $player) {
     $player['buildings'] = $buildings;
     $player['treaties'] = $treaties;
 
+    $player['gold'] = intval($player['gold']);
+    $player['armies']['strength'] = intval($player['armies']['strength']);
+    $player['buildings']['level'] = intval($player['buildings']['level']);
+
     $result['userdata'] = $mongo->add_document('Userdata', $player);
 }
 
