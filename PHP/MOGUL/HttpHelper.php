@@ -3,10 +3,11 @@
 
 class HttpHelper
 {
-	private $base_url = "http://localhost:8000/";
+	private $base_url;
 
 	function __construct()
 	{
+		$base_url = "http://localhost:8000/";
 		$settings = $this->post('Mongo/BalanceSettings/post_get_setting.php', array('value' => 'Map_Size'));
 		if(!empty($settings))
 		{
