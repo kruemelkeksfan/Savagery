@@ -7,7 +7,7 @@ class HttpHelper
 
 	function __construct()
 	{
-		$settings = $this->post('BalanceSettings/post_get_setting.php', array());
+		$settings = $this->post('Mongo/BalanceSettings/post_get_setting.php', array());
 		if(!empty($settings))
 		{
 			$this->base_url = $this->base_url . "Mongo/";
