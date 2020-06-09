@@ -154,12 +154,16 @@ class MongoDatabase
     }
 	
     function get_collections(){
-        $query = new MongoDB\Driver\Query(array(), array());
+        /*$query = new MongoDB\Driver\Query(array(), array());
         try {
             $cursor = $this->dblink->executeQuery($this->db_name . $collection, 'db.getCollectionNames()');
         } catch (\MongoDB\Driver\Exception\Exception $e) {
             return($e);
-        }
+        }*/
+		
+		/*$mongo = new MongoClient();
+		$mongo->listCollections();*/
+		
         return(array(1)/*$cursor->toArray()*/);
     }
 
