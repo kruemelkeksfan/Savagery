@@ -5,7 +5,7 @@ class HttpHelper
 {
 	private $base_url;
 
-	$check;
+	private $check;
 
 	function __construct()
 	{
