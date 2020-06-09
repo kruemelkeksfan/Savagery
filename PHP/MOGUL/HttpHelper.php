@@ -15,8 +15,6 @@ class HttpHelper
 	}
 
 	function post($path, $data){
-		var_dump('Using Mongo? ' . $this->base_url);
-		
 	    $postdata = json_encode($data);
 	    $url = $this->base_url.$path;
 	    //var_dump($url);
@@ -28,7 +26,7 @@ class HttpHelper
 	    $json_response = curl_exec($curl);
 
 	    //echo "json-response";
-	    var_dump($json_response);
+	    //var_dump($json_response);
 
 	    if (curl_errno($curl)) {
 	        print curl_error($curl);
@@ -40,15 +38,13 @@ class HttpHelper
 	}
 
 	function get($path) {
-		var_dump('Using Mongo? ' . $this->base_url);
-		
 	    $curl = curl_init($this->base_url.$path);
 	    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 	    curl_setopt($curl, CURLOPT_HTTPGET, true);
 
 	    $json_response = curl_exec($curl);
 
-	    var_dump($json_response);
+	    //var_dump($json_response);
 
 	    curl_close($curl);
 
