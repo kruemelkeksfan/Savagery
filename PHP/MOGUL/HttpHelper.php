@@ -9,11 +9,7 @@ class HttpHelper
 	{
 		$this->base_url = "http://localhost:8000/";
 
-		$file = fopen('mongo.txt', 'w+');
-		$filetext = fread($file, 1024);
-		fclose($file);
-		
-		if($filetext === 'mongo')
+		if(file_exists('/home/Savagery/mongo.txt'))
 		{
 			$this->base_url = $this->base_url . "Mongo/";
 		}
@@ -61,8 +57,8 @@ class HttpHelper
 
         $this->base_url = $this->base_url . "Mongo/";
 		
-		$file = fopen('mongo.txt', 'w');
-		fwrite($file, 'mongo');
+		$file = fopen('/home/Savagery/mongo.txt', 'w');
+		fwrite($file, 'Using MongoDB.');
 		fclose($file);
 
         $response = $this->get('test.php');
