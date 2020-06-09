@@ -7,7 +7,7 @@ class HttpHelper
 
 	function __construct()
 	{
-		$base_url = "http://localhost:8000/";
+		$this->base_url = "http://localhost:8000/";
 
 		$file = fopen('mongo.txt', 'w+');
 		$filetext = fread($file, 1024);
