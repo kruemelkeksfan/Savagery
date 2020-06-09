@@ -7,8 +7,7 @@ class HttpHelper
 
 	function __construct()
 	{
-		var_dump($this->post('Mongo/BalanceSettings/post_get_setting.php', array()));
-		$settings = $this->post('Mongo/BalanceSettings/post_get_setting.php', array());
+		$settings = $this->post('Mongo/BalanceSettings/post_get_setting.php', array('value' => 'Map_Size'));
 		if(!empty($settings))
 		{
 			$this->base_url = $this->base_url . "Mongo/";
