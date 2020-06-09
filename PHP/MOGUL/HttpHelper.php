@@ -3,15 +3,17 @@
 
 class HttpHelper
 {
+	private $mongo_flag_path;
 	private $base_url;
 
 	function __construct()
 	{
+		$this->mongo_flag_path = '/root/Savagery/mongo.txt';
 		$this->base_url = "http://localhost:8000/";
 
-		if(file_exists('/home/Savagery/mongo.txt'))
+		if(file_exists($this->mongo_flag_path))
 		{
-			$file = fopen('/home/Savagery/mongo.txt', 'r');
+			$file = fopen($this->mongo_flag_path, 'r');
 			if($file)
 			$filetext = fread($file, 1024);
 			fclose($file);
@@ -65,7 +67,7 @@ class HttpHelper
 
         $this->base_url = $this->base_url . "Mongo/";
 		
-		$file = fopen('/home/Savagery/mongo.txt', 'w');
+		$file = fopen($this->mongo_flag_path, 'w');
 		fwrite($file, 'mongo');
 		fclose($file);
 
