@@ -17,7 +17,7 @@ if($data['max'] != "") {
     $max = $data['max'];
     $min = $data['min'];
 
-    $targets = $database->find_document('Userdata', array('$and'=>array(['position'=>array('$gte'=>$min)], ['position'=>array('$lte'=>$max)])));
+    $targets = $database->find_document('Userdata', array('position'=>array('$gte'=>$min, '$lte'=>$max)), array('projection'=>array('_id'=>0, 'townname'=>1, 'username'=>1)));
 
     echo json_encode($targets); //check if works!!
 }
