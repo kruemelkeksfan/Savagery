@@ -12,16 +12,16 @@ class Page
 		$this->restricted = $restricted;
 		
 		$this->errors = array();
-		
+
+        // PHP Settings
+        ini_set('session.use_strict_mode', '1');
+        ini_set('max_execution_time', 10);
+        ignore_user_abort(true);
+
+        // Start Session
+        session_start();
+			
 		$this->httpHelper = new HttpHelper();
-
-            // PHP Settings
-            ini_set('session.use_strict_mode', '1');
-            ini_set('max_execution_time', 10);
-            ignore_user_abort(true);
-
-            // Start Session
-            session_start();
 		}
 		
 	// TODO: Use in Map for Cells and other Locations where $_SERVER['PHP_SELF'] was used before
