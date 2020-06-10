@@ -26,8 +26,8 @@ class HttpHelper
 
 	    $json_response = curl_exec($curl);
 
-		var_dump('POST: ' . $this->base_url . $path);
-	    var_dump($json_response);
+		//var_dump('POST: ' . $this->base_url . $path);
+	    //var_dump($json_response);
 
     if (curl_errno($curl)) {
         print curl_error($curl);
@@ -45,11 +45,11 @@ function get($path) {
 
     $json_response = curl_exec($curl);
 
-		if($path !== 'MongoCheck.php')	// MongoCheck is called to early, so that the Page crashed if there would be a var_dump
+		/*if($path !== 'MongoCheck.php')	// MongoCheck is called to early, so that the Page crashed if there would be a var_dump
 		{
 			var_dump('GET: ' . $this->base_url . $path);
 		    var_dump($json_response);
-		}
+		}*/
 
     curl_close($curl);
 

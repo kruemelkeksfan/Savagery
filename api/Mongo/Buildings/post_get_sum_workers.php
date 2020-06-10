@@ -18,8 +18,9 @@ if ($data['username'] != "") {
 
     // $workers = $database->query("SELECT sum(workers) FROM Buildings WHERE town IN 
     // 	(SELECT townname FROM Towns WHERE owner = :0);", array($username));
-	$workers = $database->aggregation('Userdata',
-		array('$project' => array('sum' => array('$sum' => array('$buildings.workers')))))['sum'];
+	$workers = $database->aggregation('Userdata',[
+	    array('$match'=>array('username'=>$username)),
+		array('$project' => array('_id'=>0, 'sum' => array('$sum' => array('$buildings.workers')))),])[0]['sum'];
 
     echo json_encode($workers);
 }
