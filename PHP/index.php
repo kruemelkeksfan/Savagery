@@ -17,7 +17,8 @@ if(!empty($action))
 	{
 	if($action === 'collect')
 		{
-        $town = $http->post('Towns/post_get_town_values.php', array('username' => $_SESSION['username']))[0];
+		$towndata = $http->post('Towns/post_get_town_values.php', array('username' => $_SESSION['username']));
+        $town = empty($towndata[0]) $towndata ? $towndata[0];
 		$http->post('User/post_add_gold.php', array('username' => $_SESSION['username'], 'value' => ($town['population'] * $town['tax'])));
 		}
 	else if($action === 'settax' && !empty($tax) && $tax > 0)
