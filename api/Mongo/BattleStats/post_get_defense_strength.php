@@ -7,9 +7,9 @@ header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 
-include_once '../Database.php';
+include_once '../../MongoDatabase.php';
 
-$database = new Database();
+$database = new MongoDatabase();
 
 $data = json_decode(file_get_contents("php://input"), true);
 
@@ -18,8 +18,15 @@ if ($data['username'] != "") {
     $username = $data['username'];
     $buildingtype = $data['buildingtype'];
 
-    $result = $database->query('SELECT i.nr*sum(a.strength) FROM Armies as a INNER JOIN Towns as t on a.hometown = t.townname INNER JOIN (SELECT town, sum(level) as nr from Buildings WHERE buildingtype = :1 group by town) as i ON i.town = a.hometown WHERE t.owner = :0 group by a.hometown;',
-        array($username, $buildingtype)); //todo: experiment with group by
+    $result = $database->aggregation('Userdata',[
+        array('$match'=>array('username'=>$username)),
+        array('$project'=>array('buildings'=>1, 'sum_army'=>array('$sum'=>'$armies.strength'))),
+        array('$unwind'=>'$buildings'),
+        array('$group'=>array('_id'=>'$buildings.buildingtype', 'sum_lvl'=>array('$sum'=>'$buildings.level'),
+           'army'=>array('$first'=>'$sum_army'))),
+        array('$match'=>array('_id'=>$buildingtype)),
+        array('$project'=>array('defense'=>array('$multiply'=>array('$sum_lvl', '$army')))),]);
 
-    echo json_encode($result);
+
+    echo json_encode(array('i.nr*sum(a.strength)'=>$result[0]['defense']));
 }
