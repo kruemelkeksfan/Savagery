@@ -34,7 +34,7 @@ if(!empty($action))
 		$workers = $http->post('Buildings/post_get_sum_workers.php', array('username' => $_SESSION['username']))[0]['sum(workers)'];
 		
 		$i = 0;
-		while($workers > $town['population'])
+		while($workers > $town['population'] && $i < 100) // I feel so dirty, I will have to take a Shower after this
 			{
 			$http->post('Buildings/post_set_workers.php', array('username' => $_SESSION['username'], 'building_id' => $i++, 'workers' => 0));
 			
