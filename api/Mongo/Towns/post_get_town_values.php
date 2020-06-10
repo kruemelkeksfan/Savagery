@@ -19,5 +19,5 @@ if($data['username'] != "") {
     $town_data = $database->find_document('Userdata',array('username'=>$username),
         array('projection'=>array('_id'=>0, 'position'=>1, 'tax'=>1, 'population'=>1, 'townname'=>1)));
 
-    echo json_encode($town_data[0]);
+    echo json_encode($town_data);
 }
