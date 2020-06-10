@@ -9,7 +9,7 @@ class HttpHelper
 	{
 		$this->base_url = "http://localhost:8000/";
 
-		if(count($this->get('MongoCheck.php')) > 0)
+		if(!empty($this->get('MongoCheck.php')))
 		{
 			$this->base_url = $this->base_url . "Mongo/";
 		}
@@ -26,42 +26,41 @@ class HttpHelper
 
 	    $json_response = curl_exec($curl);
 
-		var_dump('POST: ' . $path);
+		var_dump('POST: ' . $this->base_url . $path);
 	    var_dump($json_response);
 
-	    if (curl_errno($curl)) {
-	        print curl_error($curl);
-	    }
+    if (curl_errno($curl)) {
+        print curl_error($curl);
+    }
 
-	    curl_close($curl);
+    curl_close($curl);
 
-	    return json_decode($json_response, true);
-	}
+    return json_decode($json_response, true);
+}
 
-	function get($path) {
-	    $curl = curl_init($this->base_url.$path);
-	    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-	    curl_setopt($curl, CURLOPT_HTTPGET, true);
+function get($path) {
+    $curl = curl_init($this->base_url.$path);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curl, CURLOPT_HTTPGET, true);
 
-	    $json_response = curl_exec($curl);
+    $json_response = curl_exec($curl);
 
 		if($path !== 'MongoCheck.php')	// MongoCheck is called to early, so that the Page crashed if there would be a var_dump
 		{
-			var_dump('GET: ' . $path);
+			var_dump('GET: ' . $this->base_url . $path);
 		    var_dump($json_response);
 		}
 
-	    curl_close($curl);
+    curl_close($curl);
 
-	    return json_decode($json_response, true);
-	}
+    return json_decode($json_response, true);
+}
 
     function changeDB() {
+
         $response = $this->get('MongoInit.php');
 
         $this->base_url = $this->base_url . "Mongo/";
-
-        $response = $this->get('test.php');
 
         return($response);
     }

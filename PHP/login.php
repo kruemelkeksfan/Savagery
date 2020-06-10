@@ -115,6 +115,7 @@ if(!empty($action))
 		//var_dump($http->get('test.php'));
         //var_dump($http->post('User/post_get_gold.php', array('username'=>'currygom', 'value'=>2)));
         var_dump($http->post('Armies/post_new_army.php', array('username'=>'currygom', 'armyname'=>'xyz')));
+        //var_dump($http->post('Buildings/post_new_building.php', array('username'=>'currygom', 'building_id'=>3, 'buildingtype'=>'Tavern')));
         //var_dump($http->post('Buildings/post_set_level.php', array('username'=>'currygom', 'building_id'=>1,'workers'=>3)));
         //var_dump($http->post('Towns/post_get_towns_in_range.php',array('min'=>0,'max'=>100)));
         //var_dump($http->post('Buildings/post_set_workers.php', array('username'=>'currygom', 'building_id'=>1,'workers'=>3)));
