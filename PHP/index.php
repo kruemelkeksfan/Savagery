@@ -36,18 +36,9 @@ if(!empty($action))
 		$i = 0;
 		while($workers > $town['population'])
 			{
-			$http->post('Buildings/post_set_workers.php', array('username' => $_SESSION['username'], $i++, 0));
+			$http->post('Buildings/post_set_workers.php', array('username' => $_SESSION['username'], 'building_id' => $i++, 'workers' => 0));
 			
-			// TODO: Copy-pasted code cz "What kind of fool sorcery is this "function"-thing that you keep talking about?!"
-                //ToDo: maybe juuuust take a look to see that I have already written an api for this?
             $workers = $http->post('Buildings/post_get_sum_workers.php', array('username' => $_SESSION['username']))[0]['sum(workers)'];
-
-                /*$buildings = $http->get("Buildings/post_get_building_values.php", array('username' => $_SESSION['username']));
-                $workers = 0;
-                foreach($buildings as $building)
-                    {
-                    $workers += $building['workers'];
-                    }*/
             }
 			
 		$towndata = $http->post('Towns/post_get_town_values.php', array('username' => $_SESSION['username']));
