@@ -31,7 +31,7 @@ if($data['building_id'] != "") {
     }
 
 	$database->add_array_field('Userdata', array('username' => $username),
-		array('buildings' => array('building_id' => $building_id, 'workers' => $workers, 'level' => $level, 'buildingtype' => $buildingtype)));
+		array('buildings' => array('building_id' => intval($building_id), 'workers' => intval($workers), 'level' => intval($level), 'buildingtype' => $buildingtype)));
 	
 }else {
     echo json_encode(

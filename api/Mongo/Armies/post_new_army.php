@@ -30,7 +30,7 @@ if($data['armyname'] != "") {
     $id = $database->aggregation('Userdata', [array('$project'=>array('_id'=>0, 'count'=>array('$max'=>'$armies.army_id'))),array('$group'=>array('_id'=>null, 'id'=>array('$max'=>'$count'))),]);
 
     $new_id = $id[0]['id']+1;
-    $database->add_to_array('Userdata', array('username'=>$username), array('armies'=>array('army_id'=>$new_id, 'armyname'=>$armyname, 'strength'=>$strength)));
+    $database->add_to_array('Userdata', array('username'=>$username), array('armies'=>array('army_id'=>$new_id, 'armyname'=>$armyname, 'strength'=>intval($strength))));
 
     echo json_encode(array($id[0]['id']));
 }else {
