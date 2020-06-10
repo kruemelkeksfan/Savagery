@@ -39,7 +39,7 @@ if(!empty($action))
 		{
 		if($gold >= 100)
 			{
-			$http->post('User/post_subtract_gold.php', array('username' => $_SESSION['username'], 'value' => 100));
+			$http->post('User/post_substract_gold.php', array('username' => $_SESSION['username'], 'value' => 100));
 			$levelneu = $http->post('Buildings/post_set_level.php', array('username' => $_SESSION['username'], 'building_id' => $building));
 			//var_dump($levelneu);
 			}

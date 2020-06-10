@@ -44,21 +44,21 @@ class MongoDatabase
             $e = $this->dblink->executeBulkWrite($this->db_name . $collection, $bulk);
             return($e);
         } catch (Exception $e) {
-            return($e);
+            return ($e);
         }
     }
 
     function aggregation(string $collection, $pipe) {
         $cmd = new MongoDB\Driver\Command([
             'aggregate'=>$collection,
-            'pipeline'=>[$pipe,],
+            'pipeline'=>$pipe,
             'cursor'=> new stdClass(),
         ]);
 
         try {
             $cursor = $this->dblink->executeCommand('savagery_mongo',$cmd);
 
-            //$cursor->setTypeMap(['root' => 'array']);
+            $cursor->setTypeMap(['root' => 'array']);
             return($cursor->toArray());
         } catch (Exception $e) {
             return($e);
