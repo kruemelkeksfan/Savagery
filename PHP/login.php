@@ -110,11 +110,14 @@ if(!empty($action))
 	    //var_dump($http->post('Armies/post_get_army_by_town.php', array('username'=>'xxxNOOBxxx')));
         //var_dump($http->post('BalanceSettings/post_get_setting.php', array('settingname'=>'Map_Size')));
         //var_dump($http->get('Buildingtypes/get_buildingtypes.php'));
+        //var_dump($http->post('Towns/post_get_town_values.php', array('username'=>'currygom')));
+        //$http->post('BattleStats/post_get_attack_strength.php', array('buildingtype'=>'Blacksmith', 'username'=>'flyingBottle', 'army_id'=>4));
         $result = $http->changeDB();
+        //$http->post('BattleStats/post_get_attack_strength.php', array('buildingtype'=>'Blacksmith', 'username'=>'flyingBottle', 'army_id'=>4));
         //var_dump($result);
 		//var_dump($http->get('test.php'));
         //var_dump($http->post('User/post_get_gold.php', array('username'=>'currygom', 'value'=>2)));
-        var_dump($http->post('Armies/post_new_army.php', array('username'=>'currygom', 'armyname'=>'xyz')));
+        //var_dump($http->post('Armies/post_new_army.php', array('username'=>'currygom', 'armyname'=>'xyz')));
         //var_dump($http->post('Buildings/post_new_building.php', array('username'=>'currygom', 'building_id'=>3, 'buildingtype'=>'Tavern')));
         //var_dump($http->post('Buildings/post_set_level.php', array('username'=>'currygom', 'building_id'=>1,'workers'=>3)));
         //var_dump($http->post('Towns/post_get_towns_in_range.php',array('min'=>0,'max'=>100)));
@@ -122,9 +125,10 @@ if(!empty($action))
         //var_dump($http->post('User/post_new_user.php',array('username'=>'stupidcat', 'password'=>password_hash('stupid', PASSWORD_DEFAULT))));
         //var_dump(($http->post('Towns/post_new_town.php',array('username'=>'stupidcat'))));
         //var_dump($http->get('User/get_all_users.php'));
+        //var_dump($http->post('Buildings/post_get_sum_workers.php', array('username'=>'currygom')));
         //var_dump($http->post('Towns/post_set_population.php', array('username'=>'stupidcat', 'population'=>99)));
         //var_dump($http->post('Towns/post_set_tax.php', array('username'=>'stupidcat', 'tax'=>99)));
-        //var_dump($http->post('Towns/post_get_town_values.php', array('username'=>'stupidcat')));
+        //var_dump($http->post('Towns/post_get_town_values.php', array('username'=>'currygom')));
         //var_dump($http->post('User/post_find_user_pwd.php', array('username'=>'stupidcat', 'password'=>'stupid')));
         //var_dump($http->post('Armies/post_get_army_by_town.php', array('username'=>'spicyRamen')));
         //var_dump($http->post('Buildings/post_get_building_values.php', array('username'=>'currygom')));
