@@ -9,17 +9,20 @@ $page->print_header();
 
 $http = new HttpHelper();
 
-$town = $http->post('Towns/post_get_town_values.php', array('username' => $_SESSION['username']))[0];
+$towndata = $http->post('Towns/post_get_town_values.php', array('username' => $_SESSION['username']));
+$town = empty($towndata[0]) ? $towndata : $towndata[0];
 
 $action = InputHelper::get_get_string('action', null);
 $tax = InputHelper::get_post_int('field_0_0', null);
+
 if(!empty($action))
 	{
 	if($action === 'collect')
 		{
-		$towndata = $http->post('Towns/post_get_town_values.php', array('username' => $_SESSION['username']));
-        $town = empty($towndata[0]) $towndata ? $towndata[0];
 		$http->post('User/post_add_gold.php', array('username' => $_SESSION['username'], 'value' => ($town['population'] * $town['tax'])));
+		
+		$towndata = $http->post('Towns/post_get_town_values.php', array('username' => $_SESSION['username']));
+	    $town = empty($towndata[0]) ? $towndata : $towndata[0];
 		}
 	else if($action === 'settax' && !empty($tax) && $tax > 0)
 		{
@@ -45,7 +48,10 @@ if(!empty($action))
                     {
                     $workers += $building['workers'];
                     }*/
-                }
+            }
+			
+		$towndata = $http->post('Towns/post_get_town_values.php', array('username' => $_SESSION['username']));
+		$town = empty($towndata[0]) ? $towndata : $towndata[0];
 		}
 	}
 
