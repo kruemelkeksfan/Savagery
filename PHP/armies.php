@@ -154,7 +154,14 @@ foreach ($armies as &$row){
 	$targetoptions = array();
 	foreach($targets as $target)
 		{
-		$targetoptions[$target['username']] = $target['username'];
+		if(isset($target['owner']))
+			{
+			$targetoptions[$target['owner']] = $target['owner'];
+			}
+		else
+			{
+			$targetoptions[$target['username']] = $target['username'];	
+			}
 		}
 	$attackform->add_dropdown_field('Target', $targetoptions, true, true);
 	$attackform->add_column_break();
