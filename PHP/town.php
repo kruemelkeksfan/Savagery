@@ -107,10 +107,15 @@ foreach($buildings as &$building)
 	$workerform->add_column_break();
 	$workerform->add_submit('Set Workers');
 
-	$building = array_values($building);
-
-	$building[] = $upgradeform;
-	$building[] = $workerform;
+	$tablecontents = array();
+	$tablecontents[] = $building['building_id'];
+	$tablecontents[] = $building['buildingtype'];
+	$tablecontents[] = $building['level'];
+	$tablecontents[] = $building['workers'];
+	$tablecontents[] = $upgradeform;
+	$tablecontents[] = $workerform;
+	
+	$building = $tablecontents;
 	}
 
 $buildingtable->add_data($buildings);
@@ -128,8 +133,15 @@ foreach($types as &$row)
     $constructionform = new Form('town.php' . '?action=construct&buildingtype=' . $row['buildingtypename'] . '&cost=' . $row['cost'],
         'post', null, null, array('formcolumn width100per'));
     $constructionform->add_submit('Build');
-    $row = array_values($row);
-    $row[] = $constructionform;
+   
+	$tablecontents = array();
+	$tablecontents[] = $row['buildingtypename'];
+	$tablecontents[] = $row['effect'];
+	$tablecontents[] = $row['maxworkers'];
+	$tablecontents[] = $row['cost'];
+	$tablecontents[] = $constructionform;
+	
+	$row = $tablecontents;
 	}
 
 $constructiontable->add_data($types);

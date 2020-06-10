@@ -160,8 +160,13 @@ foreach ($armies as &$row){
 	$attackform->add_column_break();
     $attackform->add_submit('Attack');
 
-    $row = array_values($row);
-    $row[] = $attackform;
+	$tablecontents = array();
+	$tablecontents[] = $row['army_id'];
+	$tablecontents[] = $row['armyname'];
+	$tablecontents[] = $row['strength'];
+	$tablecontents[] = $attackform;
+	
+	$row = $tablecontents;
 }
 
 $armytable->add_data($armies);
