@@ -31,7 +31,7 @@ if($data['username'] != "") {
 
 
     $result = $database->update_field('Userdata', array('username'=>$username),
-        array('$set'=>array('townname'=>$username.'s Town', 'position'=>mt_rand(0, $mapsize - 1), 'tax'=>$tax, 'population'=>$population)));
+        array('$set'=>array('townname'=>$username.'s Town', 'position'=>mt_rand(0, $mapsize - 1), 'tax'=>intval($tax), 'population'=>intval($population))));
         echo json_encode(
             array($result)
         );
