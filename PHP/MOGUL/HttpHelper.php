@@ -26,8 +26,8 @@ class HttpHelper
 
 	    $json_response = curl_exec($curl);
 
-	    //echo "json-response";
-	    //var_dump($json_response);
+		var_dump('POST: ' . $path);
+	    var_dump($json_response);
 
 	    if (curl_errno($curl)) {
 	        print curl_error($curl);
@@ -45,7 +45,8 @@ class HttpHelper
 
 	    $json_response = curl_exec($curl);
 
-	    //var_dump($json_response);
+		var_dump('GET: ' . $path);
+	    var_dump($json_response);
 
 	    curl_close($curl);
 
