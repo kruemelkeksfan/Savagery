@@ -29,7 +29,7 @@ if($data['username'] != "")
 	        $gold = $data['gold'];
 	    }
 
-	    $result = $database->add_document('Userdata', array('username'=>$username, 'password'=>$password, 'gold'=>$gold));
+	    $result = $database->add_document('Userdata', array('username'=>$username, 'password'=>$password, 'gold'=>intval($gold)));
 		
         echo json_encode(array('message' => 'User Created', 'success' => true));
     }
