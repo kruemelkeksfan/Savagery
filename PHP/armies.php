@@ -16,7 +16,6 @@ $recruitmentfee = 5;
 $troopsize = InputHelper::get_post_int('troopsize', 1);
 $armyname = InputHelper::get_post_string('armyname', '');
 
-$army_strength = $http->post('Armies/post_get_sum_soldiers.php', array('username' => $_SESSION['username']))[0]['sum(strength'];
 $position = $http->post('Towns/post_get_town_values.php', array('username' => $_SESSION['username']))[0]['position'];
 $mapsize = $http->post('BalanceSettings/post_get_setting.php', array('value'=>'Map_Size'));
 
@@ -180,8 +179,6 @@ $recruitform->add_submit('Recruit Army');
 $recruitform->print();
 
 $page->print_text('Cost per Soldier: ' . $recruitmentfee . '$');
-
-$page->print_text('Current Troop Strength: ' . $army_strength);
 
 // Page Footer
 $page->print_footer();
