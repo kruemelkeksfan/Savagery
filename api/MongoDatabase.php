@@ -14,8 +14,6 @@ class MongoDatabase
         /*$db = new MongoClient("mongodb://user:password@localhost:27017");
         $this->dblink = $db->savagery_mongo;*/
         $this->dblink = new MongoDB\Driver\Manager("mongodb://localhost:27017");
-		
-		return array('success' => true);
 		}
 
 	function add_document(string $collection, $data)
@@ -27,8 +25,6 @@ class MongoDatabase
             } catch (Exception $e) {
                 return($e);
             }
-			
-			return array('success' => true);
         }
 	
     function add_array_field(string $collection, $filter, $data, $options = []) {
@@ -39,8 +35,6 @@ class MongoDatabase
         } catch (Exception $e) {
             return($e);
         }
-		
-		return array('success' => true);
     }
 
     function update_field(string $collection, $filter, $data, $options = []) {
@@ -52,8 +46,6 @@ class MongoDatabase
         } catch (Exception $e) {
             return($e);
         }
-		
-		return array('success' => true);
     }
 
     function aggregation(string $collection, $pipe) {
@@ -73,8 +65,6 @@ class MongoDatabase
         } catch (\MongoDB\Driver\Exception\Exception $e) {
             return($e);
         }
-		
-		return array('success' => true);
     }
 
     function add_to_array(string $collection, $filter, $data) {
@@ -85,8 +75,6 @@ class MongoDatabase
         } catch (Exception $e) {
             return($e);
         }
-		
-		return array('success' => true);
     }
 
     function delete_field(string $collection, $filter, $data) {
@@ -97,8 +85,6 @@ class MongoDatabase
         } catch (Exception $e) {
             return($e);
         }
-		
-		return array('success' => true);
     }
 
     function find_document(string $collection, $criteria = [], $options = []){
