@@ -27,7 +27,7 @@ if(!empty($action))
 	else if($action === 'settax' && !empty($tax) && $tax > 0)
 		{
 		$http->post('Towns/post_set_tax.php', array('username' => $_SESSION['username'], 'tax' => $tax));
-		$pop = ceil(pow($tax, -1));
+		$pop = ceil(pow($tax, -1) * 50);
 		$http->post('Towns/post_set_population.php', array('username' => $_SESSION['username'], 'population' => $pop));
 		
 		// Update Workers
