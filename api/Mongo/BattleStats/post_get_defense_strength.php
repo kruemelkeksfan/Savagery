@@ -28,5 +28,5 @@ if ($data['username'] != "") {
         array('$project'=>array('defense'=>array('$multiply'=>array('$sum_lvl', '$army')))),]);
 
 
-    echo json_encode(array('i.nr*sum(a.strength)'=>$result[0]['defense']));
+    echo json_encode([array('i.nr*sum(a.strength)'=>$result[0]['defense'])]);
 }
