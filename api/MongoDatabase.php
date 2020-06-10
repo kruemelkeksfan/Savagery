@@ -19,8 +19,6 @@ class MongoDatabase
 	function new_collection(string $name)
 		{
 		$this->dblink->createCollection($name);
-		
-		return array('success' => true);
 		}
 
 	function add_document(string $collection, $data)
@@ -32,8 +30,6 @@ class MongoDatabase
             } catch (Exception $e) {
                 return($e);
             }
-			
-			return array('success' => true);
         }
 
     function add_field(string $collection, $filter, $data) {
@@ -44,8 +40,6 @@ class MongoDatabase
         } catch (Exception $e) {
             return($e);
         }
-		
-		return array('success' => true);
     }
 	
     function add_array_field(string $collection, $filter, $data, $options = []) {
@@ -56,8 +50,6 @@ class MongoDatabase
         } catch (Exception $e) {
             return($e);
         }
-		
-		return array('success' => true);
     }
 
     function update_field(string $collection, $filter, $data, $options = []) {
@@ -69,8 +61,6 @@ class MongoDatabase
         } catch (Exception $e) {
             return($e);
         }
-		
-		return array('success' => true);
     }
 
     function update_array_field(string $collection, $filter, $data, $arrayFilters) {
@@ -93,8 +83,6 @@ class MongoDatabase
         } catch (Exception $e) {
             return($e);
         }
-		
-		return array('success' => true);
     }
 	
     function inc_array_field(string $collection, $filter, $data, $arrayFilters) {
@@ -112,8 +100,6 @@ class MongoDatabase
         } catch (Exception $e) {
             return($e);
         }
-		
-		return array('success' => true);
     }
 
     function aggregation(string $collection, $pipe) {
@@ -133,8 +119,6 @@ class MongoDatabase
         } catch (\MongoDB\Driver\Exception\Exception $e) {
             return($e);
         }
-		
-		return array('success' => true);
     }
 
     function add_to_array(string $collection, $filter, $data) {
@@ -145,8 +129,6 @@ class MongoDatabase
         } catch (Exception $e) {
             return($e);
         }
-		
-		return array('success' => true);
     }
 
     function delete_field(string $collection, $filter, $data) {
@@ -157,8 +139,6 @@ class MongoDatabase
         } catch (Exception $e) {
             return($e);
         }
-		
-		return array('success' => true);
     }
 
     function find_document(string $collection, $criteria = [], $options = []){
