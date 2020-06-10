@@ -25,12 +25,9 @@ if($data['username'] != "") {
 
     $result = $database->add_document('Userdata', array('username'=>$username, 'password'=>$password, 'gold'=>$gold));
 
-        echo json_encode(
-            array($result)
-        );
+	echo json_encode(array($result));
 
-}else {
-    echo json_encode(
-        $data
-    );
+}
+else {
+    echo json_encode($data);
 }
