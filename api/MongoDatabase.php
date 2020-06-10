@@ -13,12 +13,9 @@ class MongoDatabase
 		{
         /*$db = new MongoClient("mongodb://user:password@localhost:27017");
         $this->dblink = $db->savagery_mongo;*/
-        $this->dblink = new MongoDB\Driver\Manager("mongodb://"./*$this->db_user.":".$this->password."@".*/"localhost:27017");
-		}
+        $this->dblink = new MongoDB\Driver\Manager("mongodb://localhost:27017");
 		
-	function new_collection(string $name)
-		{
-		$this->dblink->createCollection($name);
+		return array('success' => true);
 		}
 
 	function add_document(string $collection, $data)
@@ -31,16 +28,6 @@ class MongoDatabase
                 return($e);
             }
         }
-
-    function add_field(string $collection, $filter, $data) {
-        $bulk = new MongoDB\Driver\BulkWrite;
-        $bulk->update($filter, array('$set'=>$data), array('multi'=>true));
-        try {
-            $this->dblink->executeBulkWrite($this->db_name . $collection, $bulk);
-        } catch (Exception $e) {
-            return($e);
-        }
-    }
 	
     function add_array_field(string $collection, $filter, $data, $options = []) {
         $bulk = new MongoDB\Driver\BulkWrite;
@@ -63,57 +50,18 @@ class MongoDatabase
         }
     }
 
-    function update_array_field(string $collection, $filter, $data, $arrayFilters) {
-        $cmd = new MongoDB\Driver\Command([
-            /*'findAndModify'=>$collection,
-            'query'=>$filter,
-            'update'=>array('$set'=>$data),
-            'arrayFilters'=>$arrayFilters*/
-
-            'update'=>$collection,
-            'updates'=>array(
-                'q'=>$filter,
-                'u'=>array('$set'=>$data),
-                'arrayFilters'=>$arrayFilters
-            )
-        ]);
-
-        try {
-            $this->dblink->executeCommand($this->db_name,$cmd);
-        } catch (Exception $e) {
-            return($e);
-        }
-    }
-	
-    function inc_array_field(string $collection, $filter, $data, $arrayFilters) {
-        $cmd = new MongoDB\Driver\Command([
-            'update'=>$collection,
-            'updates'=>array(
-                'q'=>$filter,
-                'u'=>array('$inc'=>$data),
-                'arrayFilters'=>$arrayFilters
-            )
-        ]);
-
-        try {
-            $this->dblink->executeCommand($this->db_name,$cmd);
-        } catch (Exception $e) {
-            return($e);
-        }
-    }
-
     function aggregation(string $collection, $pipe) {
         $cmd = new MongoDB\Driver\Command([
             'aggregate'=>$collection,
-            'pipeline'=>$pipe,
-            'cursor'=> array('batchSize'=>1)//new stdClass()
+            'pipeline'=>[$pipe,],
+            'cursor'=> new stdClass(),
         ]);
 
         try {
-            $cursor = $this->dblink->executeReadCommand($this->db_name,$cmd);
+            $cursor = $this->dblink->executeCommand('savagery_mongo',$cmd);
 
             //$cursor->setTypeMap(['root' => 'array']);
-            return($cursor/*->toArray()*/);
+            return($cursor->toArray());
         } catch (Exception $e) {
             return($e);
         } catch (\MongoDB\Driver\Exception\Exception $e) {
